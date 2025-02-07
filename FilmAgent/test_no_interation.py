@@ -4,10 +4,8 @@ from typing import Dict, List, Union
 import random
 import copy
 
-# TO DO
-ROOT_PATH = "/path/to/FilmAgent"
+ROOT_PATH = "/absolute/path/to/FilmAgent"
 ID = 13
-# TO DO
 
 topics=["Reconcilation in a friend reunion", "A quarrel and breakup scene", "Casual meet-up with an old friend", "Emergency meeting after a security breach", "Late night brainstorming for a startup", "Family argument during dinner", "Emotional farewell at the roadside", "Heated debate over investments in the office", "Heated family discussion ending in a heartfelt apology", "Office gossip turning into a major understanding", "Celebratory end of project cheers with team members", "Planning a secret escape from a mundane routine", "Unexpected guest crashes a small house party", "An employee's emotional breakdown after being terminated", "Confession of a long-held secret among close friends"]
 
@@ -15,7 +13,7 @@ class FilmCrafter:
     
     def __init__(self, topic: str) -> None:
         self.topic = topic
-        self.store_path = os.path.join(ROOT_PATH, f"store\\no_interation\{ID}")
+        self.store_path = os.path.join(ROOT_PATH, f"store\\\no_interation\{ID}")
         self.log_path = os.path.join(self.store_path, "prompt.txt")
         self.profile_path = os.path.join(self.store_path, "actors_profile.json") 
         self.action_description_path = os.path.join(ROOT_PATH, "Locations\\actions.txt")
@@ -121,7 +119,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\n   - topic: {topic}\n   - involved characters: {characters}\n   - plot: {plot}\n   - location: {location}\n   - dialogue goal: {goal}\n\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\n   - topic: {topic}\\n   - involved characters: {characters}\\n   - plot: {plot}\\n   - location: {location}\\n   - dialogue goal: {goal}\\n\\n"
     
         params = {"{script_outline}": script_outline.strip()}
         result = self.call("screenwriter_1", params) 
@@ -155,7 +153,7 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\n   - characters: {who}\n   - location: {where}\n   - plot: {what}\n\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\n   - characters: {who}\\n   - location: {where}\\n   - plot: {what}\\n\\n"
             
             position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
             positions = read_json(position_path)
@@ -165,13 +163,13 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\n{p}\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\n{p}\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
@@ -203,7 +201,7 @@ class FilmCrafter:
                     sit = "sittable"
                 else:
                     sit = "unsittable"
-                ini = ini + f"   - {item['character']}: " + f"{sit} {item['position']}, standing\n"
+                ini = ini + f"   - {item['character']}: " + f"{sit} {item['position']}, standing\\n"
             ini = "   " + ini.strip() 
             params = {"{initial}": ini, 
                         "{plot}": scene['scene_information']['what'],
@@ -275,7 +273,7 @@ class FilmCrafter:
             if moveable_characters:
                 move2destination = ""
                 for pn in unoccupied_positions:
-                    move2destination = move2destination + f"   - {pn}\n"
+                    move2destination = move2destination + f"   - {pn}\\n"
                 move2destination = "   " + move2destination.strip()
                 lines = []
                 for id in range(len(scene['dialogues'])):
