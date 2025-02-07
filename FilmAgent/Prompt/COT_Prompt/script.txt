@@ -7,28 +7,16 @@ Plan three coherent scenes based on the topic, assign a sub-topic to each scene,
 
 This step may require the following information:
 #### Main Characters:
-1. **Male**: {male_characters}
-2. **Female**: {female_characters}
+1. **Combatants**: {combatant_characters}
 
 #### Main Locations:
-1. **Apartment living room**: maximum capacity: 5
-2. **Apartment kitchen**: maximum capacity: 5
-3. **Roadside**: maximum capacity: 2
-4. **Gaming room**: maximum capacity: 4
-5. **Meeting room**: maximum capacity: 7
-6. **Storehouse**: maximum capacity: 3
-7. **Relaxing Room**: maximum capacity: 5
-8. **Reception Room**: maximum capacity: 5
-9. **Sofa Corner**: maximum capacity: 5
-10. **Large kitchen**: maximum capacity: 5
-11. **Beverage Room**: maximum capacity: 3
-12. **Office**: maximum capacity: 3
-13. **Dining Room**: maximum capacity: 4
-14. **Billiard room**: maximum capacity: 4
-15. **Work room**: maximum capacity: 5
+1. **Race Track**: features stunt ramps, obstacles, and high-speed paths.
+2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles.
+3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings.
+4. **VR Simulation Room**: features dynamic virtual environments for vehicular combat.
 
 After this step, the following parts of the script will be completed:
-"scene_information": {"who": [Selected Main Characters], "where": "Selected Location", "what": "The Plot For This Scene"}
+"scene_information": {"who": [Selected Combatants], "where": "Selected Location", "what": "The Plot For This Scene"}
 
 
 
@@ -57,16 +45,16 @@ After this step, the following parts of the script will be completed:
 
 
 ### Step 4:
-Understand the emotions expressed in the dialogues from step 2, and consider the emotional states of the characters in the conversation. According to your considerations and [Action Selection Requirements], choose the most appropriate actions from the [Complete List of Actions] and add them after each line of dialogue, including the speaker and some other (not all) characters' actions.
+Understand the emotions expressed in the dialogues from step 2, and consider the emotional states of the combatants in the conversation. According to your considerations and [Action Selection Requirements], choose the most appropriate vehicular actions from the [Complete List of Actions] and add them after each line of dialogue, including the speaker and some other (not all) combatants' actions.
 
 Each action added should consist of the following parts:
    - action: The action selected from [Complete List of Actions].
-   - character: The character that performs the action.
-   - state: The state before the action is performed, including standing or sitting.
+   - combatant: The combatant that performs the action.
+   - vehicle state: The state of the vehicle before the action is performed, including stationary or moving.
 
 This step may require the following information:
 #### [Complete List of Actions]:
-{all_actions}
+{all_vehicular_actions}
 
 
 #### [Action Selection Requirements]:
@@ -88,11 +76,11 @@ After this step, the following parts of the script will be completed:
 
 
 ### Step 5:
-Focus on the usage conditions of each shot in the [Complete List of Shots], then allocate them to the shot annotation points in the script according to different usage conditions. Check if the shot annotations meet the [Shot Annotation Requirements]. If not, identify which requirements are not met, then update the shot annotations to meet these requirements.
+Focus on the usage conditions of each shot in the [Complete List of Shots], then allocate them to the shot annotation points in the script according to different usage conditions. Ensure the shots capture the intensity of vehicular combat, stunts, and explosions. Check if the shot annotations meet the [Shot Annotation Requirements]. If not, identify which requirements are not met, then update the shot annotations to meet these requirements.
 
 This step may require the following information:
 #### [Complete List of Shots]:
-{all_shots}
+{all_combat_shots}
 
 
 #### [Shot Annotation Requirements]:

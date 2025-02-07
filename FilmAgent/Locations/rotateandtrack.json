@@ -73,5 +73,25 @@
         "rotate": 3,
         "track": 2,
         "long": 2
+    },
+    "Race Track": {
+        "rotate": 5,
+        "track": 8,
+        "long": 10
+    },
+    "Desert Arena": {
+        "rotate": 6,
+        "track": 7,
+        "long": 9
+    },
+    "Urban Streets": {
+        "rotate": 4,
+        "track": 6,
+        "long": 8
+    },
+    "VR Simulation Room": {
+        "rotate": 7,
+        "track": 9,
+        "long": 10
     }
 }
