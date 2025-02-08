@@ -33,5 +33,10 @@
     "Activate Shield": "Deploy a temporary energy shield to protect the vehicle.",
     "Use Oil Slick": "Release oil onto the track to make it slippery for other vehicles.",
     "Perform 360 Spin": "Execute a full 360-degree spin for style or evasion.",
-    "Target Lock": "Lock onto an opponent for a precision attack."
+    "Target Lock": "Lock onto an opponent for a precision attack.",
+    "Turbo Drift": "Perform a high-speed drift with turbo boost.",
+    "EMP Blast": "Emit an electromagnetic pulse to disable nearby vehicles.",
+    "Deploy Spikes": "Release spikes onto the track to puncture tires of pursuing vehicles.",
+    "Cloak Mode": "Activate stealth mode to become temporarily invisible to opponents.",
+    "Auto Repair": "Automatically repair minor vehicle damage over time."
 }
