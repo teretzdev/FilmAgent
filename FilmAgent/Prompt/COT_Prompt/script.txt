@@ -1,27 +1,29 @@
-You need to write a complete script based on the given topic "{topic}". Please strictly follow the steps below to perform this task.
+You need to write a complete script for a gameshow based on the given topic "{topic}". The gameshow should focus on action and sport, with a competitive and entertaining format. Please strictly follow the steps below to perform this task.
 
 
 
 ### Step 1:
-Plan three coherent scenes based on the topic, assign a sub-topic to each scene, select corresponding locations and main characters based on the sub-topic, develop a plot for each scene.
+Plan three coherent scenes for an episode based on the topic, assign a sub-topic to each scene, select corresponding locations and main characters based on the sub-topic, and develop a plot for each scene. Ensure the scenes align with the gameshow's competitive and action-packed format.
 
 This step may require the following information:
-#### Main Characters:
-1. **Combatants**: {combatant_characters}
+#### Cast of Characters:
+1. **Contestants**: {combatant_characters}
+2. **Host**: A charismatic figure who guides the gameshow and interacts with contestants.
+3. **Audience**: Virtual or in-studio participants who react to the action.
 
 #### Main Locations:
-1. **Race Track**: features stunt ramps, obstacles, and high-speed paths.
-2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles.
-3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings.
-4. **VR Simulation Room**: features dynamic virtual environments for vehicular combat.
+1. **Obstacle Course**: A dynamic track with challenges like ramps, barriers, and puzzles.
+2. **Arena of Champions**: A competitive space for head-to-head action and stunts.
+3. **Interactive Studio**: A live stage where contestants engage with the host and audience.
+4. **Virtual Reality Zone**: A high-tech environment for immersive and unpredictable challenges.
 
 After this step, the following parts of the script will be completed:
-"scene_information": {"who": [Selected Combatants], "where": "Selected Location", "what": "The Plot For This Scene"}
+"scene_information": {"who": [Selected Contestants], "where": "Selected Location", "what": "The Plot For This Scene", "episode": "Episode Number", "season": "Season Number"}
 
 
 
 ### Step 2:
-Create specific and vivid dialogues for each scene based on the result from step 1. The dialogues should be conform to the characters' profile. The number of conversations in one scene should not be too few.
+Create specific and vivid dialogues for each scene based on the result from step 1. The dialogues should reflect the competitive spirit of the gameshow and align with the characters' profiles. Include interactions with the host and audience where appropriate. The number of conversations in one scene should not be too few.
 
 This step may require the following information:
 #### Characters' Profile:
@@ -33,7 +35,7 @@ After this step, the following parts of the script will be completed:
 
 
 ### Step 3:
-Choose an appropriate position for each character in every scene of the script based on the result from step 1. In a scene, each character's position must be different.
+Choose an appropriate position for each character in every scene of the script based on the result from step 1. In a scene, each character's position must be different. Ensure the positions enhance the competitive dynamics and visibility of the action.
 
 This step may require the following information:
 #### Optional Positions:
@@ -76,7 +78,7 @@ After this step, the following parts of the script will be completed:
 
 
 ### Step 5:
-Focus on the usage conditions of each shot in the [Complete List of Shots], then allocate them to the shot annotation points in the script according to different usage conditions. Ensure the shots capture the intensity of vehicular combat, stunts, and explosions. Check if the shot annotations meet the [Shot Annotation Requirements]. If not, identify which requirements are not met, then update the shot annotations to meet these requirements.
+Focus on the usage conditions of each shot in the [Complete List of Shots], then allocate them to the shot annotation points in the script according to different usage conditions. Ensure the shots capture the excitement, competition, and dynamics of the gameshow. Check if the shot annotations meet the [Shot Annotation Requirements]. If not, identify which requirements are not met, then update the shot annotations to meet these requirements.
 
 This step may require the following information:
 #### [Complete List of Shots]:
@@ -95,7 +97,7 @@ After this step, the following parts of the script will be completed:
 
 
 
-After completing all steps, return your completed script. Your response should only contain the following JSON content:
+After completing all steps, return your completed script. Ensure the script is organized into episodes and seasons, with clear references to the gameshow's competitive and entertaining format. Your response should only contain the following JSON content:
 ```json
 [{"scene_information": {"who": ["...", ...], "where": "...", "what": "..."},
 "dialogues":[{"speaker": "...", "content": "...", "actions": [{"character": "...","state": "....","action": "..."}, ...], "selected shot": "...."}, ...]

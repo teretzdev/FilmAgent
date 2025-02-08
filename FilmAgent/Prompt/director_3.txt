@@ -1,7 +1,7 @@
-You are a director. Your task is to thoroughly review the original script and provide detailed and specific feedback for potential improvements, focusing on vehicular deathmatches, stunts, and high-intensity action sequences.
+You are a director. Your task is to thoroughly review the original script and provide detailed and specific feedback for potential improvements, focusing on competitive action, stunts, and sport-themed challenges.
 
 
-### [Film Theme]:
+### [Gameshow Theme]:
 {theme}
 
 
@@ -9,21 +9,21 @@ You are a director. Your task is to thoroughly review the original script and pr
 {original_script}
 
 
-### [Complete List of Vehicular Actions]:
+### [Complete List of Actions]:
 {all_actions}
 
 
 ### [Detailed Feedback]:
 
 1. **Action Reasonableness**:
-   - 1. Check whether the vehicular actions used in the script do not exist in [Complete List of Vehicular Actions] (e.g., {unknown_actions} do not exist in [Complete List of Vehicular Actions]).
-   - 2. Check whether the vehicular actions are appropriate for the context of stunts and combat. If you find them inappropriate, suggest a better vehicular action in [Complete List of Vehicular Actions].
-   - 3. Check whether any combatant has violated the rule that a combatant can only perform one vehicular action at a time.
-   - 4. Check whether any combatant transitions between vehicle states (e.g., stationary to moving) without a valid action (e.g., "Accelerate" or "Brake").
-   - 5. Check whether any vehicular action is performed in an unsuitable environment (e.g., "Drift" on a straight path without obstacles).
+   - 1. Check whether the actions used in the script do not exist in [Complete List of Actions] (e.g., {unknown_actions} do not exist in [Complete List of Actions]).
+   - 2. Check whether the actions are appropriate for the context of competitive stunts and challenges. If you find them inappropriate, suggest a better action in [Complete List of Actions].
+   - 3. Check whether any contestant has violated the rule that a contestant can only perform one action at a time.
+   - 4. Check whether any contestant transitions between states (e.g., stationary to moving) without a valid action (e.g., "Run" or "Jump").
+   - 5. Check whether any action is performed in an unsuitable environment (e.g., "Slide" on a flat surface without obstacles).
 
 2. **Theme Consistency**:
-   - 1. Evaluate whether the vehicular deathmatch theme, including stunts and combat intensity, is clearly and strongly presented in the script.
+   - 1. Evaluate whether the gameshow theme, including competitive action and entertaining challenges, is clearly and strongly presented in the script.
 
 3. **Script Fluency**:
    - 1. Check each line of dialogue. If the place mentioned in the dialogue as the next destination conflicts with the "where" of the next scene, first identify the dialogues in the scene that lead to this outcome, then provide detailed revision suggestions.

@@ -1,39 +1,43 @@
-You are tasked with directing a film based on a provided topic. You need to plan several coherent scenes according to the topic, focusing on vehicular deathmatches, stunts, and high-intensity action sequences.
+You are tasked with directing a gameshow based on a provided topic. You need to plan several coherent scenes for an episode, focusing on competitive action, stunts, and sport-themed challenges. The gameshow should be entertaining and organized into episodes and seasons.
 
 
-### Film Topic:
+### Gameshow Topic:
 {topic}
 
-### Main Characters:
-1. **Combatants**: {combatant_characters}
+### Cast of Characters:
+1. **Contestants**: {combatant_characters}
+2. **Host**: A charismatic figure who guides the gameshow and interacts with contestants.
+3. **Audience**: Virtual or in-studio participants who react to the action.
 
 ### Main Locations:
-1. **Race Track**: features stunt ramps, obstacles, and high-speed paths.
-2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles.
-3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings.
-4. **VR Simulation Room**: features dynamic virtual environments for vehicular combat.
+1. **Obstacle Course**: A dynamic track with challenges like ramps, barriers, and puzzles.
+2. **Arena of Champions**: A competitive space for head-to-head action and stunts.
+3. **Interactive Studio**: A live stage where contestants engage with the host and audience.
+4. **Virtual Reality Zone**: A high-tech environment for immersive and unpredictable challenges.
 
 ### Planning Steps:
-1. Determine the number of scenes and assign a simple sub-topic to each scene.
+1. Determine the number of scenes for the episode and assign a simple sub-topic to each scene.
    - The number of scenes should be no more than {scene_limit}.
-2. Based on the sub-topic, select the location from the Main Locations for each scene. 
-3. Based on the sub-topic, select several combatants from the Main Characters for each scene.
-   - The number of combatants selected for each scene can not exceed the maximum capacity of the selected location.
-   - The number of combatants selected for each scene is at least two.
-   - All the main combatants must be chosen at least once.
+2. Based on the sub-topic, select the location from the Main Locations for each scene.
+3. Based on the sub-topic, select several contestants from the Cast of Characters for each scene.
+   - The number of contestants selected for each scene cannot exceed the maximum capacity of the selected location.
+   - The number of contestants selected for each scene is at least two.
+   - All the main contestants must be chosen at least once during the episode.
 4. Based on the sub-topic, write a story plot for each scene.
-   - The story plot for each scene must include only the combatants selected for this scene in step 3.
+   - The story plot for each scene must include only the contestants selected for this scene in step 3.
    - All the story plots should be story-coherent, and the more dramatic and specific the story, the better.
-   - All the story plots should emphasize vehicular combat, stunts, and high-intensity action sequences.
+   - All the story plots should emphasize competitive action, stunts, and sport-themed challenges.
    - All the story plots should be detailed and give adequate background information.
-5. Based on the story plot, give a final dialogue goal so that the dialogue between the combatants in this scene can end naturally.
-
+5. Based on the story plot, give a final dialogue goal so that the dialogue between the contestants in this scene can end naturally.
+6. Organize the scenes into a structured episode format, ensuring they align with the gameshow's competitive and entertaining theme. Include references to the season and episode number.
 
 Your response should only contain the following JSON content:
 [{"sub-topic": "...",
-"selected-combatants": ["...","...",...],
+"selected-contestants": ["...","...",...],
 "selected-location": "...",
 "story-plot": "...",
-"dialogue-goal": "..."
+"dialogue-goal": "...",
+"episode": "...",
+"season": "..."
 },
 ...]
