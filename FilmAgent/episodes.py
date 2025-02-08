@@ -85,37 +85,51 @@ class GTARealityShow:
 
     def generate_preview(self):
         """
-        Generate a human-readable preview of the last two episodes and save it to a file.
+        Generate a human-readable preview document summarizing recent changes in the codebase.
         """
-        episodes_file = os.path.join(ROOT_PATH, "Script", f"{self.season_name}_episodes.json")
-        preview_file = os.path.join(ROOT_PATH, "Script", "episodes_preview.txt")
+        import subprocess
 
-        if not os.path.exists(episodes_file):
-            raise FileNotFoundError(f"Episodes file not found: {episodes_file}")
+        # Define paths
+        diff_output_file = os.path.join(ROOT_PATH, "Documentation", "Changes_Preview.md")
+        documentation_dir = os.path.dirname(diff_output_file)
 
-        episodes = read_json(episodes_file)
-        if len(episodes) < 2:
-            raise ValueError("Not enough episodes to generate a preview.")
+        # Ensure the Documentation directory exists
+        if not os.path.exists(documentation_dir):
+            os.makedirs(documentation_dir)
 
-        # Extract the last two episodes
-        last_two_episodes = episodes[-2:]
+        try:
+            # Run git diff to get recent changes
+            git_diff = subprocess.check_output(["git", "diff"], universal_newlines=True)
+        except subprocess.CalledProcessError as e:
+            raise RuntimeError(f"Failed to retrieve git diff: {e}")
 
-        # Format the preview
-        preview_lines = []
-        for episode in last_two_episodes:
-            preview_lines.append(f"Episode {episode['episode_number']}:")
-            preview_lines.append(f"  Purpose: {episode['unique_purpose']}")
-            preview_lines.append(f"  Contestants: {', '.join(episode['selected_contestants'])}")
-            preview_lines.append(f"  Location: {episode['selected_location']}")
-            preview_lines.append(f"  Plan: {episode['plan']}")
-            preview_lines.append(f"  Script: {episode['script']}")
-            preview_lines.append("")  # Add a blank line between episodes
+        if not git_diff.strip():
+            raise ValueError("No changes detected in the git diff.")
 
-        # Write the preview to the file
-        with open(preview_file, "w") as f:
-            f.write("\\n".join(preview_lines))
+        # Parse the git diff
+        diff_lines = git_diff.splitlines()
+        formatted_diff = ["# Recent Code Changes\\n"]
+        current_file = None
 
-        print(f"Preview of the last two episodes saved to {preview_file}")
+        for line in diff_lines:
+            if line.startswith("diff --git"):
+                # Extract file name
+                parts = line.split(" ")
+                current_file = parts[-1] if len(parts) > 2 else None
+                if current_file:
+                    formatted_diff.append(f"\\n## {current_file}\\n")
+            elif line.startswith("+") and not line.startswith("+++"):
+                # Added lines
+                formatted_diff.append(f"- **Added**: {line[1:].strip()}")
+            elif line.startswith("-") and not line.startswith("---"):
+                # Removed lines
+                formatted_diff.append(f"- **Removed**: {line[1:].strip()}")
+
+        # Write the formatted diff to the markdown file
+        with open(diff_output_file, "w") as f:
+            f.write("\\n".join(formatted_diff))
+
+        print(f"Changes preview saved to {diff_output_file}")
 
     def manage_crowd_votes(self):
         if not os.path.exists(self.crowd_votes_path):
