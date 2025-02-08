@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException
-from typing import List, Dict
+from typing import List, Dict, Optional
 import os
 import json
+from pathlib import Path
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -12,10 +13,15 @@ EPISODES_PATH = "FilmAgent/episodes.json"
 
 # Utility function to load JSON data
 def load_json(file_path: str) -> List[Dict]:
-    if not os.path.exists(file_path):
-        return []
-    with open(file_path, "r") as file:
-        return json.load(file)
+    try:
+        if not Path(file_path).exists():
+            return []
+        with open(file_path, "r") as file:
+            return json.load(file)
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=500, detail="Invalid JSON data in file")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error loading file: {str(e)}")
 
 # Load scripts and episodes data
 scripts_data = load_json(SCRIPTS_PATH)
@@ -34,11 +40,15 @@ def get_all_scripts():
 
 # Endpoint to fetch a specific script by ID
 @app.get("/scripts/{script_id}", response_model=Dict)
-def get_script_by_id(script_id: int):
-    for script in scripts_data:
-        if script.get("id") == script_id:
-            return script
-    raise HTTPException(status_code=404, detail=f"Script with ID {script_id} not found.")
+async def get_script_by_id(script_id: int) -> Dict:
+    try:
+        scripts = load_json(SCRIPTS_PATH)
+        script = next((s for s in scripts if s.get("id") == script_id), None)
+        if not script:
+            raise HTTPException(status_code=404, detail=f"Script with ID {script_id} not found")
+        return script
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Endpoint to fetch all episodes
 @app.get("/episodes", response_model=List[Dict])

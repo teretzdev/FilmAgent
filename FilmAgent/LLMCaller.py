@@ -1,35 +1,33 @@
 import os
-import openai
+import time
 from openai import OpenAI
+from typing import Optional
 
-
-api_key = "xxxxxxxxxxxxxx"
-organization = "xxxxxxxxxxxxxx"
-
+class LLMError(Exception):
+    pass
+def GPTCall(prompt: str, max_retries: int = 3, delay: float = 1.0) -> str:
 def GPTCall(prompt):
-    counter = 0
-    result = "api调用失败"
+    last_error = None
+
+    while counter < max_retries:
     while counter < 3:
-        try:
-            openai.api_key = api_key
-            openai.organization = organization
-            client = OpenAI(api_key = api_key, organization = organization)
-            completion = client.chat.completions.create(
-                model = "gpt-4o",
-                # model = "gpt-3.5-turbo",
-                # model="gpt-4-1106-preview",
-                messages=[
-                    {"role": "user", "content": prompt},
-                ]
+            client = OpenAI(
+                api_key=os.getenv('OPENAI_API_KEY'),
+                organization=os.getenv('OPENAI_ORG')
             )
-            result = completion.choices[0].message.content
-            print(f"%%%%%%%%%%%%%%%%%%%%%%%%\n{result}\n%%%%%%%%%%%%%%%%%%%%%%%")
+            client = OpenAI(api_key = api_key, organization = organization)
+                model="gpt-4",
+                messages=[{"role": "user", "content": prompt}]
+                ]
+            return completion.choices[0].message.content
             break
         
-        except Exception as e:
+            last_error = e
             print(e)
+            if counter < max_retries:
+                time.sleep(delay * counter)  # Exponential backoff
             counter += 1
-            
+    raise LLMError(f"Failed after {max_retries} attempts. Last error: {str(last_error)}")
     return result
 
 

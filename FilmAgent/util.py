@@ -1,19 +1,30 @@
 import json
 import os
-import re
-import Levenshtein
-from LLMCaller import *
+from pathlib import Path
+from typing import Any
+import fcntl
 
-def read_json(input_path):
-    with open(input_path, 'r', encoding='utf-8',errors='ignore') as f:
-        r = toString(json.load(f))
-        r = r.replace("�",".")
-        return json.loads(r)
+def safe_read_json(input_path: str) -> Any:
+    """Thread-safe JSON reading with file locking"""
+    with open(input_path, 'r') as f:
+        fcntl.flock(f, fcntl.LOCK_SH)
+        try:
+            return json.load(f)
+        finally:
+            fcntl.flock(f, fcntl.LOCK_UN)
 
 
 def write_json(output_path, output_data):
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(output_data, f, ensure_ascii=False)
+    """Thread-safe JSON writing with file locking"""
+    path = Path(output_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(output_path, 'w') as f:
+        fcntl.flock(f, fcntl.LOCK_EX)
+        try:
+            json.dump(output_data, f, ensure_ascii=False, indent=2)
+        finally:
+            fcntl.flock(f, fcntl.LOCK_UN)
 
 
 def read_prompt(input_path):

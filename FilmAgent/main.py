@@ -1,3 +1,4 @@
+import os
 from util import *
 from LLMCaller import *
 from typing import Dict, List, Union
@@ -5,9 +6,14 @@ import random
 import copy
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 from FilmAgent.api import app as api_app
 
-ROOT_PATH = "/absolute/path/to/FilmAgent"
+# Load environment variables
+load_dotenv()
+
+# Use environment variable with fallback
+ROOT_PATH = os.getenv('FILM_AGENT_ROOT', "/absolute/path/to/FilmAgent")
 
 class FilmCrafter:
     
