@@ -83,6 +83,40 @@ class GTARealityShow:
         write_json(self.episodes_path, season_data)
         return season_data
 
+    def generate_preview(self):
+        """
+        Generate a human-readable preview of the last two episodes and save it to a file.
+        """
+        episodes_file = os.path.join(ROOT_PATH, "Script", f"{self.season_name}_episodes.json")
+        preview_file = os.path.join(ROOT_PATH, "Script", "episodes_preview.txt")
+
+        if not os.path.exists(episodes_file):
+            raise FileNotFoundError(f"Episodes file not found: {episodes_file}")
+
+        episodes = read_json(episodes_file)
+        if len(episodes) < 2:
+            raise ValueError("Not enough episodes to generate a preview.")
+
+        # Extract the last two episodes
+        last_two_episodes = episodes[-2:]
+
+        # Format the preview
+        preview_lines = []
+        for episode in last_two_episodes:
+            preview_lines.append(f"Episode {episode['episode_number']}:")
+            preview_lines.append(f"  Purpose: {episode['unique_purpose']}")
+            preview_lines.append(f"  Contestants: {', '.join(episode['selected_contestants'])}")
+            preview_lines.append(f"  Location: {episode['selected_location']}")
+            preview_lines.append(f"  Plan: {episode['plan']}")
+            preview_lines.append(f"  Script: {episode['script']}")
+            preview_lines.append("")  # Add a blank line between episodes
+
+        # Write the preview to the file
+        with open(preview_file, "w") as f:
+            f.write("\\n".join(preview_lines))
+
+        print(f"Preview of the last two episodes saved to {preview_file}")
+
     def manage_crowd_votes(self):
         if not os.path.exists(self.crowd_votes_path):
             raise FileNotFoundError("Crowd votes file not found. Please ensure the file exists.")
@@ -112,6 +146,9 @@ class GTARealityShow:
             advantages = self.manage_crowd_votes()
             prizes = self.assign_prizes(episode)
             print(f"Episode {episode['episode_number']} completed with prizes: {prizes} and advantages: {advantages}")
+
+        # Generate a preview of the last two episodes
+        self.generate_preview()
 
 
 if __name__ == "__main__":
