@@ -1,0 +1,70 @@
+# .gitignore
+
+# Node.js dependencies
+FilmAgent/frontend/node_modules/
+
+# Logs
+logs/
+*.log
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment files
+.env
+.env.*
+
+# Compiled Python files
+*.pyc
+
+# Virtual environment
+venv/
+*.venv/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+FilmAgent/frontend/build/
+FilmAgent/frontend/dist/
+FilmAgent/frontend/.parcel-cache/
+
+# Coverage reports
+coverage/
+*.coverage
+*.lcov
+
+# Temporary files
+FilmAgent/frontend/temp/
+FilmAgent/frontend/tmp/
+FilmAgent/frontend/.temp/
+FilmAgent/frontend/.tmp/
+
+# Unity specific files
+Library/
+Temp/
+Build/
+obj/
+*.csproj
+*.unityproj
+*.sln
+*.userprefs
+
+# Miscellaneous
+FilmAgent/frontend/.eslintcache
+FilmAgent/frontend/.cache/
+FilmAgent/frontend/yarn-error.log
+FilmAgent/frontend/npm-debug.log*
+FilmAgent/frontend/.pnp/
+FilmAgent/frontend/.pnp.js
+FilmAgent/frontend/.pnp.cjs
+FilmAgent/frontend/.pnp.loader.mjs
+FilmAgent/frontend/.pnp.loader.js
+FilmAgent/frontend/.pnp.loader.cjs
