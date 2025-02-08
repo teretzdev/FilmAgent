@@ -23,6 +23,18 @@
             "description": "Camera vantage point near the stunt ramp",
             "fixed_angle": true,
             "sittable": false
+        },
+        {
+            "id": "Position 5",
+            "description": "Position at the starting line of the race",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 6",
+            "description": "Position at the finishing line of the race",
+            "fixed_angle": true,
+            "sittable": false
         }
     ],
     "paths": [

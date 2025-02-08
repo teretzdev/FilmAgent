@@ -12,6 +12,8 @@ You are tasked with directing a film based on a provided topic. You need to plan
 2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles.
 3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings.
 4. **VR Simulation Room**: features dynamic virtual environments for vehicular combat.
+5. **Starting Line**: maximum capacity: 5. A critical point where the race begins, emphasizing the tension and anticipation of the competition.
+6. **Finishing Line**: maximum capacity: 5. The climactic endpoint of the race, highlighting the culmination of the action and the final moments of the competition.
 
 ### Planning Steps:
 1. Determine the number of scenes and assign a simple sub-topic to each scene.

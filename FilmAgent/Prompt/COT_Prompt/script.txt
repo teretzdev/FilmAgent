@@ -1,9 +1,9 @@
-You need to write a complete script based on the given topic "{topic}". Please strictly follow the steps below to perform this task.
+You need to write a complete script based on the given topic "{topic}" and the provided plotline "{plotline}". Please strictly follow the steps below to perform this task. Ensure that the plotline is central to all stages of the script generation process.
 
 
 
 ### Step 1:
-Plan three coherent scenes based on the topic, assign a sub-topic to each scene, select corresponding locations and main characters based on the sub-topic, develop a plot for each scene.
+Plan three coherent scenes based on the topic and the provided plotline. Assign a sub-topic to each scene, select corresponding locations and main characters based on the sub-topic, and develop a plot for each scene that aligns with the plotline.
 
 This step may require the following information:
 #### Main Characters:
@@ -21,7 +21,7 @@ After this step, the following parts of the script will be completed:
 
 
 ### Step 2:
-Create specific and vivid dialogues for each scene based on the result from step 1. The dialogues should be conform to the characters' profile. The number of conversations in one scene should not be too few.
+Create specific and vivid dialogues for each scene based on the result from step 1 and the provided plotline. The dialogues should conform to the characters' profile and reflect the emotional and narrative elements of the plotline. The number of conversations in one scene should not be too few.
 
 This step may require the following information:
 #### Characters' Profile:
@@ -33,7 +33,7 @@ After this step, the following parts of the script will be completed:
 
 
 ### Step 3:
-Choose an appropriate position for each character in every scene of the script based on the result from step 1. In a scene, each character's position must be different.
+Choose an appropriate position for each character in every scene of the script based on the result from step 1 and the plotline. Ensure that the positions enhance the narrative flow and align with the plotline's requirements. In a scene, each character's position must be different.
 
 This step may require the following information:
 #### Optional Positions:
@@ -45,7 +45,7 @@ After this step, the following parts of the script will be completed:
 
 
 ### Step 4:
-Understand the emotions expressed in the dialogues from step 2, and consider the emotional states of the combatants in the conversation. According to your considerations and [Action Selection Requirements], choose the most appropriate vehicular actions from the [Complete List of Actions] and add them after each line of dialogue, including the speaker and some other (not all) combatants' actions.
+Understand the emotions expressed in the dialogues from step 2, and consider the emotional states of the combatants in the conversation. Use the plotline to guide your understanding of the narrative context. According to your considerations and [Action Selection Requirements], choose the most appropriate vehicular actions from the [Complete List of Actions] and add them after each line of dialogue, including the speaker and some other (not all) combatants' actions.
 
 Each action added should consist of the following parts:
    - action: The action selected from [Complete List of Actions].
@@ -76,7 +76,7 @@ After this step, the following parts of the script will be completed:
 
 
 ### Step 5:
-Focus on the usage conditions of each shot in the [Complete List of Shots], then allocate them to the shot annotation points in the script according to different usage conditions. Ensure the shots capture the intensity of vehicular combat, stunts, and explosions. Check if the shot annotations meet the [Shot Annotation Requirements]. If not, identify which requirements are not met, then update the shot annotations to meet these requirements.
+Focus on the usage conditions of each shot in the [Complete List of Shots], then allocate them to the shot annotation points in the script according to different usage conditions. Ensure the shots capture the intensity of vehicular combat, stunts, and explosions, while aligning with the narrative and emotional beats of the plotline. Check if the shot annotations meet the [Shot Annotation Requirements]. If not, identify which requirements are not met, then update the shot annotations to meet these requirements.
 
 This step may require the following information:
 #### [Complete List of Shots]:
