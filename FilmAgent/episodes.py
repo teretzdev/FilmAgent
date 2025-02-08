@@ -22,6 +22,16 @@ class GTARealityShow:
             "Perform the most daring stunt",
             "Capture a rival gang's territory",
         ]
+        self.locations = [
+            "Police Station",
+            "Gas Station",
+            "Grove Street",
+            "Airport",
+            "Gun Store",
+            "Beach",
+            "Car Dealer",
+            "Gang Territory",
+        ]
 
     def call_ai_agent(self, identity: str, params: dict, trans2json: bool = True):
         prompt = read_prompt(os.path.join(ROOT_PATH, f"Prompt/GTA/{identity}.txt"))
@@ -47,10 +57,12 @@ class GTARealityShow:
         unique_purpose = random.choice(self.unique_purposes)
         selected_contestants = random.sample(self.recurring_contestants, k=min(4, len(self.recurring_contestants)))
 
+        selected_location = random.choice(self.locations)
         params = {
             "{episode_number}": episode_number,
             "{unique_purpose}": unique_purpose,
             "{selected_contestants}": ", ".join(selected_contestants),
+            "{selected_location}": selected_location,
         }
         episode_plan = self.call_ai_agent("gta_director_2", params)
         episode_script = self.call_ai_agent("gta_screenwriter_2", params)
