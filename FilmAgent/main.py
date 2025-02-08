@@ -1,17 +1,30 @@
+import os
 from util import *
 from LLMCaller import *
 from typing import Dict, List, Union
 import random
 import copy
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+from FilmAgent.api import app as api_app
 
-ROOT_PATH = "/absolute/path/to/FilmAgent"
+# Load environment variables
+load_dotenv()
+
+# Use environment variable with fallback
+ROOT_PATH = os.getenv('FILM_AGENT_ROOT', "/absolute/path/to/FilmAgent")
 
 class FilmCrafter:
     
-    def __init__(self, topic: str) -> None:
+    def __init__(self, topic: str, scenario: str = "default") -> None:
         self.topic = topic
+        self.scenario = scenario
         self.log_path = cretae_new_path(os.path.join(ROOT_PATH, "Logs"), "txt")
-        self.profile_path = os.path.join(ROOT_PATH, "Script\\actors_profile.json") 
+        if self.scenario == "GTA Reality Show":
+            self.profile_path = os.path.join(ROOT_PATH, "Script\\gta_contestants.json")
+        else:
+            self.profile_path = os.path.join(ROOT_PATH, "Script\\actors_profile.json")
         self.action_description_path = os.path.join(ROOT_PATH, "Locations\\actions.txt")
         self.shot_description_path = os.path.join(ROOT_PATH, "Locations\\shots.txt")
         # scenes
@@ -51,7 +64,10 @@ class FilmCrafter:
         
 
     def call(self, identity: str, params: Dict, trans2json: bool = True) -> Union[str, dict, list]:
-        prompt = read_prompt(os.path.join(ROOT_PATH, f"Prompt\{identity}.txt") )
+        if self.scenario == "GTA Reality Show":
+            prompt = read_prompt(os.path.join(ROOT_PATH, f"Prompt\\GTA\\{identity}.txt"))
+        else:
+            prompt = read_prompt(os.path.join(ROOT_PATH, f"Prompt\{identity}.txt"))
         prompt = prompt_format(prompt, params)
         log_prompt(self.log_path, prompt)
         result = GPTCall(prompt)
@@ -69,7 +85,10 @@ class FilmCrafter:
             Behavior: Create the main characters and their bios for the film script.
         '''
         params = {"{topic}": self.topic, "{character_limit}": self.character_limit}
-        result = self.call("director_1", params)
+        if self.scenario == "GTA Reality Show":
+            result = self.call("gta_director_1", params)
+        else:
+            result = self.call("director_1", params)
         write_json(self.profile_path, result)
         
         
@@ -92,7 +111,13 @@ class FilmCrafter:
                   "{male_characters}": male_characters,
                   "{female_characters}": female_characters,
                   "{scene_limit}": self.scene_limit}
-        result = self.call("director_2", params)
+        if self.scenario == "GTA Reality Show":
+            result = self.call("gta_director_2", params)
+        else:
+            if self.scenario == "GTA Reality Show":
+                result = self.call("gta_director_2", params)
+            else:
+                result = self.call("director_2", params)
         write_json(self.scene_path, result)
         
         
@@ -121,10 +146,13 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\n   - topic: {topic}\\n   - involved characters: {characters}\\n   - plot: {plot}\\n   - location: {location}\\n   - dialogue goal: {goal}\\n\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\n   - topic: {topic}\\\\\n   - involved characters: {characters}\\\\\n   - plot: {plot}\\\\\n   - location: {location}\\\\\n   - dialogue goal: {goal}\\\\\n\\\\\n"
     
         params = {"{script_outline}": script_outline.strip()}
-        result = self.call("screenwriter_1", params) 
+        if self.scenario == "GTA Reality Show":
+            result = self.call("gta_screenwriter_1", params)
+        else:
+            result = self.call("screenwriter_1", params)
         
         lines = []
         assert len(result) == len(scenes)
@@ -155,7 +183,7 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\\n   - characters: {who}\\n   - location: {where}\\n   - plot: {what}\\n\\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\\\\n   - characters: {who}\\\\\n   - location: {where}\\\\\n   - plot: {what}\\\\\n\\\\\n"
             
             position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
             positions = read_json(position_path)
@@ -165,17 +193,20 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\n{p}\\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\n{p}\\\\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
-        result = self.call("screenwriter_2", params)
+        if self.scenario == "GTA Reality Show":
+            result = self.call("gta_screenwriter_2", params)
+        else:
+            result = self.call("screenwriter_2", params)
         
         assert len(result) == len(scenes)
         for j in range(len(scenes)):
@@ -203,13 +234,16 @@ class FilmCrafter:
                     sit = "sittable"
                 else:
                     sit = "unsittable"
-                ini = ini + f"   - {item['character']}: " + f"{sit} Position {str(get_number(item['position']))}, standing\\n"
+                ini = ini + f"   - {item['character']}: " + f"{sit} Position {str(get_number(item['position']))}, standing\\\\\n"
             ini = "   " + ini.strip() 
             params = {"{initial}": ini, 
                         "{plot}": scene['scene_information']['what'],
                         "{dialogues}": scene['dialogues'],
                         "{all_actions}": all_actions}
-            result = self.call("screenwriter_3", params)
+            if self.scenario == "GTA Reality Show":
+                result = self.call("gta_screenwriter_3", params)
+            else:
+                result = self.call("screenwriter_3", params)
 
             assert len(result) == len(scene['dialogues'])
             scene['dialogues'] = result
@@ -266,7 +300,7 @@ class FilmCrafter:
                 position_id = get_number(position['position'])
                 sittable = "sittable" if positions[position_id-1]['sittable'] else "unsittable"
                 p.append(f"{position['character']}'s position: {sittable}")
-            characters_position = characters_position + f"{id+1}. **Scene {id+1}**:\\n{', '.join(p)}\\n\\n"
+            characters_position = characters_position + f"{id+1}. **Scene {id+1}**:\\\\\n{', '.join(p)}\\\\\n\\\\\n"
 
         all_actions = read_prompt(self.action_description_path)
         for i in range(self.stage1_verify_limit):
@@ -274,14 +308,20 @@ class FilmCrafter:
                         "{original_script}": current_script,
                         "{all_actions}": all_actions,
                         "{unknown_actions}": ', '.join(unknown_actions)}
-            feedback = self.call("director_3", params, trans2json=False)
+            if self.scenario == "GTA Reality Show":
+                feedback = self.call("gta_director_3", params, trans2json=False)
+            else:
+                feedback = self.call("director_3", params, trans2json=False)
             
             params = {"{theme}": self.topic,
                       "{feedback}": feedback, 
                         "{script}": current_script,
                         "{all_actions}": all_actions,
                         "{characters_position}": characters_position}
-            revised_script = self.call("screenwriter_4", params)
+            if self.scenario == "GTA Reality Show":
+                revised_script = self.call("gta_screenwriter_4", params)
+            else:
+                revised_script = self.call("screenwriter_4", params)
             current_script = revised_script
             unknown_actions = self.find_unknown_actions(revised_script)
             # If there are still unknown actions, discuss again immediately.
@@ -290,7 +330,10 @@ class FilmCrafter:
             
             params = {"{feedback}": feedback, 
                         "{revised_script}": revised_script}
-            verify = self.call("director_4", params, trans2json=False)
+            if self.scenario == "GTA Reality Show":
+                verify = self.call("gta_director_4", params, trans2json=False)
+            else:
+                verify = self.call("director_4", params, trans2json=False)
             if verify.find("finalize") == -1:
                 continue
             verify = verify[verify.find("finalize"):]
@@ -326,16 +369,22 @@ class FilmCrafter:
             params = {"{character}": profile['name'], 
                         "{profile}": profile,
                         "{script}": scenes_for_actor}
-            result = self.call("actor", params, trans2json=False)
+            if self.scenario == "GTA Reality Show":
+                result = self.call("gta_actor", params, trans2json=False)
+            else:
+                result = self.call("actor", params, trans2json=False)
             feedback[profile['name']] = result
             
         suggestions = ""
         for name, suggestion in feedback.items():
-            suggestions = suggestions + f"   - **{name}**: {suggestion}\\n"
+            suggestions = suggestions + f"   - **{name}**: {suggestion}\\\\\n"
         params = {"{suggestions}": suggestions,
                   "{character_profiles}": profiles,
                   "{draft_script}": scenes}
-        result = self.call("director_5", params)
+        if self.scenario == "GTA Reality Show":
+            result = self.call("gta_director_5", params)
+        else:
+            result = self.call("director_5", params)
         
         if result[return_most_similar("adopted-suggestions", list(result.keys()))] == "None":
             write_json(self.scene_path_5, scenes)
@@ -347,12 +396,18 @@ class FilmCrafter:
             for i in range(self.stage2_verify_limit):
                 params = {"{feedback}": adopted_suggestions, 
                             "{script}": current_script}
-                revised_script = self.call("screenwriter_5", params)
+                if self.scenario == "GTA Reality Show":
+                    revised_script = self.call("gta_screenwriter_5", params)
+                else:
+                    revised_script = self.call("screenwriter_5", params)
                 current_script = revised_script
                 
                 params = {"{feedback}": adopted_suggestions, 
                             "{revised_script}": revised_script}
-                verify = self.call("director_6", params, trans2json=False)
+                if self.scenario == "GTA Reality Show":
+                    verify = self.call("gta_director_6", params, trans2json=False)
+                else:
+                    verify = self.call("director_6", params, trans2json=False)
                 verify = verify[verify.find("finalize"):]
                 if "True" in verify or "true" in verify:
                     break
@@ -424,7 +479,7 @@ class FilmCrafter:
             if moveable_characters:
                 move2destination = ""
                 for pn in unoccupied_positions:
-                    move2destination = move2destination + f"   - {pn}\\n"
+                    move2destination = move2destination + f"   - {pn}\\\\\n"
                 move2destination = "   " + move2destination.strip()
                 lines = []
                 for id in range(len(scene['dialogues'])):
@@ -438,7 +493,10 @@ class FilmCrafter:
                                 "{lines}": lines,
                                 "{destinations}": move2destination,
                                 "{current_positions}": scene[return_most_similar('initial position', list(scene.keys()))]}
-                result = self.call("director_7", params)
+                if self.scenario == "GTA Reality Show":
+                    result = self.call("gta_director_7", params)
+                else:
+                    result = self.call("director_7", params)
                 
                 if 'insertion' in result.keys():
                     moved_charatcter = result['move']['character']
@@ -494,8 +552,12 @@ class FilmCrafter:
                 
         all_shots = read_prompt(self.shot_description_path)   
         params = {"{script}": script, "{all_shots}": all_shots}
-        result1 = self.call("cinematographer", params)
-        result2 = self.call("cinematographer", params)
+        if self.scenario == "GTA Reality Show":
+            result1 = self.call("gta_cinematographer", params)
+            result2 = self.call("gta_cinematographer", params)
+        else:
+            result1 = self.call("cinematographer", params)
+            result2 = self.call("cinematographer", params)
         # result2 = self.call("director_8", params)
         for scene_id, scene in result1.items():
             for shot_id, shot in scene.items():
@@ -550,7 +612,10 @@ class FilmCrafter:
                       "{shot_annotation}": current_shot_c,
                       "{all_shots}": all_shots
                       }
-            result1 = self.call("shot_review", params)
+            if self.scenario == "GTA Reality Show":
+                result1 = self.call("gta_shot_review", params)
+            else:
+                result1 = self.call("shot_review", params)
             current_shot_c = self.revise_shot_annotation(current_shot_c, result1)
             
             params = {"{identity_1}": "Cinematographer",
@@ -559,7 +624,10 @@ class FilmCrafter:
                       "{shot_annotation}": current_shot_d,
                       "{all_shots}": all_shots
                       }
-            result2 = self.call("shot_review", params)
+            if self.scenario == "GTA Reality Show":
+                result2 = self.call("gta_shot_review", params)
+            else:
+                result2 = self.call("shot_review", params)
             current_shot_d = self.revise_shot_annotation(current_shot_d, result2)
         
         params = {"{shot_annotation_1}": current_shot_d,
@@ -567,7 +635,10 @@ class FilmCrafter:
                     "{script}": script,
                     "{all_shots}": all_shots
                     }
-        result = self.call("director_9", params)
+        if self.scenario == "GTA Reality Show":
+            result = self.call("gta_director_9", params)
+        else:
+            result = self.call("director_9", params)
         last_shots = current_shot_d if result['better']=="1" else current_shot_c
         # last_shots = current_shot_d if result['better'].lower()=="director" else current_shot_c
         
@@ -623,6 +694,19 @@ class FilmCrafter:
             return shot
         
         
+    def generate_season(self):
+        '''
+            Role: Director
+
+            Behavior: Generate a full season of the GTA reality show, including multiple episodes.
+        '''
+        season = []
+        for episode_number in range(1, 11):  # Example: 10 episodes per season
+            params = {"{topic}": self.topic, "{episode_number}": episode_number}
+            episode = self.call("gta_director_2", params)
+            season.append(episode)
+        write_json(os.path.join(ROOT_PATH, "Script\\gta_season.json"), season)
+
     def clean_script(self):
         '''
             Description: Only keep the necessary information in the script and perform certain checks to avoid errors when executing the script in Unity.
@@ -689,24 +773,21 @@ class FilmCrafter:
                     
                     
 if __name__ == '__main__':
-    f = FilmCrafter(topic = "Reconcilation in a friend reunion")
-    print("Characters selecting >>>")
-    f.casting()
-    print("Scenes planning >>>")
-    f.scenes_plan()
-    print("Lines generating >>>")
-    f.lines_generate()
-    print("Positions marking >>>")
-    f.position_mark()
-    print("Actions marking >>>")
-    f.action_mark()
-    print("Director discusses with screenwriter about the script >>>")
-    f.stage1_verify()
-    print("Actors give comments on the lines >>>")
-    f.stage2_verify()
-    print("Movement marking >>>")
-    f.move_mark()
-    print("Director discusses with cinematographer about the shots >>>")
-    f.stage3_verify()
-    print("Script cleaning >>>")
-    f.clean_script()
+    # Initialize FastAPI app
+    app = FastAPI()
+
+    # Add CORS middleware to allow requests from the ReactJS frontend
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://localhost:3000"],  # Update with the ReactJS frontend URL
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # Include the API router
+    app.include_router(api_app.router)
+
+    # Run the FastAPI server
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

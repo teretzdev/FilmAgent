@@ -1,0 +1,97 @@
+{
+    "positions": [
+        {
+            "id": "Position 1",
+            "description": "Main entrance of the Gun Store, suitable for character entry or exit.",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 2",
+            "description": "Counter area where weapons and ammunition are displayed, ideal for transaction scenes.",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 3",
+            "description": "Back storage room, suitable for secretive or tense scenes.",
+            "fixed_angle": false,
+            "sittable": false
+        },
+        {
+            "id": "Position 4",
+            "description": "Shooting range inside the Gun Store, ideal for action or practice scenes.",
+            "fixed_angle": false,
+            "sittable": false
+        },
+        {
+            "id": "Position 5",
+            "description": "Parking lot outside the Gun Store, suitable for vehicle parking or ambush scenes.",
+            "fixed_angle": false,
+            "sittable": false
+        }
+    ],
+    "paths": [
+        {
+            "id": "Path 1",
+            "start": "Position 1",
+            "end": "Position 2",
+            "type": "straight",
+            "description": "A straight path from the main entrance to the counter area."
+        },
+        {
+            "id": "Path 2",
+            "start": "Position 2",
+            "end": "Position 3",
+            "type": "corridor",
+            "description": "A narrow corridor leading from the counter area to the back storage room."
+        },
+        {
+            "id": "Path 3",
+            "start": "Position 2",
+            "end": "Position 4",
+            "type": "straight",
+            "description": "A direct path from the counter area to the shooting range."
+        },
+        {
+            "id": "Path 4",
+            "start": "Position 1",
+            "end": "Position 5",
+            "type": "curved",
+            "description": "A curved path from the main entrance to the parking lot."
+        },
+        {
+            "id": "Path 5",
+            "start": "Position 3",
+            "end": "Position 4",
+            "type": "hidden",
+            "description": "A hidden path connecting the back storage room to the shooting range."
+        }
+    ],
+    "obstacles": [
+        {
+            "id": "Obstacle 1",
+            "location": "Path 2",
+            "type": "locked door",
+            "description": "A locked door blocking the corridor to the back storage room, requiring a key or force to open."
+        },
+        {
+            "id": "Obstacle 2",
+            "location": "Path 3",
+            "type": "target dummy",
+            "description": "A target dummy partially obstructing the path to the shooting range."
+        },
+        {
+            "id": "Obstacle 3",
+            "location": "Path 4",
+            "type": "abandoned vehicle",
+            "description": "An abandoned vehicle blocking part of the curved path to the parking lot."
+        },
+        {
+            "id": "Obstacle 4",
+            "location": "Path 5",
+            "type": "stacked crates",
+            "description": "A stack of crates blocking the hidden path between the back storage room and the shooting range."
+        }
+    ]
+}

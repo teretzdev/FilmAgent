@@ -1,0 +1,97 @@
+{
+    "positions": [
+        {
+            "id": "Position 1",
+            "description": "Main entrance of the Car Dealer, suitable for vehicle or character entry.",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 2",
+            "description": "Showroom floor, ideal for showcasing vehicles and character interactions.",
+            "fixed_angle": false,
+            "sittable": false
+        },
+        {
+            "id": "Position 3",
+            "description": "Sales desk, suitable for dialogue or transaction scenes.",
+            "fixed_angle": true,
+            "sittable": true
+        },
+        {
+            "id": "Position 4",
+            "description": "Garage area, ideal for vehicle repairs or technical demonstrations.",
+            "fixed_angle": false,
+            "sittable": false
+        },
+        {
+            "id": "Position 5",
+            "description": "Parking lot outside the Car Dealer, suitable for vehicle parking or ambush scenes.",
+            "fixed_angle": false,
+            "sittable": false
+        }
+    ],
+    "paths": [
+        {
+            "id": "Path 1",
+            "start": "Position 1",
+            "end": "Position 2",
+            "type": "straight",
+            "description": "A straight path from the main entrance to the showroom floor."
+        },
+        {
+            "id": "Path 2",
+            "start": "Position 2",
+            "end": "Position 3",
+            "type": "curved",
+            "description": "A curved path leading from the showroom floor to the sales desk."
+        },
+        {
+            "id": "Path 3",
+            "start": "Position 2",
+            "end": "Position 4",
+            "type": "corridor",
+            "description": "A narrow corridor connecting the showroom floor to the garage area."
+        },
+        {
+            "id": "Path 4",
+            "start": "Position 4",
+            "end": "Position 5",
+            "type": "straight",
+            "description": "A straight path from the garage area to the parking lot."
+        },
+        {
+            "id": "Path 5",
+            "start": "Position 1",
+            "end": "Position 5",
+            "type": "curved",
+            "description": "A curved path from the main entrance to the parking lot."
+        }
+    ],
+    "obstacles": [
+        {
+            "id": "Obstacle 1",
+            "location": "Path 2",
+            "type": "display stand",
+            "description": "A vehicle display stand partially blocking the path to the sales desk."
+        },
+        {
+            "id": "Obstacle 2",
+            "location": "Path 3",
+            "type": "tool cart",
+            "description": "A tool cart obstructing the corridor to the garage area."
+        },
+        {
+            "id": "Obstacle 3",
+            "location": "Path 4",
+            "type": "oil spill",
+            "description": "An oil spill creating a slippery hazard on the path to the parking lot."
+        },
+        {
+            "id": "Obstacle 4",
+            "location": "Path 5",
+            "type": "abandoned vehicle",
+            "description": "An abandoned vehicle partially blocking the curved path to the parking lot."
+        }
+    ]
+}

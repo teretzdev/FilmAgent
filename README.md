@@ -83,6 +83,34 @@ python GenerateAudio.py
 
 6. For the tests on 15 topics in our experimental section, we provide three .py files: `test_full.py` (The full FilmAgent framework, utilizing multi-agent collaboration.), `test_no_interation.py` (A single agent is responsible for planning, scriptwriting, and cinematography, representing our FilmAgent framework without multi-agent collaboration algorithms.) and `test_cot.py` (A single agent generates the chain-of-thought rationale and the complete script).
 
+## 🌟 Setting Up the ReactJS Frontend
+
+To set up and run the ReactJS frontend application, follow these steps:
+
+1. Navigate to the `client` directory:
+   ```bash
+   cd client
+   ```
+
+2. Install the required dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+   This will start the ReactJS application, and it will be accessible at `http://localhost:3000` in your web browser.
+
+4. To build the application for production, run:
+   ```bash
+   npm run build
+   ```
+
+   The production-ready files will be available in the `client/build` directory.
+
 ## 🌈 Case Study
 
 ### What does Multi-Agent Collaboration do?

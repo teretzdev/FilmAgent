@@ -1,0 +1,97 @@
+{
+    "positions": [
+        {
+            "id": "Position 1",
+            "description": "Main entrance of the Gang Territory, a key entry point for vehicles and characters.",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 2",
+            "description": "Central gathering area, ideal for gang meetings and interactions.",
+            "fixed_angle": false,
+            "sittable": true
+        },
+        {
+            "id": "Position 3",
+            "description": "Back alley, suitable for stealthy movements or ambush scenes.",
+            "fixed_angle": false,
+            "sittable": false
+        },
+        {
+            "id": "Position 4",
+            "description": "Rooftop of a nearby building, offering a strategic vantage point for surveillance.",
+            "fixed_angle": false,
+            "sittable": false
+        },
+        {
+            "id": "Position 5",
+            "description": "Garage area, commonly used for vehicle repairs or storage.",
+            "fixed_angle": true,
+            "sittable": false
+        }
+    ],
+    "paths": [
+        {
+            "id": "Path 1",
+            "start": "Position 1",
+            "end": "Position 2",
+            "type": "straight",
+            "description": "A straight path from the main entrance to the central gathering area."
+        },
+        {
+            "id": "Path 2",
+            "start": "Position 2",
+            "end": "Position 3",
+            "type": "curved",
+            "description": "A curved path leading from the central gathering area to the back alley."
+        },
+        {
+            "id": "Path 3",
+            "start": "Position 3",
+            "end": "Position 4",
+            "type": "stairs",
+            "description": "A staircase connecting the back alley to the rooftop."
+        },
+        {
+            "id": "Path 4",
+            "start": "Position 2",
+            "end": "Position 5",
+            "type": "straight",
+            "description": "A direct path from the central gathering area to the garage."
+        },
+        {
+            "id": "Path 5",
+            "start": "Position 1",
+            "end": "Position 3",
+            "type": "alley",
+            "description": "A narrow alley connecting the main entrance to the back alley."
+        }
+    ],
+    "obstacles": [
+        {
+            "id": "Obstacle 1",
+            "location": "Path 2",
+            "type": "trash bins",
+            "description": "A set of trash bins partially blocking the curved path to the back alley."
+        },
+        {
+            "id": "Obstacle 2",
+            "location": "Path 3",
+            "type": "broken stairs",
+            "description": "A damaged staircase leading to the rooftop, requiring careful navigation."
+        },
+        {
+            "id": "Obstacle 3",
+            "location": "Path 4",
+            "type": "abandoned car",
+            "description": "An abandoned car blocking the path to the garage."
+        },
+        {
+            "id": "Obstacle 4",
+            "location": "Path 5",
+            "type": "gang blockade",
+            "description": "A temporary gang blockade restricting access to the back alley."
+        }
+    ]
+}
