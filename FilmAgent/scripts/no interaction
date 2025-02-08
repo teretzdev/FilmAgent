@@ -35,8 +35,8 @@
                 "actions": [
                     {
                         "character": "Alex",
-                        "state": "standing",
-                        "action": "Standing Talking"
+                        "state": "stationary",
+                        "action": "Stationary Talking"
                     },
                     {
                         "character": "Maya",

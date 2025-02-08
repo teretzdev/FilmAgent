@@ -29,7 +29,7 @@ topics = [
 class FilmCrafter:
     def __init__(self, topic: str) -> None:
         self.topic = topic
-        self.store_path = os.path.join(ROOT_PATH, "store", "no_interaction", f"{ID}")
+        self.store_path = os.path.join(ROOT_PATH, f"store\\\no_interaction\\{ID}")
         self.log_path = os.path.join(self.store_path, "prompt.txt")
         self.profile_path = os.path.join(self.store_path, "actors_profile.json")
         self.action_description_path = os.path.join(ROOT_PATH, "Locations", "actions.txt")
@@ -131,7 +131,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\n   - topic: {topic}\\\n   - involved characters: {characters}\\\n   - plot: {plot}\\\n   - location: {location}\\\n   - dialogue goal: {goal}\\\n\\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\n   - topic: {topic}\\\\n   - involved characters: {characters}\\\\n   - plot: {plot}\\\\n   - location: {location}\\\\n   - dialogue goal: {goal}\\\\n\\\\n"
 
         params = {"{script_outline}": script_outline.strip()}
         result = self.call("screenwriter_1", params)

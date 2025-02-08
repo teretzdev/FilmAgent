@@ -111,7 +111,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\n   - topic: {topic}\\n   - involved characters: {characters}\\n   - plot: {plot}\\n   - location: {location}\\n   - dialogue goal: {goal}\\n\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\n   - topic: {topic}\\\n   - involved characters: {characters}\\\n   - plot: {plot}\\\n   - location: {location}\\\n   - dialogue goal: {goal}\\\n\\\n"
     
         params = {"{script_outline}": script_outline.strip()}
         result = self.call("screenwriter_1", params) 
@@ -145,9 +145,9 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\\n   - characters: {who}\\n   - location: {where}\\n   - plot: {what}\\n\\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\\n   - characters: {who}\\\n   - location: {where}\\\n   - plot: {what}\\\n\\\n"
             
-            position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
+            position_path = os.path.join(ROOT_PATH, "Locations", where, "position.json")
             positions = read_json(position_path)
             normal_position = [item for item in positions if item['fixed_angle'] == False]
             # This "if judgment" is related to the position, and camera settings in Unity.
@@ -155,13 +155,13 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\n{p}\\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\n{p}\\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
@@ -184,7 +184,7 @@ class FilmCrafter:
         all_actions = read_prompt(self.action_description_path)
         data = []
         for scene in scenes:
-            position_path = os.path.join(ROOT_PATH, f"Locations\{scene['scene_information']['where']}\position.json")
+            position_path = os.path.join(ROOT_PATH, "Locations", scene['scene_information']['where'], "position.json")
             positions = read_json(position_path)
             
             ini = ""
@@ -193,7 +193,7 @@ class FilmCrafter:
                     sit = "sittable"
                 else:
                     sit = "unsittable"
-                ini = ini + f"   - {item['character']}: " + f"{sit} Position {str(get_number(item['position']))}, standing\\n"
+                ini = ini + f"   - {item['character']}: " + f"{sit} Position {str(get_number(item['position']))}, standing\\\n"
             ini = "   " + ini.strip() 
             params = {"{initial}": ini, 
                         "{plot}": scene['scene_information']['what'],
@@ -216,7 +216,7 @@ class FilmCrafter:
             Output: The list of actions appearing in the script that are not set in Unity.
         '''
         unknown_actions = []
-        all_actions = read_json(os.path.join(ROOT_PATH, "Locations\\actions.json"))
+        all_actions = read_json(os.path.join(ROOT_PATH, "Locations", "actions.json"))
         for scene in scenes:
             for line in scene['dialogues']:
                 for action in line['actions']:
@@ -249,14 +249,14 @@ class FilmCrafter:
                 new_scene['dialogues'].append(new_line)
             current_script.append(new_scene)
             
-            position_path = os.path.join(ROOT_PATH, f"Locations\{scene['scene_information']['where']}\position.json")
+            position_path = os.path.join(ROOT_PATH, "Locations", scene['scene_information']['where'], "position.json")
             positions = read_json(position_path)
             p = []
             for position in scene['initial position']:
                 position_id = get_number(position['position'])
                 sittable = "sittable" if positions[position_id-1]['sittable'] else "unsittable"
                 p.append(f"{position['character']}'s position: {sittable}")
-            characters_position = characters_position + f"{id+1}. **Scene {id+1}**:\\n{', '.join(p)}\\n\\n"
+            characters_position = characters_position + f"{id+1}. **Scene {id+1}**:\\\n{', '.join(p)}\\\n\\\n"
 
         all_actions = read_prompt(self.action_description_path)
         for i in range(self.stage1_verify_limit):
@@ -321,7 +321,7 @@ class FilmCrafter:
             
         suggestions = ""
         for name, suggestion in feedback.items():
-            suggestions = suggestions + f"   - **{name}**: {suggestion}\\n"
+            suggestions = suggestions + f"   - **{name}**: {suggestion}\\\n"
         params = {"{suggestions}": suggestions,
                   "{character_profiles}": profiles,
                   "{draft_script}": scenes}
@@ -382,7 +382,7 @@ class FilmCrafter:
                 1. All movable characters (i.e., the characters that remain standing throughout the script)
                 2. All positions that character can move to (i.e., the unoccupied positions)
         '''
-        position_path = os.path.join(ROOT_PATH, f"Locations\{scene[return_most_similar('scene_information', list(scene.keys()))]['where']}\position.json")
+        position_path = os.path.join(ROOT_PATH, "Locations", scene[return_most_similar('scene_information', list(scene.keys()))]['where'], "position.json")
         positions = read_json(position_path)
         occupied_positions = [get_number(item['position']) for item in scene[return_most_similar('initial position', list(scene.keys()))]]
         unoccupied_positions = [f"{item['id']}: {item['description']}" for item in positions if get_number(item['id']) not in occupied_positions]
@@ -414,7 +414,7 @@ class FilmCrafter:
             if moveable_characters:
                 move2destination = ""
                 for pn in unoccupied_positions:
-                    move2destination = move2destination + f"   - {pn}\\n"
+                    move2destination = move2destination + f"   - {pn}\\\n"
                 move2destination = "   " + move2destination.strip()
                 lines = []
                 for id in range(len(scene['dialogues'])):
@@ -620,11 +620,11 @@ class FilmCrafter:
         scenes = read_json(self.scene_path_7)
         profiles = read_json(self.profile_path)
         v_characters = [item['name'] for item in profiles]
-        info = read_json(os.path.join(ROOT_PATH, "Locations\\rotateandtrack.json"))
+        info = read_json(os.path.join(ROOT_PATH, "Locations", "rotateandtrack.json"))
         v_locations = [location for location in info.keys()]
-        info_1 = read_json(os.path.join(ROOT_PATH, "Locations\\actions.json"))
+        info_1 = read_json(os.path.join(ROOT_PATH, "Locations", "actions.json"))
         v_actions = [action for action in info_1.keys()]
-        info_2 = read_json(os.path.join(ROOT_PATH, "Locations\\shots.json"))
+        info_2 = read_json(os.path.join(ROOT_PATH, "Locations", "shots.json"))
         v_shots = [shot for shot in info_2.keys()]
         
         data = []
