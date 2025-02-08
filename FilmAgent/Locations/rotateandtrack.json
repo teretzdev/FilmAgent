@@ -1,18 +1,7 @@
 {
     "Apartment living room": {
         "rotate": 1,
-        "track": 4,
-        "long": 4
-    },
-    "Apartment kitchen": {
-        "rotate": 1,
-        "track": 1,
-        "long": 3
-    },
-    "Roadside": {
-        "rotate": 1,
-        "track": 1,
-        "long": 1
+    ,    "track":        "long": 1
     },
     "Gaming room": {
         "rotate": 1,
@@ -58,7 +47,7 @@
         "rotate": 7,
         "track": 9,
         "long": 10
-    }
+    },
     "Sofa Corner": {
         "rotate": 3,
         "track": 3,

@@ -1,4 +1,4 @@
-You are tasked with directing a film based on a provided topic. You need to plan several coherent scenes according to the topic, focusing on vehicular deathmatches, stunts, and high-intensity action sequences.
+You are tasked with directing a film based on a provided topic. You need to plan several coherent scenes according to the topic, focusing on vehicular deathmatches, stunts, and high-intensity action sequences inspired by GTA gameplay.
 
 
 ### Film Topic:
@@ -8,28 +8,27 @@ You are tasked with directing a film based on a provided topic. You need to plan
 1. **Combatants**: {combatant_characters}
 
 ### Main Locations:
-1. **Race Track**: features stunt ramps, obstacles, and high-speed paths.
-2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles.
-3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings.
-4. **VR Simulation Room**: features dynamic virtual environments for vehicular combat.
+1. **Race Track**: features stunt ramps, obstacles, and high-speed paths for vehicular stunts and combat.
+2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles for chaotic vehicular battles.
+3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings for high-speed chases and tactical combat.
+4. **VR Simulation Room**: features dynamic virtual environments for experimental vehicular combat scenarios.
 
 ### Planning Steps:
 1. Determine the number of scenes and assign a simple sub-topic to each scene.
    - The number of scenes should be no more than {scene_limit}.
-   - Each sub-topic should emphasize vehicular deathmatches, stunts, or high-intensity action sequences.
+   - Each sub-topic must emphasize vehicular deathmatches, stunts, or high-intensity action sequences inspired by GTA gameplay.
 2. Based on the sub-topic, select the location from the Main Locations for each scene. 
 3. Based on the sub-topic, select several combatants from the Main Characters for each scene.
    - The number of combatants selected for each scene must align with the vehicular combat or stunt requirements of the sub-topic.
-   - The number of combatants selected for each scene can not exceed the maximum capacity of the selected location.
-   - The number of combatants selected for each scene is at least two.
-   - All the main combatants must be chosen at least once.
-4. Based on the sub-topic, write a story plot for each scene.
+   - The number of combatants selected for each scene cannot exceed the maximum capacity of the selected location.
+   - The number of combatants selected for each scene must be at least two.
+   - All the main combatants must be chosen at least once across all scenes.
+4. Based on the sub-topic, write a detailed story plot for each scene.
    - The story plot for each scene must include only the combatants selected for this scene in step 3.
-   - All the story plots should be story-coherent, emphasizing dramatic vehicular combat, stunts, and high-intensity action sequences.
+   - All the story plots should emphasize dramatic vehicular combat, stunts, and high-intensity action sequences.
    - Each story plot should highlight specific challenges, rivalries, or alliances among the combatants.
    - All the story plots should be detailed, providing adequate background information and context for the action.
-5. Based on the story plot, give a final dialogue goal so that the dialogue between the combatants in this scene can end naturally.
-
+5. Based on the story plot, define a final dialogue goal so that the dialogue between the combatants in this scene can end naturally and align with the action.
 
 Your response should only contain the following JSON content:
 [{"sub-topic": "...",

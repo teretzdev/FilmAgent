@@ -111,6 +111,10 @@ To set up and run the ReactJS frontend application, follow these steps:
 
    The production-ready files will be available in the `client/build` directory.
 
+5. If you encounter issues with the development server, ensure that the backend API server is running and accessible at `http://localhost:8000`. You can configure the API endpoint in the frontend code if necessary.
+
+6. For deploying the production build, copy the contents of the `client/build` directory to your web server's root directory. Ensure that the server is configured to serve static files correctly.
+
 ## 🌈 Case Study
 
 ### What does Multi-Agent Collaboration do?

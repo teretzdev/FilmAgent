@@ -10,6 +10,8 @@ app = FastAPI()
 # Mock data paths (replace with actual paths in production)
 SCRIPTS_PATH = "FilmAgent/scripts.json"
 EPISODES_PATH = "FilmAgent/episodes.json"
+CONTESTANTS_PATH = "FilmAgent/contestants.json"
+PRIZES_PATH = "FilmAgent/prizes.json"
 
 # Utility function to load JSON data
 def load_json(file_path: str) -> List[Dict]:
@@ -23,9 +25,11 @@ def load_json(file_path: str) -> List[Dict]:
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error loading file: {str(e)}")
 
-# Load scripts and episodes data
+# Load scripts, episodes, contestants, and prizes data
 scripts_data = load_json(SCRIPTS_PATH)
 episodes_data = load_json(EPISODES_PATH)
+contestants_data = load_json(CONTESTANTS_PATH)
+prizes_data = load_json(PRIZES_PATH)
 
 @app.get("/")
 def root():
@@ -37,6 +41,31 @@ def get_all_scripts():
     if not scripts_data:
         raise HTTPException(status_code=404, detail="No scripts found.")
     return scripts_data
+
+# Endpoint to fetch all contestants
+@app.get("/contestants", response_model=List[Dict])
+def get_all_contestants():
+    if not contestants_data:
+        raise HTTPException(status_code=404, detail="No contestants found.")
+    return contestants_data
+
+# Endpoint to fetch a specific contestant by ID
+@app.get("/contestants/{contestant_id}", response_model=Dict)
+def get_contestant_by_id(contestant_id: int):
+    try:
+        contestant = next((c for c in contestants_data if c.get("id") == contestant_id), None)
+        if not contestant:
+            raise HTTPException(status_code=404, detail=f"Contestant with ID {contestant_id} not found")
+        return contestant
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Endpoint to fetch available prizes
+@app.get("/prizes", response_model=List[Dict])
+def get_all_prizes():
+    if not prizes_data:
+        raise HTTPException(status_code=404, detail="No prizes found.")
+    return prizes_data
 
 # Endpoint to fetch a specific script by ID
 @app.get("/scripts/{script_id}", response_model=Dict)

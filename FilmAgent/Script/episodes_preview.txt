@@ -17,4 +17,23 @@ Episode 3:
   Script: 
     - Alex: I'm really proud of what we've accomplished.
     - Zara: Me too, Alex. It's been quite a journey and I've enjoyed every step.
+    - Alex: Here's to more challenges and more wins!Episode 2:
+  Purpose: Reflecting on the project's challenges and personal growth.
+  Contestants: Alex, Maya, Leo
+  Location: Apartment Living Room
+  Plan: This project had its ups and downs, but look at how much we've grown.
+  Script: 
+    - Alex: This project had its ups and downs, but look at how much we've grown.
+    - Maya: Absolutely. I've learned so much about managing complex codebases under pressure.
+    - Leo: And the collaboration was top-notch. Each of us brought something unique to the table.
+    - Alex: Here's to many more successful collaborations in the future!
+
+Episode 3:
+  Purpose: Alex and Zara share a quiet moment to appreciate the journey.
+  Contestants: Alex, Zara
+  Location: Roadside
+  Plan: Alex and Zara share a quiet moment to appreciate the journey.
+  Script: 
+    - Alex: I'm really proud of what we've accomplished.
+    - Zara: Me too, Alex. It's been quite a journey and I've enjoyed every step.
     - Alex: Here's to more challenges and more wins!

@@ -43,20 +43,9 @@
    - Use Oil Slick: Release oil onto the track to make it slippery for other vehicles.
    - Perform 360 Spin: Execute a full 360-degree spin for style or evasion.
    - Target Lock: Lock onto an opponent for a precision attack.
-   - Pole Dancing: a dance performed around a vertical pole.
-   - Victory Pose: a celebratory pose after achieving success.
-   - Accelerate: Increase the speed of the vehicle.
-   - Brake: Reduce the speed of the vehicle or bring it to a stop.
-   - Drift: Perform a controlled slide around a corner.
-   - Nitro Boost: Temporarily increase the vehicle's speed using a nitro boost.
-   - Fire Cannon: Launch a projectile from the vehicle's mounted cannon.
-   - Deploy Smoke Screen: Release a smoke screen to obscure visibility for pursuers.
-   - Perform Stunt Jump: Execute a high-speed jump over a ramp or obstacle.
-   - Ram Opponent: Deliberately collide with another vehicle to cause damage.
-   - Evasive Maneuver: Perform a quick maneuver to avoid an incoming attack or obstacle.
-   - Spin Attack: Rotate the vehicle rapidly to strike nearby opponents.
-   - Repair Vehicle: Temporarily halt to repair minor damage to the vehicle.
-   - Activate Shield: Deploy a temporary energy shield to protect the vehicle.
-   - Use Oil Slick: Release oil onto the track to make it slippery for other vehicles.
-   - Perform 360 Spin: Execute a full 360-degree spin for style or evasion.
-   - Target Lock: Lock onto an opponent for a precision attack.
+   - Auto Repair: Automatically repair minor vehicle damage over time.
+   - Taunt: A mocking or provocative action performed while standing or sitting.
+   - Heckle: An action to interrupt or jeer at someone while standing or sitting.
+   - Crowd Pleaser: An action to entertain or win over the crowd while standing.
+   - Pole Dancing: A dance performed around a vertical pole.
+   - Victory Pose: A celebratory pose after achieving success.

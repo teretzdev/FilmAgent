@@ -50,30 +50,64 @@ class GTARealityShow:
         else:
             raise FileNotFoundError("Contestants file not found. Please ensure the file exists.")
 
-    def generate_episode(self, episode_number: int):
+    def generate_episode_plan(self, episode_number: int) -> dict:
+        """
+        Generate a detailed plan for an episode, including purpose, location, and contestants.
+        """
         if not self.recurring_contestants:
             self.load_contestants()
 
         unique_purpose = random.choice(self.unique_purposes)
         selected_contestants = random.sample(self.recurring_contestants, k=min(4, len(self.recurring_contestants)))
-
         selected_location = random.choice(self.locations)
-        params = {
-            "{episode_number}": episode_number,
-            "{unique_purpose}": unique_purpose,
-            "{selected_contestants}": ", ".join(selected_contestants),
-            "{selected_location}": selected_location,
-        }
-        episode_plan = self.call_ai_agent("gta_director_2", params)
-        episode_script = self.call_ai_agent("gta_screenwriter_2", params)
 
         return {
             "episode_number": episode_number,
             "unique_purpose": unique_purpose,
             "selected_contestants": selected_contestants,
-            "plan": episode_plan,
+            "selected_location": selected_location,
+        }
+
+    def generate_episode_script(self, episode_plan: dict) -> dict:
+        """
+        Generate a script for an episode based on the episode plan.
+        """
+        params = {
+            "{episode_number}": episode_plan["episode_number"],
+            "{unique_purpose}": episode_plan["unique_purpose"],
+            "{selected_contestants}": ", ".join(episode_plan["selected_contestants"]),
+            "{selected_location}": episode_plan["selected_location"],
+        }
+        episode_plan_details = self.call_ai_agent("gta_director_2", params)
+        episode_script = self.call_ai_agent("gta_screenwriter_2", params)
+
+        return {
+            "plan": episode_plan_details,
             "script": episode_script,
         }
+
+    def generate_episode(self, episode_number: int):
+        """
+        Generate a complete episode, including the plan and script.
+        """
+        episode_plan = self.generate_episode_plan(episode_number)
+        episode_script = self.generate_episode_script(episode_plan)
+
+        return {
+            "episode_number": episode_plan["episode_number"],
+            "unique_purpose": episode_plan["unique_purpose"],
+            "selected_contestants": episode_plan["selected_contestants"],
+            "plan": episode_script["plan"],
+            "script": episode_script["script"],
+        }
+
+    def manage_contestants(self, new_contestants: list):
+        """
+        Add new contestants to the recurring contestants list and ensure no duplicates.
+        """
+        for contestant in new_contestants:
+            if contestant not in self.recurring_contestants:
+                self.recurring_contestants.append(contestant)
 
     def generate_season(self):
         season_data = []
@@ -108,7 +142,7 @@ class GTARealityShow:
 
         # Parse the git diff
         diff_lines = git_diff.splitlines()
-        formatted_diff = ["# Recent Code Changes\\n"]
+        formatted_diff = ["# Recent Code Changes\\\n"]
         current_file = None
 
         for line in diff_lines:
@@ -117,7 +151,7 @@ class GTARealityShow:
                 parts = line.split(" ")
                 current_file = parts[-1] if len(parts) > 2 else None
                 if current_file:
-                    formatted_diff.append(f"\\n## {current_file}\\n")
+                    formatted_diff.append(f"\\\n## {current_file}\\\n")
             elif line.startswith("+") and not line.startswith("+++"):
                 # Added lines
                 formatted_diff.append(f"- **Added**: {line[1:].strip()}")
@@ -127,7 +161,7 @@ class GTARealityShow:
 
         # Write the formatted diff to the markdown file
         with open(diff_output_file, "w") as f:
-            f.write("\\n".join(formatted_diff))
+            f.write("\\\n".join(formatted_diff))
 
         print(f"Changes preview saved to {diff_output_file}")
 

@@ -15,6 +15,26 @@ load_dotenv()
 # Use environment variable with fallback
 ROOT_PATH = os.getenv('FILM_AGENT_ROOT', "/absolute/path/to/FilmAgent")
 
+# Initialize FastAPI app
+app = FastAPI()
+
+# Add CORS middleware to allow requests from the ReactJS frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Update with the ReactJS frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Include the API router
+app.include_router(api_app.router)
+
+# Run the FastAPI server
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
 class FilmCrafter:
     
     def __init__(self, topic: str, scenario: str = "default") -> None:
@@ -146,7 +166,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\n   - topic: {topic}\\\\\n   - involved characters: {characters}\\\\\n   - plot: {plot}\\\\\n   - location: {location}\\\\\n   - dialogue goal: {goal}\\\\\n\\\\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\n   - topic: {topic}\\\\\\n   - involved characters: {characters}\\\\\\n   - plot: {plot}\\\\\\n   - location: {location}\\\\\\n   - dialogue goal: {goal}\\\\\\n\\\\\\n"
     
         params = {"{script_outline}": script_outline.strip()}
         if self.scenario == "GTA Reality Show":
@@ -183,7 +203,7 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\\\\\n   - characters: {who}\\\\\n   - location: {where}\\\\\n   - plot: {what}\\\\\n\\\\\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\n   - characters: {who}\\\\\\n   - location: {where}\\\\\\n   - plot: {what}\\\\\\n\\\\\\n"
             
             position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
             positions = read_json(position_path)
@@ -193,13 +213,13 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\n{p}\\\\\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\n{p}\\\\\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
@@ -234,7 +254,7 @@ class FilmCrafter:
                     sit = "sittable"
                 else:
                     sit = "unsittable"
-                ini = ini + f"   - {item['character']}: " + f"{sit} Position {str(get_number(item['position']))}, standing\\\\\n"
+                ini = ini + f"   - {item['character']}: " + f"{sit} Position {str(get_number(item['position']))}, standing\\\\\\n"
             ini = "   " + ini.strip() 
             params = {"{initial}": ini, 
                         "{plot}": scene['scene_information']['what'],
@@ -300,7 +320,7 @@ class FilmCrafter:
                 position_id = get_number(position['position'])
                 sittable = "sittable" if positions[position_id-1]['sittable'] else "unsittable"
                 p.append(f"{position['character']}'s position: {sittable}")
-            characters_position = characters_position + f"{id+1}. **Scene {id+1}**:\\\\\n{', '.join(p)}\\\\\n\\\\\n"
+            characters_position = characters_position + f"{id+1}. **Scene {id+1}**:\\\\\\n{', '.join(p)}\\\\\\n\\\\\\n"
 
         all_actions = read_prompt(self.action_description_path)
         for i in range(self.stage1_verify_limit):
@@ -377,7 +397,7 @@ class FilmCrafter:
             
         suggestions = ""
         for name, suggestion in feedback.items():
-            suggestions = suggestions + f"   - **{name}**: {suggestion}\\\\\n"
+            suggestions = suggestions + f"   - **{name}**: {suggestion}\\\\\\n"
         params = {"{suggestions}": suggestions,
                   "{character_profiles}": profiles,
                   "{draft_script}": scenes}
@@ -479,7 +499,7 @@ class FilmCrafter:
             if moveable_characters:
                 move2destination = ""
                 for pn in unoccupied_positions:
-                    move2destination = move2destination + f"   - {pn}\\\\\n"
+                    move2destination = move2destination + f"   - {pn}\\\\\\n"
                 move2destination = "   " + move2destination.strip()
                 lines = []
                 for id in range(len(scene['dialogues'])):
