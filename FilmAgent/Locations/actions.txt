@@ -15,12 +15,17 @@
    - Standing Deny: convey the character's rejection or disapproval.
    - Joyful Jump: demonstrate the character is extremely happy.
    - Sit Down: Only when you need to change the character's state from standing to sitting, you must perform this action.
+   - Taunt: a mocking or provocative action performed while standing.
+   - Heckle: an action to interrupt or jeer at someone while standing.
+   - Crowd Pleaser: an action to entertain or win over the crowd while standing.
 
 2. **Actions performed in sitting state**:
    - Sitting Talking: simply show the character is talking.
    - Sitting Laughing: convey the character's happy emotion.
    - Sitting Claping: indicate the character agrees or is happy.
    - Stand Up: Only when you need to change the character's state from sitting to standing, you must perform this action.
+   - Taunt: a mocking or provocative action performed while sitting.
+   - Heckle: an action to interrupt or jeer at someone while sitting.
 
 3. **Vehicular Actions**:
    - Accelerate: Increase the speed of the vehicle.
@@ -38,6 +43,8 @@
    - Use Oil Slick: Release oil onto the track to make it slippery for other vehicles.
    - Perform 360 Spin: Execute a full 360-degree spin for style or evasion.
    - Target Lock: Lock onto an opponent for a precision attack.
+   - Pole Dancing: a dance performed around a vertical pole.
+   - Victory Pose: a celebratory pose after achieving success.
    - Accelerate: Increase the speed of the vehicle.
    - Brake: Reduce the speed of the vehicle or bring it to a stop.
    - Drift: Perform a controlled slide around a corner.

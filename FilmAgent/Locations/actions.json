@@ -38,5 +38,10 @@
     "EMP Blast": "Emit an electromagnetic pulse to disable nearby vehicles.",
     "Deploy Spikes": "Release spikes onto the track to puncture tires of pursuing vehicles.",
     "Cloak Mode": "Activate stealth mode to become temporarily invisible to opponents.",
-    "Auto Repair": "Automatically repair minor vehicle damage over time."
+    "Auto Repair": "Automatically repair minor vehicle damage over time.",
+    "Taunt": "A mocking or provocative action.",
+    "Heckle": "An action to interrupt or jeer at someone.",
+    "Crowd Pleaser": "An action to entertain or win over the crowd.",
+    "Pole Dancing": "A dance performed around a vertical pole.",
+    "Victory Pose": "A celebratory pose after achieving success."
 }
