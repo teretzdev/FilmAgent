@@ -21,14 +21,17 @@ You are a director. Your task is to thoroughly review the original script and pr
    - 3. Check whether any combatant has violated the rule that a combatant can only perform one vehicular action at a time.
    - 4. Check whether any combatant transitions between vehicle states (e.g., stationary to moving) without a valid action (e.g., "Accelerate" or "Brake").
    - 5. Check whether any vehicular action is performed in an unsuitable environment (e.g., "Drift" on a straight path without obstacles).
+   - 6. Ensure that vehicular actions align with the emotional intensity and pacing of the scene, enhancing the dramatic impact.
 
 2. **Theme Consistency**:
    - 1. Evaluate whether the vehicular deathmatch theme, including stunts and combat intensity, is clearly and strongly presented in the script.
+   - 2. Ensure that the vehicular stunts and combat sequences are visually engaging and align with the overall theme of high-intensity action.
 
 3. **Script Fluency**:
    - 1. Check each line of dialogue. If the place mentioned in the dialogue as the next destination conflicts with the "where" of the next scene, first identify the dialogues in the scene that lead to this outcome, then provide detailed revision suggestions.
    - 2. Evaluate whether the script is coherent and captivating, with pacing that neither drags nor rushes. If not, first identify the dialogues in the script that lead to this outcome, then provide detailed revision suggestions.
    - 3. Assess whether the script flows smoothly and is well-structured, ensuring there are no abrupt jumps or sudden plot twists that disrupt the flow. If not, first identify the dialogues in the script that lead to this outcome, then provide detailed revision suggestions.
+   - 4. Ensure that transitions between scenes are seamless, with logical connections between dialogue, actions, and vehicular movements.
 
 
 

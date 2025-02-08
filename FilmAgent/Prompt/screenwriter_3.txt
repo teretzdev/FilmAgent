@@ -28,19 +28,19 @@ You are a screenwriter. You need to read the dialogues and story plot in the scr
    - In one scene, you cannot overuse a certain vehicular action.
    - When a vehicle is stationary, you can only choose actions performed in a stationary state. When a vehicle is moving, you can only choose actions performed in a moving state.
    - You can choose "Accelerate" or "Brake" to change the vehicle's state between stationary and moving.
-   - Only by using "Accelerate" or "Brake" can the vehicle's state be changed; otherwise, the vehicle's state should remain the same as before.
+   - Only by using "Accelerate" or "Brake" can the vehicle's state be changed; otherwise, the vehicle's state should remain the same as before. Ensure that transitions between states are logical and enhance the flow of the scene.
 
 
 ### [Action Selection Steps]:
    - Step 1: Understand the emotions and intensity expressed in the dialogues based on the story plot, and consider the combatants' emotional states and vehicular dynamics in the conversation.
-   - Step 2: According to the considerations from Step 1 and [Action Selection Requirements], choose the most appropriate vehicular actions from the [Complete List of Vehicular Actions] and add them after each line of dialogue, including the speaker and some other (not all) combatants' actions. Emphasize stunts, vehicular combat, and near-impossible feats.
+   - Step 2: According to the considerations from Step 1 and [Action Selection Requirements], choose the most appropriate vehicular actions from the [Complete List of Vehicular Actions] and add them after each line of dialogue, including the speaker and some other (not all) combatants' actions. Ensure the actions align with the emotional intensity of the dialogue and highlight vehicular stunts, combat maneuvers, and dynamic sequences.
 
 
 ### [Output Content]:
 Each action added should consist of the following parts:
-   - action: The action selected from [Complete List of Vehicular Actions].
+   - action: The action selected from [Complete List of Vehicular Actions] (e.g., "Drift", "Nitro Boost", "Fire Cannon").
    - combatant: The combatant that performs the action.
-   - vehicle state: The state of the vehicle before the action is performed, including stationary or moving.
+   - vehicle state: The state of the vehicle before the action is performed, including stationary or moving (e.g., "stationary", "moving").
    - reasoning: The logical reasoning process that includes the complete two action selection steps mentioned above.
 
 

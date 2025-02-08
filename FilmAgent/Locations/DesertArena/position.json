@@ -87,4 +87,93 @@
             "description": "A sand pit that slows down vehicles."
         }
     ]
+}{
+    "positions": [
+        {
+            "id": "Position 1",
+            "description": "Starting point for vehicle 1 near the edge of the desert.",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 2",
+            "description": "Starting point for vehicle 2 near a dune ramp.",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 3",
+            "description": "Camera vantage point overlooking the central arena.",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 4",
+            "description": "Elevated position on a dune for strategic advantage.",
+            "fixed_angle": false,
+            "sittable": false
+        },
+        {
+            "id": "Position 5",
+            "description": "Camera vantage point near the destructible rock obstacle.",
+            "fixed_angle": true,
+            "sittable": false
+        }
+    ],
+    "paths": [
+        {
+            "id": "Path 1",
+            "start": "Position 1",
+            "end": "Position 2",
+            "type": "straight",
+            "description": "A straight path across open terrain."
+        },
+        {
+            "id": "Path 2",
+            "start": "Position 2",
+            "end": "Position 3",
+            "type": "dune ramp",
+            "description": "A steep dune ramp leading to the central arena."
+        },
+        {
+            "id": "Path 3",
+            "start": "Position 3",
+            "end": "Position 4",
+            "type": "curved",
+            "description": "A curved path around the central arena."
+        },
+        {
+            "id": "Path 4",
+            "start": "Position 4",
+            "end": "Position 5",
+            "type": "stunt ramp",
+            "description": "A stunt ramp for high-speed jumps over obstacles."
+        }
+    ],
+    "obstacles": [
+        {
+            "id": "Obstacle 1",
+            "location": "Path 2",
+            "type": "rock",
+            "description": "A destructible rock placed on the dune ramp."
+        },
+        {
+            "id": "Obstacle 2",
+            "location": "Path 3",
+            "type": "barrel",
+            "description": "A stack of barrels placed on the curved path."
+        },
+        {
+            "id": "Obstacle 3",
+            "location": "Path 4",
+            "type": "ramp",
+            "description": "A stunt ramp for vehicles to jump over."
+        },
+        {
+            "id": "Obstacle 4",
+            "location": "Path 1",
+            "type": "sand pit",
+            "description": "A sand pit that slows down vehicles."
+        }
+    ]
 }

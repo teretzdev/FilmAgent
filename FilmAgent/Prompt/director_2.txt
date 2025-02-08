@@ -5,13 +5,13 @@ You are tasked with directing a film based on a provided topic. You need to plan
 {topic}
 
 ### Main Characters:
-1. **Combatants**: {combatant_characters}
+1. **Combatants**: {combatant_characters} (e.g., skilled drivers, mechanics, or strategists)
 
 ### Main Locations:
-1. **Race Track**: features stunt ramps, obstacles, and high-speed paths.
-2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles.
-3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings.
-4. **VR Simulation Room**: features dynamic virtual environments for vehicular combat.
+1. **Race Track**: features stunt ramps, obstacles, and high-speed paths for vehicular combat.
+2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles for intense vehicular battles.
+3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings for high-speed chases.
+4. **VR Simulation Room**: features dynamic virtual environments for vehicular combat and stunts.
 
 ### Planning Steps:
 1. Determine the number of scenes and assign a simple sub-topic to each scene.
@@ -23,10 +23,10 @@ You are tasked with directing a film based on a provided topic. You need to plan
    - All the main combatants must be chosen at least once.
 4. Based on the sub-topic, write a story plot for each scene.
    - The story plot for each scene must include only the combatants selected for this scene in step 3.
-   - All the story plots should be story-coherent, and the more dramatic and specific the story, the better.
-   - All the story plots should emphasize vehicular combat, stunts, and high-intensity action sequences.
-   - All the story plots should be detailed and give adequate background information.
-5. Based on the story plot, give a final dialogue goal so that the dialogue between the combatants in this scene can end naturally.
+   - All the story plots should be story-coherent, emphasizing vehicular combat, stunts, and high-intensity action sequences.
+   - The story plots should include dramatic vehicular battles, near-impossible stunts, and strategic maneuvers.
+   - All the story plots should be detailed, providing adequate background information and context for the vehicular action.
+5. Based on the story plot, give a final dialogue goal that aligns with the vehicular combat theme and ensures the dialogue between the combatants in this scene ends naturally.
 
 
 Your response should only contain the following JSON content:

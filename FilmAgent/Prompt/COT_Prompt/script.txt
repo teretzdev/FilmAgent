@@ -7,13 +7,13 @@ Plan three coherent scenes based on the topic, assign a sub-topic to each scene,
 
 This step may require the following information:
 #### Main Characters:
-1. **Combatants**: {combatant_characters}
+1. **Combatants**: {combatant_characters} (e.g., skilled drivers, mechanics, or strategists)
 
 #### Main Locations:
-1. **Race Track**: features stunt ramps, obstacles, and high-speed paths.
-2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles.
-3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings.
-4. **VR Simulation Room**: features dynamic virtual environments for vehicular combat.
+1. **Race Track**: features stunt ramps, obstacles, and high-speed paths for vehicular combat.
+2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles for intense vehicular battles.
+3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings for high-speed chases.
+4. **VR Simulation Room**: features dynamic virtual environments for vehicular combat and stunts.
 
 After this step, the following parts of the script will be completed:
 "scene_information": {"who": [Selected Combatants], "where": "Selected Location", "what": "The Plot For This Scene"}
@@ -48,13 +48,13 @@ After this step, the following parts of the script will be completed:
 Understand the emotions expressed in the dialogues from step 2, and consider the emotional states of the combatants in the conversation. According to your considerations and [Action Selection Requirements], choose the most appropriate vehicular actions from the [Complete List of Actions] and add them after each line of dialogue, including the speaker and some other (not all) combatants' actions.
 
 Each action added should consist of the following parts:
-   - action: The action selected from [Complete List of Actions].
+   - action: The action selected from [Complete List of Actions] (e.g., "Drift", "Nitro Boost", "Fire Cannon").
    - combatant: The combatant that performs the action.
    - vehicle state: The state of the vehicle before the action is performed, including stationary or moving.
 
 This step may require the following information:
 #### [Complete List of Actions]:
-{all_vehicular_actions}
+{all_vehicular_actions} (e.g., vehicular stunts, combat maneuvers, and evasive actions)
 
 
 #### [Action Selection Requirements]:
@@ -80,7 +80,7 @@ Focus on the usage conditions of each shot in the [Complete List of Shots], then
 
 This step may require the following information:
 #### [Complete List of Shots]:
-{all_combat_shots}
+{all_combat_shots} (e.g., "Drift Shot", "Chase Shot", "Stunt Shot", "Explosion Shot")
 
 
 #### [Shot Annotation Requirements]:

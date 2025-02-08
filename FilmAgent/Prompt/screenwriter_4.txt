@@ -36,10 +36,11 @@ You are a screenwriter. You have received feedback on your script from the direc
    - Each combatant can only add one vehicular action at a time.
    - Only by using "Accelerate" or "Brake" can the vehicle's state be changed; otherwise, the vehicle's state should remain the same as before.
    - Each vehicular action should consist of the following parts:
-      - reason: The reason for your choice of vehicular action.
+      - reason: The reason for your choice of vehicular action, ensuring alignment with the dialogue and scene context.
       - action: The vehicular action selected from [Complete List of Vehicular Actions].
       - combatant: The combatant that performs the vehicular action.
       - vehicle state: The state of the vehicle before the action is performed, including stationary or moving.
+      - environment: The environment or path type (e.g., "straight", "curved", "dune ramp") where the action is performed, ensuring suitability.
 
 
 

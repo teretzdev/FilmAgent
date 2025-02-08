@@ -136,4 +136,68 @@
             "description": "A stunt ramp for vehicles to jump over"
         }
     ]
+}{
+    "positions": [
+        {
+            "id": "Position 1",
+            "description": "Starting point for vehicle 1",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 2",
+            "description": "Starting point for vehicle 2",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 3",
+            "description": "Camera vantage point overlooking the first turn",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 4",
+            "description": "Camera vantage point near the stunt ramp",
+            "fixed_angle": true,
+            "sittable": false
+        }
+    ],
+    "paths": [
+        {
+            "id": "Path 1",
+            "start": "Position 1",
+            "end": "Position 2",
+            "type": "straight",
+            "description": "Main straight path for high-speed racing"
+        },
+        {
+            "id": "Path 2",
+            "start": "Position 2",
+            "end": "Position 3",
+            "type": "curved",
+            "description": "Sharp turn leading to the first obstacle"
+        },
+        {
+            "id": "Path 3",
+            "start": "Position 3",
+            "end": "Position 4",
+            "type": "stunt ramp",
+            "description": "High-speed ramp for performing stunts"
+        }
+    ],
+    "obstacles": [
+        {
+            "id": "Obstacle 1",
+            "location": "Path 2",
+            "type": "barrel",
+            "description": "A stack of barrels placed on the curve"
+        },
+        {
+            "id": "Obstacle 2",
+            "location": "Path 3",
+            "type": "ramp",
+            "description": "A stunt ramp for vehicles to jump over"
+        }
+    ]
 }
