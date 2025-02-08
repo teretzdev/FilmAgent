@@ -16,16 +16,18 @@ You are tasked with directing a film based on a provided topic. You need to plan
 ### Planning Steps:
 1. Determine the number of scenes and assign a simple sub-topic to each scene.
    - The number of scenes should be no more than {scene_limit}.
+   - Each sub-topic should emphasize vehicular deathmatches, stunts, or high-intensity action sequences.
 2. Based on the sub-topic, select the location from the Main Locations for each scene. 
 3. Based on the sub-topic, select several combatants from the Main Characters for each scene.
+   - The number of combatants selected for each scene must align with the vehicular combat or stunt requirements of the sub-topic.
    - The number of combatants selected for each scene can not exceed the maximum capacity of the selected location.
    - The number of combatants selected for each scene is at least two.
    - All the main combatants must be chosen at least once.
 4. Based on the sub-topic, write a story plot for each scene.
    - The story plot for each scene must include only the combatants selected for this scene in step 3.
-   - All the story plots should be story-coherent, and the more dramatic and specific the story, the better.
-   - All the story plots should emphasize vehicular combat, stunts, and high-intensity action sequences.
-   - All the story plots should be detailed and give adequate background information.
+   - All the story plots should be story-coherent, emphasizing dramatic vehicular combat, stunts, and high-intensity action sequences.
+   - Each story plot should highlight specific challenges, rivalries, or alliances among the combatants.
+   - All the story plots should be detailed, providing adequate background information and context for the action.
 5. Based on the story plot, give a final dialogue goal so that the dialogue between the combatants in this scene can end naturally.
 
 

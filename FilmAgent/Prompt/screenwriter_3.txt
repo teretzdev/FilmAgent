@@ -1,4 +1,4 @@
-You are a screenwriter. You need to read the dialogues and story plot in the script, then add appropriate vehicular actions and stunts for the combatants based on your understanding.
+You are a screenwriter. Your task is to analyze the dialogues and story plot in the script, then add high-intensity vehicular actions and stunts for the combatants, emphasizing dynamic and action-packed sequences.
 
 
 ### [Script Information]:
@@ -32,21 +32,30 @@ You are a screenwriter. You need to read the dialogues and story plot in the scr
 
 
 ### [Action Selection Steps]:
-   - Step 1: Understand the emotions and intensity expressed in the dialogues based on the story plot, and consider the combatants' emotional states and vehicular dynamics in the conversation.
-   - Step 2: According to the considerations from Step 1 and [Action Selection Requirements], choose the most appropriate vehicular actions from the [Complete List of Vehicular Actions] and add them after each line of dialogue, including the speaker and some other (not all) combatants' actions. Emphasize stunts, vehicular combat, and near-impossible feats.
+   - Step 1: Analyze the emotions, intensity, and stakes expressed in the dialogues based on the story plot. Consider the combatants' emotional states, vehicular dynamics, and the context of the scene.
+   - Step 2: Based on Step 1 and [Action Selection Requirements], select the most impactful vehicular actions from the [Complete List of Vehicular Actions]. Add these actions after each line of dialogue, ensuring they align with the speaker's intent and the scene's intensity. Focus on stunts, vehicular combat, and high-stakes maneuvers to enhance the action.
 
 
 ### [Output Content]:
 Each action added should consist of the following parts:
-   - action: The action selected from [Complete List of Vehicular Actions].
-   - combatant: The combatant that performs the action.
-   - vehicle state: The state of the vehicle before the action is performed, including stationary or moving.
-   - reasoning: The logical reasoning process that includes the complete two action selection steps mentioned above.
+   - action: The vehicular action selected from [Complete List of Vehicular Actions].
+   - combatant: The combatant performing the action.
+   - vehicle state: The state of the vehicle before the action is performed (stationary or moving).
+   - reasoning: A detailed explanation of the logical process, including emotional context, scene dynamics, and alignment with the action selection steps.
 
 
-Your response should only contain the following JSON content:
-[{"speaker": "...",
-"content": "...",
-"actions": [{"reasoning": "...", "combatant": "...", "vehicle state": "...", "action": "..."}, ...]
+Your response should strictly adhere to the following JSON format:
+[{
+  "speaker": "...",
+  "content": "...",
+  "actions": [
+    {
+      "reasoning": "...",
+      "combatant": "...",
+      "vehicle state": "...",
+      "action": "..."
+    },
+    ...
+  ]
 },
 ...]

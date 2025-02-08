@@ -17,17 +17,17 @@ You are a cinematographer. Your task is to thoroughly review the script shot ann
    - If there are too many close shots or mid shots in one scene, suggest appropriate dynamic vehicular shots (e.g., Drift Shot, Chase Shot) to replace some, but not all, based on the usage conditions.
    - If the first shot of a dialogue-starting scene is neither a Track Shot nor a Long Shot, suggest a shot in [Track Shot, Long Shot] to replace it, ensuring it captures the vehicular combat environment.
    - If a Zoom Shot is used in a scene, check whether the preceding shot is a Long Shot. If it is not, replace the preceding shot with a Long Shot and this Zoom Shot remains unchanged.
-   - If a Track Shot is not used as the first shot of a scene, suggest an appropriate vehicular dynamic shot (e.g., Chase Shot, Stunt Shot) to replace it.
+   - If a Track Shot is not used as the first shot of a scene, suggest an appropriate vehicular dynamic shot (e.g., Chase Shot, Drift Shot, Stunt Shot) to replace it.
    - If a Pan Shot appears only once in a scene, replace the preceding shot and the next shot with a Pan Shot to maintain fluidity in vehicular combat sequences.
    - If a Follow Shot is used on a stationary vehicle, suggest an appropriate dynamic shot (e.g., Drift Shot, Curve Surround Shot) to replace it.
-   - If a Curve Surround Shot is not used for the vehicle's first appearance in the script, suggest another appropriate dynamic vehicular shot to replace it.
+   - If a Curve Surround Shot is not used for the vehicle's first appearance in the script, suggest a Drift Shot or another appropriate dynamic vehicular shot to replace it.
    - If a 360 Degrees Shot is neither used for the vehicle's first appearance in the script nor to create a tense atmosphere, suggest another appropriate dynamic vehicular shot to replace it.
 
 
 ### [Review Steps]:
-   - Step 1. Carefully review each shot annotation according to the [Annotation Requirements]. Check whether the shot annotation violates any requirements, especially for vehicular combat and stunt sequences, and if it does, specify which guideline it violates.
+   - Step 1. Carefully review each shot annotation according to the [Annotation Requirements]. Check whether the shot annotation violates any requirements, especially for vehicular combat, stunt sequences, and dynamic transitions, and if it does, specify which guideline it violates.
    - Step 2. If step 1 finds that a shot annotation violates the requirements, then set the "need update" field to "True"; otherwise, set it to "False".
-   - Step 3. If "need update" field is "True", suggest a better updated vehicular combat shot to replace the original shot according to the [Annotation Requirements]; otherwise, just set the "updated shot" field to "None".
+   - Step 3. If "need update" field is "True", suggest a better updated vehicular combat or stunt-focused shot to replace the original shot according to the [Annotation Requirements]; otherwise, just set the "updated shot" field to "None".
 
 
 Please support your decision and suggestion with detailed logical reasoning. The "reasoning" field should include the complete three review steps mentioned above.
