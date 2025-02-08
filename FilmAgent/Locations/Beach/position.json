@@ -1,0 +1,97 @@
+{
+    "positions": [
+        {
+            "id": "Position 1",
+            "description": "Main entrance to the Beach, suitable for character or vehicle entry.",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 2",
+            "description": "Lifeguard tower, offering a strategic vantage point for observation.",
+            "fixed_angle": false,
+            "sittable": true
+        },
+        {
+            "id": "Position 3",
+            "description": "Shoreline area, ideal for character interactions or action scenes.",
+            "fixed_angle": false,
+            "sittable": false
+        },
+        {
+            "id": "Position 4",
+            "description": "Beach bar, suitable for dialogue or casual scenes.",
+            "fixed_angle": true,
+            "sittable": true
+        },
+        {
+            "id": "Position 5",
+            "description": "Parking lot near the Beach, suitable for vehicle parking or ambush scenes.",
+            "fixed_angle": false,
+            "sittable": false
+        }
+    ],
+    "paths": [
+        {
+            "id": "Path 1",
+            "start": "Position 1",
+            "end": "Position 3",
+            "type": "straight",
+            "description": "A straight path from the main entrance to the shoreline."
+        },
+        {
+            "id": "Path 2",
+            "start": "Position 3",
+            "end": "Position 2",
+            "type": "stairs",
+            "description": "A staircase leading from the shoreline to the lifeguard tower."
+        },
+        {
+            "id": "Path 3",
+            "start": "Position 3",
+            "end": "Position 4",
+            "type": "curved",
+            "description": "A curved path connecting the shoreline to the beach bar."
+        },
+        {
+            "id": "Path 4",
+            "start": "Position 1",
+            "end": "Position 5",
+            "type": "straight",
+            "description": "A direct path from the main entrance to the parking lot."
+        },
+        {
+            "id": "Path 5",
+            "start": "Position 5",
+            "end": "Position 4",
+            "type": "ramp",
+            "description": "A ramp connecting the parking lot to the beach bar."
+        }
+    ],
+    "obstacles": [
+        {
+            "id": "Obstacle 1",
+            "location": "Path 2",
+            "type": "broken stairs",
+            "description": "A damaged staircase leading to the lifeguard tower, requiring careful navigation."
+        },
+        {
+            "id": "Obstacle 2",
+            "location": "Path 3",
+            "type": "sand dune",
+            "description": "A sand dune partially blocking the path to the beach bar."
+        },
+        {
+            "id": "Obstacle 3",
+            "location": "Path 4",
+            "type": "abandoned vehicle",
+            "description": "An abandoned vehicle blocking part of the path to the parking lot."
+        },
+        {
+            "id": "Obstacle 4",
+            "location": "Path 5",
+            "type": "fallen tree",
+            "description": "A fallen tree obstructing the ramp to the beach bar."
+        }
+    ]
+}
