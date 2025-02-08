@@ -1,4 +1,4 @@
-You need to write a complete script based on the given topic "{topic}". Please strictly follow the steps below to perform this task.
+You need to write a complete script based on the given topic "{topic}". This script is for a reality show set in an alternate reality where Grand Theft Auto (GTA) is a competitive sport. Please strictly follow the steps below to perform this task, ensuring the content aligns with the action-oriented, adult amusement focus of the GTA reality show.
 
 
 
@@ -6,46 +6,46 @@ You need to write a complete script based on the given topic "{topic}". Please s
 Plan three coherent scenes based on the topic, assign a sub-topic to each scene, select corresponding locations and main characters based on the sub-topic, develop a plot for each scene.
 
 This step may require the following information:
-#### Main Characters:
-1. **Combatants**: {combatant_characters}
+#### Main Contestants:
+1. **Contestants**: {combatant_characters}
 
-#### Main Locations:
+#### Main Locations (Inspired by GTA):
 1. **Race Track**: features stunt ramps, obstacles, and high-speed paths.
 2. **Desert Arena**: features open terrains, dune ramps, and destructible obstacles.
 3. **Urban Streets**: features narrow alleys, sharp turns, and destructible buildings.
 4. **VR Simulation Room**: features dynamic virtual environments for vehicular combat.
 
-After this step, the following parts of the script will be completed:
+After this step, the following parts of the script will be completed, ensuring the scenes are action-packed and align with the GTA reality show theme:
 "scene_information": {"who": [Selected Combatants], "where": "Selected Location", "what": "The Plot For This Scene"}
 
 
 
 ### Step 2:
-Create specific and vivid dialogues for each scene based on the result from step 1. The dialogues should be conform to the characters' profile. The number of conversations in one scene should not be too few.
+Create specific and vivid dialogues for each scene based on the result from step 1. The dialogues should align with the contestants' profiles and the GTA reality show theme. Include dramatic, action-oriented exchanges that emphasize rivalries, alliances, and intense competition. The number of conversations in one scene should not be too few.
 
 This step may require the following information:
 #### Characters' Profile:
 {profiles}
 
-After this step, the following parts of the script will be completed:
+After this step, the following parts of the script will be completed, ensuring the scenes are action-packed and align with the GTA reality show theme:
 "dialogues":[{"speaker": "...", "content": "..."}, ...]
 
 
 
 ### Step 3:
-Choose an appropriate position for each character in every scene of the script based on the result from step 1. In a scene, each character's position must be different.
+Choose an appropriate position for each contestant in every scene of the script based on the result from step 1. In a scene, each contestant's position must be different, ensuring dynamic interactions and alignment with the GTA reality show format.
 
 This step may require the following information:
 #### Optional Positions:
 {optional_positions}
 
-After this step, the following parts of the script will be completed:
+After this step, the following parts of the script will be completed, ensuring the scenes are action-packed and align with the GTA reality show theme:
 "initial position": [{"character": "...", "position": "Position XX"}, ...]
 
 
 
 ### Step 4:
-Understand the emotions expressed in the dialogues from step 2, and consider the emotional states of the combatants in the conversation. According to your considerations and [Action Selection Requirements], choose the most appropriate vehicular actions from the [Complete List of Actions] and add them after each line of dialogue, including the speaker and some other (not all) combatants' actions.
+Understand the emotions expressed in the dialogues from step 2, and consider the emotional states of the contestants in the conversation. According to your considerations and [Action Selection Requirements], choose the most appropriate vehicular actions from the [Complete List of Actions] and add them after each line of dialogue, including the speaker and some other (not all) contestants' actions. Emphasize stunts, vehicular combat, and chaotic action inspired by GTA gameplay.
 
 Each action added should consist of the following parts:
    - action: The action selected from [Complete List of Actions].
@@ -70,13 +70,13 @@ This step may require the following information:
    - You can choose "Sit Down" only when the character is at a sittable position.
    - Only by using "Stand Up" or "Sit Down" can the character's state be changed; otherwise, the character's state should remain the same as before.
 
-After this step, the following parts of the script will be completed:
+After this step, the following parts of the script will be completed, ensuring the scenes are action-packed and align with the GTA reality show theme:
 "actions": [{"character": "...","state": "....","action": "..."}, ...]
 
 
 
 ### Step 5:
-Focus on the usage conditions of each shot in the [Complete List of Shots], then allocate them to the shot annotation points in the script according to different usage conditions. Ensure the shots capture the intensity of vehicular combat, stunts, and explosions. Check if the shot annotations meet the [Shot Annotation Requirements]. If not, identify which requirements are not met, then update the shot annotations to meet these requirements.
+Focus on the usage conditions of each shot in the [Complete List of Shots], then allocate them to the shot annotation points in the script according to different usage conditions. Ensure the shots capture the intensity of vehicular combat, stunts, explosions, and the chaotic energy of the GTA reality show. Check if the shot annotations meet the [Shot Annotation Requirements]. If not, identify which requirements are not met, then update the shot annotations to meet these requirements.
 
 This step may require the following information:
 #### [Complete List of Shots]:
@@ -90,12 +90,12 @@ This step may require the following information:
    - If you want to use Zoom Shot, you must ensure the preceding shot is a Long Shot
    - If you want to use Pan Shot during dialogue, it should be used multiple times in a row.
 
-After this step, the following parts of the script will be completed:
+After this step, the following parts of the script will be completed, ensuring the scenes are action-packed and align with the GTA reality show theme:
 "selected shot": "..."
 
 
 
-After completing all steps, return your completed script. Your response should only contain the following JSON content:
+After completing all steps, return your completed script. Ensure the script reflects the GTA reality show format, with recurring contestants, unique episode purposes, and intense action. Your response should only contain the following JSON content:
 ```json
 [{"scene_information": {"who": ["...", ...], "where": "...", "what": "..."},
 "dialogues":[{"speaker": "...", "content": "...", "actions": [{"character": "...","state": "....","action": "..."}, ...], "selected shot": "...."}, ...]
