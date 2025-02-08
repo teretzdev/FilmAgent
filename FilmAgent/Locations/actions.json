@@ -13,6 +13,8 @@
     "Standing Arguing": "show the character is arguing with others.",
     "Standing Agree": "convey the character's approval.",
     "Standing Deny": "convey the character's rejection or disapproval.",
+    "Standing Confident": "depict the character's confidence or self-assurance.",
+    "Standing Nervous": "show the character's nervousness or anxiety.",
     "Joyful Jump": "demonstrate the character is extremely happy.",
     "Sit Down": "When you need to change the character's state from standing to sitting, you can perform this action.",
     "Sitting Talking": "simply show the character is talking.",
@@ -34,6 +36,8 @@
     "Use Oil Slick": "Release oil onto the track to make it slippery for other vehicles.",
     "Perform 360 Spin": "Execute a full 360-degree spin for style or evasion.",
     "Target Lock": "Lock onto an opponent for a precision attack.",
+    "Deploy Decoy": "Release a decoy to distract opponents or mislead pursuers.",
+    "Activate Turbo Shield": "Activate a shield that provides temporary invincibility while boosting speed.",
     "Turbo Drift": "Perform a high-speed drift with turbo boost.",
     "EMP Blast": "Emit an electromagnetic pulse to disable nearby vehicles.",
     "Deploy Spikes": "Release spikes onto the track to puncture tires of pursuing vehicles.",
@@ -43,5 +47,7 @@
     "Heckle": "An action to interrupt or jeer at someone.",
     "Crowd Pleaser": "An action to entertain or win over the crowd.",
     "Pole Dancing": "A dance performed around a vertical pole.",
-    "Victory Pose": "A celebratory pose after achieving success."
+    "Victory Pose": "A celebratory pose after achieving success.",
+    "Dance Celebration": "Perform a dance to celebrate a victory or achievement.",
+    "Mock Opponent": "Perform an action to mock or taunt an opponent.",
 }

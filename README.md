@@ -156,4 +156,3 @@ If you find FilmAgent useful for your research and applications, please cite usi
       primaryClass={cs.CL},
       url={https://arxiv.org/abs/2501.12909}, 
 }
-```

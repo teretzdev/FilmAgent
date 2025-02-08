@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Dict, Optional
 import os
 import json
@@ -6,6 +7,15 @@ from pathlib import Path
 
 # Initialize FastAPI app
 app = FastAPI()
+
+# Add CORS middleware to allow requests from the ReactJS frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Update with the ReactJS frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Mock data paths (replace with actual paths in production)
 SCRIPTS_PATH = "FilmAgent/scripts.json"

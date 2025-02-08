@@ -1,4 +1,4 @@
-You are a director. Your task is to thoroughly review the original script and provide detailed and specific feedback for potential improvements, focusing on vehicular deathmatches, stunts, and high-intensity action sequences.
+You are a director. Your task is to thoroughly review the original script and provide detailed and specific feedback for potential improvements, with a strong emphasis on vehicular deathmatches, stunts, and high-intensity vehicular action sequences.
 
 
 ### [Film Theme]:
@@ -16,19 +16,19 @@ You are a director. Your task is to thoroughly review the original script and pr
 ### [Detailed Feedback]:
 
 1. **Action Reasonableness**:
-   - 1. Check whether the vehicular actions used in the script do not exist in [Complete List of Vehicular Actions] (e.g., {unknown_actions} do not exist in [Complete List of Vehicular Actions]).
-   - 2. Check whether the vehicular actions are appropriate for the context of vehicular deathmatches, stunts, and high-intensity combat. If you find them inappropriate, suggest a better vehicular action in [Complete List of Vehicular Actions].
-   - 3. Check whether any combatant has violated the rule that a combatant can only perform one vehicular action or stunt at a time.
-   - 4. Check whether any combatant transitions between vehicle states (e.g., stationary to moving) without a valid action (e.g., "Accelerate" or "Brake").
-   - 5. Check whether any vehicular action or stunt is performed in an unsuitable environment (e.g., "Drift" on a straight path without obstacles, or "Stunt Jump" in a confined space).
+   - 1. Verify that all vehicular actions used in the script exist in [Complete List of Vehicular Actions] (e.g., {unknown_actions} should not appear if they are not in [Complete List of Vehicular Actions]).
+   - 2. Assess whether the vehicular actions align with the context of vehicular deathmatches, stunts, and high-intensity vehicular combat. If any action is inappropriate, recommend a more suitable vehicular action from [Complete List of Vehicular Actions].
+   - 3. Ensure that no combatant violates the rule that only one vehicular action or stunt can be performed at a time.
+   - 4. Verify that all transitions between vehicle states (e.g., stationary to moving) are accompanied by valid actions (e.g., "Accelerate" or "Brake").
+   - 5. Confirm that all vehicular actions or stunts are performed in appropriate environments (e.g., "Drift" should not occur on a straight path without obstacles, and "Stunt Jump" should not occur in confined spaces).
 
 2. **Theme Consistency**:
-   - 1. Evaluate whether the vehicular deathmatch theme, including stunts, vehicular combat intensity, and chaotic action sequences, is clearly and strongly presented in the script.
+   - 1. Evaluate whether the script strongly conveys the vehicular deathmatch theme, emphasizing stunts, vehicular combat intensity, and chaotic action sequences.
 
 3. **Script Fluency**:
-   - 1. Check each line of dialogue. If the place mentioned in the dialogue as the next destination conflicts with the "where" of the next scene, first identify the dialogues in the scene that lead to this outcome, then provide detailed revision suggestions.
-   - 2. Evaluate whether the script is coherent and captivating, with pacing that neither drags nor rushes. If not, first identify the dialogues in the script that lead to this outcome, then provide detailed revision suggestions.
-   - 3. Assess whether the script flows smoothly and is well-structured, ensuring there are no abrupt jumps, sudden plot twists, or inconsistencies in vehicular combat sequences that disrupt the flow. If not, first identify the dialogues or vehicular actions in the script that lead to this outcome, then provide detailed revision suggestions.
+   - 1. Review each line of dialogue to ensure that the place mentioned as the next destination aligns with the "where" of the next scene. If conflicts arise, identify the problematic dialogues and provide detailed revision suggestions.
+   - 2. Assess whether the script maintains coherence and captivates the audience, with pacing that is neither too slow nor too rushed. If issues are found, identify the problematic dialogues and provide detailed revision suggestions.
+   - 3. Ensure that the script flows smoothly and is well-structured, avoiding abrupt jumps, sudden plot twists, or inconsistencies in vehicular combat sequences. If issues are found, identify the problematic dialogues or vehicular actions and provide detailed revision suggestions.
 
 
 

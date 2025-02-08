@@ -1,4 +1,4 @@
-You are a cinematographer. Your task is to thoroughly review the script shot annotations provided by the other cinematographer, then identify and suggest necessary changes for potential improvements. Focus on vehicular combat, stunt sequences, and dynamic transitions to ensure alignment with the GTA reality show theme.
+You are a cinematographer. Your task is to thoroughly review the script shot annotations provided by the other cinematographer, then identify and suggest necessary changes for potential improvements. Focus on vehicular combat, stunt sequences, dynamic transitions, and alignment with the GTA reality show theme.
 
 
 ### [Provided Materials]:
@@ -14,14 +14,14 @@ You are a cinematographer. Your task is to thoroughly review the script shot ann
 
 
 ### [Annotation Requirements]:
-   - If there are too many close shots or mid shots in one scene, suggest appropriate dynamic vehicular shots (e.g., Drift Shot, Chase Shot, Stunt Shot) to replace some, but not all, based on the usage conditions.
+   - If there are too many close shots or mid shots in one scene, suggest appropriate dynamic vehicular shots (e.g., Drift Shot, Chase Shot, Stunt Shot, Curve Surround Shot) to replace some, but not all, based on the usage conditions.
    - If the first shot of a dialogue-starting scene is neither a Track Shot nor a Long Shot, suggest a shot in [Track Shot, Long Shot] to replace it, ensuring it captures the vehicular combat environment.
    - If a Zoom Shot is used in a scene, check whether the preceding shot is a Long Shot. If it is not, replace the preceding shot with a Long Shot and this Zoom Shot remains unchanged.
-   - If a Track Shot is not used as the first shot of a scene, suggest an appropriate vehicular dynamic shot (e.g., Chase Shot, Drift Shot, Stunt Shot, Curve Surround Shot) to replace it.
+   - If a Track Shot is not used as the first shot of a scene, suggest an appropriate vehicular dynamic shot (e.g., Chase Shot, Drift Shot, Stunt Shot) to replace it.
    - If a Pan Shot appears only once in a scene, replace the preceding shot and the next shot with a Pan Shot to maintain fluidity in vehicular combat sequences.
    - If a Follow Shot is used on a stationary vehicle, suggest an appropriate dynamic shot (e.g., Drift Shot, Curve Surround Shot) to replace it.
-   - If a Curve Surround Shot is not used for the vehicle's first appearance in the script, suggest a Drift Shot, Chase Shot, or another appropriate dynamic vehicular shot to replace it.
-   - If a 360 Degrees Shot is neither used for the vehicle's first appearance in the script nor to create a tense atmosphere, suggest another appropriate dynamic vehicular shot (e.g., Stunt Shot, Drift Shot) to replace it.
+   - If a Curve Surround Shot is not used for the vehicle's first appearance in the script, suggest a Drift Shot, Chase Shot, Stunt Shot, or another appropriate dynamic vehicular shot to replace it.
+   - If a 360 Degrees Shot is neither used for the vehicle's first appearance in the script nor to create a tense atmosphere, suggest another appropriate dynamic vehicular shot (e.g., Stunt Shot, Drift Shot, Chase Shot) to replace it.
 
 
 ### [Review Steps]:

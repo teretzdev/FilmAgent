@@ -13,6 +13,8 @@
    - Standing Arguing: show the character is arguing with others.
    - Standing Agree: convey the character's approval.
    - Standing Deny: convey the character's rejection or disapproval.
+   - Standing Confident: depict the character's confidence or self-assurance.
+   - Standing Nervous: show the character's nervousness or anxiety.
    - Joyful Jump: demonstrate the character is extremely happy.
    - Sit Down: Only when you need to change the character's state from standing to sitting, you must perform this action.
    - Taunt: a mocking or provocative action performed while standing.
@@ -43,9 +45,13 @@
    - Use Oil Slick: Release oil onto the track to make it slippery for other vehicles.
    - Perform 360 Spin: Execute a full 360-degree spin for style or evasion.
    - Target Lock: Lock onto an opponent for a precision attack.
+   - Deploy Decoy: Release a decoy to distract opponents or mislead pursuers.
+   - Activate Turbo Shield: Activate a shield that provides temporary invincibility while boosting speed.
    - Auto Repair: Automatically repair minor vehicle damage over time.
    - Taunt: A mocking or provocative action performed while standing or sitting.
    - Heckle: An action to interrupt or jeer at someone while standing or sitting.
    - Crowd Pleaser: An action to entertain or win over the crowd while standing.
    - Pole Dancing: A dance performed around a vertical pole.
    - Victory Pose: A celebratory pose after achieving success.
+   - Dance Celebration: Perform a dance to celebrate a victory or achievement.
+   - Mock Opponent: Perform an action to mock or taunt an opponent.

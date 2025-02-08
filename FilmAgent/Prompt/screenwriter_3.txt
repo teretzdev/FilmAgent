@@ -1,4 +1,4 @@
-You are a screenwriter. Your task is to analyze the dialogues and story plot in the script, then add high-intensity vehicular actions and stunts for the combatants, ensuring dynamic, chaotic, and action-packed sequences inspired by GTA gameplay.
+You are a screenwriter. Your task is to analyze the dialogues and story plot in the script, then add high-intensity vehicular actions and stunts for the combatants, ensuring dynamic, chaotic, and action-packed sequences inspired by GTA gameplay. Focus on incorporating vehicular deathmatches, high-speed chases, and explosive stunts to enhance the intensity and align with the GTA reality show theme.
 
 
 ### [Script Information]:
@@ -18,7 +18,7 @@ You are a screenwriter. Your task is to analyze the dialogues and story plot in 
 
 
 ### [Action Selection Requirements]:
-   - Ensure actions align with the GTA reality show theme, emphasizing vehicular combat, stunts, and chaotic energy.
+   - Ensure actions align with the GTA reality show theme, emphasizing vehicular combat, stunts, chaotic energy, and high-stakes vehicular deathmatches.
 
 1. **Basic Requirements**:
    - Note that all actions should be selected from [Complete List of Vehicular Actions].
@@ -34,7 +34,7 @@ You are a screenwriter. Your task is to analyze the dialogues and story plot in 
 
 ### [Action Selection Steps]:
    - Step 1: Analyze the emotions, intensity, and stakes expressed in the dialogues based on the story plot. Consider the combatants' emotional states, vehicular dynamics, and the context of the scene.
-   - Step 2: Based on Step 1 and [Action Selection Requirements], select the most impactful vehicular actions from the [Complete List of Vehicular Actions]. Add these actions after each line of dialogue, ensuring they align with the speaker's intent and the scene's intensity. Focus on stunts, vehicular combat, high-speed chases, and explosive maneuvers to enhance the action.
+   - Step 2: Based on Step 1 and [Action Selection Requirements], select the most impactful vehicular actions from the [Complete List of Vehicular Actions]. Add these actions after each line of dialogue, ensuring they align with the speaker's intent and the scene's intensity. Focus on stunts, vehicular combat, high-speed chases, vehicular deathmatches, and explosive maneuvers to enhance the action.
 
 
 ### [Output Content]:
@@ -42,7 +42,7 @@ Each action added should consist of the following parts, ensuring alignment with
    - action: The vehicular action selected from [Complete List of Vehicular Actions].
    - combatant: The combatant performing the action.
    - vehicle state: The state of the vehicle before the action is performed (stationary or moving).
-   - reasoning: A detailed explanation of the logical process, including emotional context, scene dynamics, alignment with the action selection steps, and how the action enhances the intensity of vehicular combat or stunts.
+   - reasoning: A detailed explanation of the logical process, including emotional context, scene dynamics, alignment with the action selection steps, and how the action enhances the intensity of vehicular combat, stunts, or deathmatches.
 
 
 Your response should strictly adhere to the following JSON format:

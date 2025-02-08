@@ -94,4 +94,100 @@
             "description": "A temporary construction barrier partially blocking the curved path to the parking lot."
         }
     ]
+}{
+    "positions": [
+        {
+            "id": "Position 1",
+            "description": "Main entrance of the Airport, suitable for vehicle or character entry.",
+            "fixed_angle": true,
+            "sittable": false
+        },
+        {
+            "id": "Position 2",
+            "description": "Check-in counter area, ideal for dialogue or transaction scenes.",
+            "fixed_angle": true,
+            "sittable": true
+        },
+        {
+            "id": "Position 3",
+            "description": "Security checkpoint, suitable for tense or investigative scenes.",
+            "fixed_angle": false,
+            "sittable": false
+        },
+        {
+            "id": "Position 4",
+            "description": "Runway observation deck, offering a strategic vantage point.",
+            "fixed_angle": false,
+            "sittable": false
+        },
+        {
+            "id": "Position 5",
+            "description": "Parking lot adjacent to the Airport, suitable for vehicle parking or ambush scenes.",
+            "fixed_angle": false,
+            "sittable": false
+        }
+    ],
+    "paths": [
+        {
+            "id": "Path 1",
+            "start": "Position 1",
+            "end": "Position 2",
+            "type": "straight",
+            "description": "A straight path from the main entrance to the check-in counter area."
+        },
+        {
+            "id": "Path 2",
+            "start": "Position 2",
+            "end": "Position 3",
+            "type": "corridor",
+            "description": "A narrow path leading from the check-in counter to the security checkpoint."
+        },
+        {
+            "id": "Path 3",
+            "start": "Position 3",
+            "end": "Position 4",
+            "type": "stairs",
+            "description": "A staircase connecting the security checkpoint to the observation deck."
+        },
+        {
+            "id": "Path 4",
+            "start": "Position 4",
+            "end": "Position 5",
+            "type": "ramp",
+            "description": "A ramp leading from the observation deck to the parking lot."
+        },
+        {
+            "id": "Path 5",
+            "start": "Position 1",
+            "end": "Position 5",
+            "type": "curved",
+            "description": "A curved path from the main entrance to the parking lot."
+        }
+    ],
+    "obstacles": [
+        {
+            "id": "Obstacle 1",
+            "location": "Path 2",
+            "type": "metal detector",
+            "description": "A security metal detector blocking the path to the checkpoint, requiring characters to pass through."
+        },
+        {
+            "id": "Obstacle 2",
+            "location": "Path 3",
+            "type": "broken stairs",
+            "description": "A damaged staircase leading to the observation deck, requiring careful navigation."
+        },
+        {
+            "id": "Obstacle 3",
+            "location": "Path 4",
+            "type": "luggage cart",
+            "description": "An abandoned luggage cart blocking the ramp to the parking lot."
+        },
+        {
+            "id": "Obstacle 4",
+            "location": "Path 5",
+            "type": "construction barrier",
+            "description": "A temporary construction barrier partially blocking the curved path to the parking lot."
+        }
+    ]
 }
