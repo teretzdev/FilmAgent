@@ -5,6 +5,20 @@ const PromptList = () => {
   const [prompts, setPrompts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const handleEdit = (id) => {
+    window.location.href = `/form?id=${id}`;
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this prompt?")) {
+      try {
+        await deletePrompt(id); // Assuming deletePrompt is defined in the API service
+        setPrompts(prompts.filter((prompt) => prompt.id !== id));
+      } catch (err) {
+        setError("Failed to delete the prompt. Please try again.");
+      }
+    }
+  };
 
   useEffect(() => {
     const getPrompts = async () => {
@@ -36,13 +50,35 @@ const PromptList = () => {
   return (
     <div style={styles.container}>
       <h2 style={styles.title}>Prompt List</h2>
-      <ul style={styles.list}>
-        {prompts.map((prompt, index) => (
-          <li key={index} style={styles.listItem}>
-            {prompt}
-          </li>
-        ))}
-      </ul>
+      <table style={styles.table}>
+        <thead>
+          <tr>
+            <th style={styles.tableHeader}>Prompt</th>
+            <th style={styles.tableHeader}>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {prompts.map((prompt, index) => (
+            <tr key={index} style={styles.tableRow}>
+              <td style={styles.tableCell}>{prompt.text}</td>
+              <td style={styles.tableCell}>
+                <button
+                  style={styles.editButton}
+                  onClick={() => handleEdit(prompt.id)}
+                >
+                  Edit
+                </button>
+                <button
+                  style={styles.deleteButton}
+                  onClick={() => handleDelete(prompt.id)}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
@@ -78,6 +114,39 @@ const styles = {
   empty: {
     fontSize: '18px',
     color: '#777',
+  },
+  table: {
+    width: '100%',
+    borderCollapse: 'collapse',
+    marginTop: '20px',
+  },
+  tableHeader: {
+    backgroundColor: '#f4f4f4',
+    padding: '10px',
+    border: '1px solid #ddd',
+    textAlign: 'left',
+  },
+  tableRow: {
+    borderBottom: '1px solid #ddd',
+  },
+  tableCell: {
+    padding: '10px',
+    border: '1px solid #ddd',
+  },
+  editButton: {
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    border: 'none',
+    padding: '5px 10px',
+    marginRight: '5px',
+    cursor: 'pointer',
+  },
+  deleteButton: {
+    backgroundColor: '#f44336',
+    color: 'white',
+    border: 'none',
+    padding: '5px 10px',
+    cursor: 'pointer',
   },
 };
 

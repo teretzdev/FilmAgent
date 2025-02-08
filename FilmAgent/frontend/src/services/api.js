@@ -46,13 +46,13 @@ export const deletePrompt = async (id) => {
   }
 };
 
-// Fetch a script for preview
-export const fetchScript = async () => {
+ // Fetch a script preview
+export const fetchScriptPreview = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/script`);
+    const response = await axios.get('http://localhost:5000/api/scripts/preview');
     return response.data;
   } catch (error) {
-    console.error('Error fetching script:', error);
+    console.error('Error fetching script preview:', error);
     throw error;
   }
 };
@@ -62,5 +62,5 @@ export default {
   createPrompt,
   updatePrompt,
   deletePrompt,
-  fetchScript,
+  fetchScriptPreview,
 };

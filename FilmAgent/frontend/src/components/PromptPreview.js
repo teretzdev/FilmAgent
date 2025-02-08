@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchScript } from '../services/api'; // Assuming an API service is available for fetching scripts.
+import { fetchScriptPreview } from '../services/api'; // Updated to use the correct API method for fetching script previews.
 
 const PromptPreview = () => {
   const [script, setScript] = useState(null);
@@ -9,10 +9,10 @@ const PromptPreview = () => {
   useEffect(() => {
     const getScript = async () => {
       try {
-        const data = await fetchScript(); // Fetch the script data from the backend API.
+        const data = await fetchScriptPreview(); // Fetch the script preview data from the backend API.
         setScript(data);
       } catch (err) {
-        setError('Failed to fetch the script. Please try again later.');
+        setError('Failed to fetch the script preview. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -30,7 +30,7 @@ const PromptPreview = () => {
   }
 
   if (!script || script.length === 0) {
-    return <div style={styles.empty}>No script available for preview.</div>;
+    return <div style={styles.empty}>No script preview available. Please generate a script first.</div>;
   }
 
   return (

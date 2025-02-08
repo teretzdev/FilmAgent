@@ -14,6 +14,8 @@ __pycache__/
 # Environment files
 .env
 .env.*
+FilmAgent/frontend/.env.local
+FilmAgent/frontend/.env.production
 
 # Compiled Python files
 *.pyc
@@ -35,11 +37,14 @@ Thumbs.db
 FilmAgent/frontend/build/
 FilmAgent/frontend/dist/
 FilmAgent/frontend/.parcel-cache/
+FilmAgent/frontend/.next/
+FilmAgent/frontend/.turbo/
 
 # Coverage reports
 coverage/
 *.coverage
 *.lcov
+FilmAgent/frontend/coverage/
 
 # Temporary files
 FilmAgent/frontend/temp/

@@ -37,7 +37,45 @@ To set up and run the React frontend application for FilmAgent, follow these ste
 
 <p align="center">
     <img src="pics/cover_page.jpg" width="300" style="margin-bottom: 0.2;"/>
-<p>
+</p>
+
+## 🌐 Setting Up the React Frontend
+
+To set up and run the React frontend application for FilmAgent, follow these steps:
+
+1. **Navigate to the Frontend Directory**:
+   ```bash
+   cd FilmAgent/frontend
+   ```
+
+2. **Install Dependencies**:
+   Ensure you have Node.js and npm installed. Then, run the following command to install the required dependencies:
+   ```bash
+   npm install
+   ```
+
+3. **Start the Development Server**:
+   Start the React development server to preview the frontend:
+   ```bash
+   npm start
+   ```
+   This will launch the application in your default web browser at `http://localhost:3000`.
+
+4. **Build for Production**:
+   To create a production build of the application, run:
+   ```bash
+   npm run build
+   ```
+   The production-ready files will be available in the `FilmAgent/frontend/build` directory.
+
+5. **API Integration**:
+   Ensure the backend Flask server is running on `http://localhost:5000` (or update the `BASE_URL` in `FilmAgent/frontend/src/services/api.js` to match your backend server's address).
+
+6. **Explore the Features**:
+   - **Prompt List**: View all prompts.
+   - **Prompt Form**: Create or edit prompts.
+   - **Prompt Preview**: Preview the generated scripts.
+</p>
 
 <h2 align="center"> <a href="https://github.com/HITsz-TMG/FilmAgent">FilmAgent: A Multi-Agent Framework for End-to-End Film Automation in Virtual 3D Spaces</a></h2>
 <!-- <h5 align="center"> If you like our project, please consider giving us a star ⭐ on GitHub to stay updated with the latest developments.  </h2> -->
