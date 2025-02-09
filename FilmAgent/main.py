@@ -1,6 +1,7 @@
 import os
 from util import *
 from LLMCaller import *
+from FilmAgent.image_generator import generate_images_from_script
 from typing import Dict, List, Union
 import random
 import copy
@@ -119,24 +120,22 @@ class FilmCrafter:
         # The maximum number of discussions between director and cinematographer
         self.stage3_verify_limit = 4
 
-    def login_to_video_generator(self) -> bool:
+        # Image generation configuration
+        self.image_interval = int(os.getenv("IMAGE_INTERVAL", 5))
+
+    def generate_images(self) -> None:
         """
-        Log into the video generator website using credentials from the .env file.
+        Generate images for the script at specified intervals.
 
         Returns:
-            bool: True if login is successful, False otherwise.
+            None
         """
-        username = os.getenv("VIDEO_GEN_USERNAME")
-        password = os.getenv("VIDEO_GEN_PASSWORD")
-
-        if not username or not password:
-            raise ValueError("Missing VIDEO_GEN_USERNAME or VIDEO_GEN_PASSWORD in .env file.")
-
-        # Simulate login process (replace with actual API call if available)
-        print(f"Logging in with username: {username}")
-        # Example: response = requests.post("https://video-generator.com/api/login", data={"username": username, "password": password})
-        # return response.status_code == 200
-        return True
+        print("Starting image generation...")
+        try:
+            generated_images = generate_images_from_script(self.script_path, self.image_interval)
+            print(f"Generated images: {generated_images}")
+        except Exception as e:
+            print(f"Error during image generation: {e}")
         
 
     def call(self, identity: str, params: Dict, trans2json: bool = True) -> Union[str, dict, list]:
@@ -222,7 +221,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\\\\n   - topic: {topic}\\\\\\\\\n   - involved characters: {characters}\\\\\\\\\n   - plot: {plot}\\\\\\\\\n   - location: {location}\\\\\\\\\n   - dialogue goal: {goal}\\\\\\\\\n\\\\\\\\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\\\\\n   - topic: {topic}\\\\\\\\\\n   - involved characters: {characters}\\\\\\\\\\n   - plot: {plot}\\\\\\\\\\n   - location: {location}\\\\\\\\\\n   - dialogue goal: {goal}\\\\\\\\\\n\\\\\\\\\\n"
     
         params = {"{script_outline}": script_outline.strip()}
         if self.scenario == "GTA Reality Show":
@@ -259,7 +258,7 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\\\\n   - characters: {who}\\\\\\\\\n   - location: {where}\\\\\\\\\n   - plot: {what}\\\\\\\\\n\\\\\\\\\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\\\\\n   - characters: {who}\\\\\\\\\\n   - location: {where}\\\\\\\\\\n   - plot: {what}\\\\\\\\\\n\\\\\\\\\\n"
             
             position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
             positions = read_json(position_path)
@@ -269,13 +268,13 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\\\\n{p}\\\\\\\\\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\\\\\n{p}\\\\\\\\\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
@@ -302,6 +301,9 @@ print(f"Total script duration: {duration} seconds")
 # Plan image generation
 image_plan = crafter.plan_image_generation(script_path)
 print(f"Image generation plan: {image_plan}")
+
+# Generate images for the script
+self.generate_images()
 
 # Log into video generator
 if crafter.login_to_video_generator():
