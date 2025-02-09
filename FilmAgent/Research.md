@@ -102,7 +102,6 @@ To estimate the duration of conversations and actions in a script:
 - Store logs in a dedicated directory (e.g., `Logs/`) for troubleshooting.
 
 ### Future Enhancements
-- Explore integration with Unity for VR experiences in Phase Two.
 - Investigate AI models for generating consistent visual styles across sequences.
 
 ---
