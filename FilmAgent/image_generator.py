@@ -54,14 +54,14 @@ def generate_image_with_text(text: str, filename: str):
 
 def generate_images_from_script(script_path: str, interval: int = 5) -> List[str]:
     """
-    Generate images based on the script at specified intervals.
+    Generate images based on the script at specified intervals, with filenames labeled sequentially.
 
     Args:
         script_path (str): Path to the script JSON file.
         interval (int): Time interval in seconds between images.
 
     Returns:
-        List[str]: List of filenames for the generated images.
+        List[str]: List of filenames for the generated images, labeled sequentially.
     """
     import json
 
@@ -76,9 +76,9 @@ def generate_images_from_script(script_path: str, interval: int = 5) -> List[str
     # Generate images
     image_filenames = []
     for i in range(num_images):
-        timestamp = i * interval
-        text = f"Timestamp: {timestamp}s"
-        filename = os.path.join(OUTPUT_DIR, f"image_{timestamp}s.png")
+        sequence_index = i + 1  # Sequential labeling starts from 1
+        text = f"Index: {sequence_index}"
+        filename = os.path.join(OUTPUT_DIR, f"image_{sequence_index}.png")
         generate_image_with_text(text, filename)
         image_filenames.append(filename)
 

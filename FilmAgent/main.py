@@ -22,16 +22,26 @@ class FilmCrafter:
         self.scenario = scenario
         self.log_path = cretae_new_path(os.path.join(ROOT_PATH, "Logs"), "txt")
 
-    def calculate_script_duration(self, script_path: str) -> float:
+    def export_images_with_labels(self, image_filenames: List[str], output_dir: str) -> None:
         """
-        Calculate the total duration of a script based on dialogue and action timings.
+        Export images with filenames clearly indicating their sequence index.
 
         Args:
-            script_path (str): Path to the script JSON file.
+            image_filenames (List[str]): List of image filenames to be exported.
+            output_dir (str): Directory where the images will be saved.
 
         Returns:
-            float: Total duration of the script in seconds.
+            None
         """
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        for idx, filename in enumerate(image_filenames, start=1):
+            # Simulate image creation and save with sequential labels
+            image_path = os.path.join(output_dir, filename)
+            with open(image_path, 'w') as f:
+                f.write(f"Image {idx}")  # Placeholder for actual image content
+            print(f"Exported: {image_path}")
         script = read_json(script_path)
         total_duration = 0.0
         avg_word_time = 0.5  # Average time per word in seconds
@@ -85,7 +95,7 @@ class FilmCrafter:
             interval (int): Time interval in seconds between images.
 
         Returns:
-            List[str]: List of filenames for the generated images.
+            List[str]: List of filenames for the generated images, labeled sequentially.
         """
         script = read_json(script_path)
         total_duration = self.calculate_script_duration(script_path)
@@ -93,7 +103,7 @@ class FilmCrafter:
         image_filenames = []
 
         for i in range(num_images):
-            filename = f"image_{i * interval}s.png"
+            filename = f"image_{i + 1}.png"  # Sequential labeling starts from 1
             image_filenames.append(filename)
 
         return image_filenames
@@ -212,7 +222,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\\\n   - topic: {topic}\\\\\\\\n   - involved characters: {characters}\\\\\\\\n   - plot: {plot}\\\\\\\\n   - location: {location}\\\\\\\\n   - dialogue goal: {goal}\\\\\\\\n\\\\\\\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\\\\n   - topic: {topic}\\\\\\\\\n   - involved characters: {characters}\\\\\\\\\n   - plot: {plot}\\\\\\\\\n   - location: {location}\\\\\\\\\n   - dialogue goal: {goal}\\\\\\\\\n\\\\\\\\\n"
     
         params = {"{script_outline}": script_outline.strip()}
         if self.scenario == "GTA Reality Show":
@@ -249,7 +259,7 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\\\n   - characters: {who}\\\\\\\\n   - location: {where}\\\\\\\\n   - plot: {what}\\\\\\\\n\\\\\\\\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\\\\n   - characters: {who}\\\\\\\\\n   - location: {where}\\\\\\\\\n   - plot: {what}\\\\\\\\\n\\\\\\\\\n"
             
             position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
             positions = read_json(position_path)
@@ -259,13 +269,13 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\\\n{p}\\\\\\\\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\\\\n{p}\\\\\\\\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
