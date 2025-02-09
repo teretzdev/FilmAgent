@@ -113,7 +113,19 @@ This section provides a step-by-step guide to generate images and video sequence
    - Ensure your `.env` file contains valid credentials for the video generator platform.
    - The `login_to_video_generator` method in `FilmAgent/main.py` will handle authentication.
 
-2. **Upload Images to Video Generator**:
+2. **Run Unit Tests for Image Generation**:
+   - To verify the correctness of the image generation process, run the unit tests provided in the `FilmAgent/tests/test_image_generator.py` file.
+   - Use the following command to execute the tests:
+     ```bash
+     pytest FilmAgent/tests/test_image_generator.py
+     ```
+   - These tests ensure that:
+     - The output directory is created correctly.
+     - Images are generated with the correct text and filenames.
+     - Edge cases (e.g., zero duration, very short intervals) are handled properly.
+   - Running these tests is crucial to validate the functionality and reliability of the image generation module.
+
+3. **Upload Images to Video Generator**:
    - Use the video generator platform's API or web interface to upload the generated images.
    - Follow the platform's guidelines for creating video sequences.
 
