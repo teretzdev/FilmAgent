@@ -212,7 +212,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\n   - topic: {topic}\\\\\\n   - involved characters: {characters}\\\\\\n   - plot: {plot}\\\\\\n   - location: {location}\\\\\\n   - dialogue goal: {goal}\\\\\\n\\\\\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\\n   - topic: {topic}\\\\\\\n   - involved characters: {characters}\\\\\\\n   - plot: {plot}\\\\\\\n   - location: {location}\\\\\\\n   - dialogue goal: {goal}\\\\\\\n\\\\\\\n"
     
         params = {"{script_outline}": script_outline.strip()}
         if self.scenario == "GTA Reality Show":
@@ -249,7 +249,7 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\n   - characters: {who}\\\\\\n   - location: {where}\\\\\\n   - plot: {what}\\\\\\n\\\\\\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\\n   - characters: {who}\\\\\\\n   - location: {where}\\\\\\\n   - plot: {what}\\\\\\\n\\\\\\\n"
             
             position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
             positions = read_json(position_path)
@@ -259,13 +259,13 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\n{p}\\\\\\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\\n{p}\\\\\\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
@@ -300,7 +300,7 @@ class FilmCrafter:
                     sit = "sittable"
                 else:
                     sit = "unsittable"
-                ini = ini + f"   - {item['character']}: " + f"{sit} Position {str(get_number(item['position']))}, standing\\\\\\n"
+                ini = ini + f"   - {item['character']}: " + f"{sit} Position {str(get_number(item['position']))}, standing\\\\\\\n"
             ini = "   " + ini.strip() 
             params = {"{initial}": ini, 
                         "{plot}": scene['scene_information']['what'],
@@ -366,7 +366,7 @@ class FilmCrafter:
                 position_id = get_number(position['position'])
                 sittable = "sittable" if positions[position_id-1]['sittable'] else "unsittable"
                 p.append(f"{position['character']}'s position: {sittable}")
-            characters_position = characters_position + f"{id+1}. **Scene {id+1}**:\\\\\\n{', '.join(p)}\\\\\\n\\\\\\n"
+            characters_position = characters_position + f"{id+1}. **Scene {id+1}**:\\\\\\\n{', '.join(p)}\\\\\\\n\\\\\\\n"
 
         all_actions = read_prompt(self.action_description_path)
         for i in range(self.stage1_verify_limit):
@@ -443,7 +443,7 @@ class FilmCrafter:
             
         suggestions = ""
         for name, suggestion in feedback.items():
-            suggestions = suggestions + f"   - **{name}**: {suggestion}\\\\\\n"
+            suggestions = suggestions + f"   - **{name}**: {suggestion}\\\\\\\n"
         params = {"{suggestions}": suggestions,
                   "{character_profiles}": profiles,
                   "{draft_script}": scenes}
@@ -545,7 +545,7 @@ class FilmCrafter:
             if moveable_characters:
                 move2destination = ""
                 for pn in unoccupied_positions:
-                    move2destination = move2destination + f"   - {pn}\\\\\\n"
+                    move2destination = move2destination + f"   - {pn}\\\\\\\n"
                 move2destination = "   " + move2destination.strip()
                 lines = []
                 for id in range(len(scene['dialogues'])):
@@ -835,8 +835,45 @@ class FilmCrafter:
             data.append(new_scene)
             
         write_json(self.script_path, data)
-                    
-                    
+    
+    def generate_prefabs(self):
+        """
+        Generate Unity-compatible prefab data from the final script.
+
+        This method reads the finalized script JSON file, extracts relevant
+        information (e.g., characters, positions, actions, shots), and formats
+        it into a structure suitable for Unity prefab creation.
+
+        The formatted data is saved as a JSON file for Unity integration.
+        """
+        # Load the finalized script
+        script = read_json(self.script_path)
+
+        # Prepare prefab data structure
+        prefab_data = []
+        for scene in script:
+            scene_data = {
+                "scene_information": scene["scene information"],
+                "initial_position": scene["initial position"],
+                "dialogues": []
+            }
+            for dialogue in scene["scene"]:
+                dialogue_data = {
+                    "speaker": dialogue.get("speaker", ""),
+                    "content": dialogue.get("content", ""),
+                    "actions": dialogue.get("actions", []),
+                    "shot": dialogue.get("shot", ""),
+                    "current_position": dialogue.get("current position", [])
+                }
+                if "move" in dialogue:
+                    dialogue_data["move"] = dialogue["move"]
+                scene_data["dialogues"].append(dialogue_data)
+            prefab_data.append(scene_data)
+
+        # Save prefab data to a JSON file
+        prefab_output_path = os.path.join(ROOT_PATH, "Script", "unity_prefabs.json")
+        write_json(prefab_output_path, prefab_data)
+        print(f"Unity prefab data generated and saved to {prefab_output_path}")
                     
 if __name__ == '__main__':
     # Initialize FastAPI app
