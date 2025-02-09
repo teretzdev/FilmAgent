@@ -56,7 +56,7 @@ pip install -r env.txt
 
 ## 🌟 Generating Images and Video Sequences
 
-This section provides a step-by-step guide to generate images and video sequences using FilmAgent.
+This section provides a step-by-step guide to generate images and video sequences using FilmAgent. It also includes instructions for exporting images with sequential labels and showcases examples for various scenarios.
 
 ### Prerequisites
 
@@ -88,9 +88,24 @@ This section provides a step-by-step guide to generate images and video sequence
    - The images will be saved in the directory specified by the `IMAGE_OUTPUT_DIR` environment variable.
    - Each image will represent a specific timestamp in the script, spaced by the interval defined in `IMAGE_INTERVAL`.
 
-2. **Verify Generated Images**:
+2. **Export Images with Sequential Labels**:
+   - The generated images will be automatically labeled with their sequence index in the filename (e.g., `image_1.png`, `image_2.png`).
+   - This ensures the images are ordered correctly for video generation.
+
+3. **Verify Generated Images**:
    - Check the `generated_images` directory to ensure all images are created correctly.
-   - Each image file will be named with its corresponding timestamp (e.g., `image_5s.png`, `image_10s.png`).
+   - Example filenames:
+     - `image_1.png`: Represents the first frame in the sequence.
+     - `image_2.png`: Represents the second frame in the sequence.
+
+4. **Example Output**:
+   - Below is an example of the generated images:
+     ```
+     generated_images/
+     ├── image_1.png
+     ├── image_2.png
+     ├── image_3.png
+     └── ...
 
 ### Steps to Generate Video Sequences
 
@@ -108,6 +123,35 @@ This section provides a step-by-step guide to generate images and video sequence
 4. **Generate and Download Video**:
    - Initiate the video generation process on the platform.
    - Once completed, download the video file to your local system.
+
+### Case Scenarios and Results
+
+#### Scenario 1: Generating Images for a Short Script
+- **Script Duration**: 15 seconds
+- **Image Interval**: 5 seconds
+- **Generated Images**:
+  ```
+  generated_images/
+  ├── image_1.png
+  ├── image_2.png
+  ├── image_3.png
+  ```
+- **Description**: The script contains three key timestamps, and the images are labeled sequentially.
+
+#### Scenario 2: Generating Images for a Long Script
+- **Script Duration**: 60 seconds
+- **Image Interval**: 10 seconds
+- **Generated Images**:
+  ```
+  generated_images/
+  ├── image_1.png
+  ├── image_2.png
+  ├── image_3.png
+  ├── image_4.png
+  ├── image_5.png
+  ├── image_6.png
+  ```
+- **Description**: The script spans a minute, and six images are generated at 10-second intervals.
 
 ### Additional Notes
 
