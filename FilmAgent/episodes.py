@@ -6,15 +6,14 @@ from LLMCaller import GPTCall, clean_text, GPTResponse2JSON
 ROOT_PATH = "/absolute/path/to/FilmAgent"
 
 class GTARealityShow:
-    def __init__(self, season_name: str, episodes_per_season: int = 10):
+    def __init__(self, season_name: str, episodes_per_season: int = 10, characters: list = None):
         self.season_name = season_name
         self.episodes_per_season = episodes_per_season
         self.log_path = os.path.join(ROOT_PATH, "Logs", f"{season_name}_log.txt")
-        self.contestants_path = os.path.join(ROOT_PATH, "Script", "gta_contestants.json")
         self.episodes_path = os.path.join(ROOT_PATH, "Script", f"{season_name}_episodes.json")
         self.prizes_path = os.path.join(ROOT_PATH, "Script", f"{season_name}_prizes.json")
         self.crowd_votes_path = os.path.join(ROOT_PATH, "Script", f"{season_name}_crowd_votes.json")
-        self.recurring_contestants = []
+        self.recurring_contestants = characters if characters else []
         self.unique_purposes = [
             "Heist a bank",
             "Win a high-speed race",
@@ -44,16 +43,8 @@ class GTARealityShow:
         log_prompt(self.log_path, result)
         return result
 
-    def load_contestants(self):
-        if os.path.exists(self.contestants_path):
-            self.recurring_contestants = read_json(self.contestants_path)
-        else:
-            raise FileNotFoundError("Contestants file not found. Please ensure the file exists.")
 
     def generate_episode(self, episode_number: int):
-        if not self.recurring_contestants:
-            self.load_contestants()
-
         unique_purpose = random.choice(self.unique_purposes)
         selected_contestants = random.sample(self.recurring_contestants, k=min(4, len(self.recurring_contestants)))
 
@@ -108,7 +99,7 @@ class GTARealityShow:
 
         # Parse the git diff
         diff_lines = git_diff.splitlines()
-        formatted_diff = ["# Recent Code Changes\\n"]
+        formatted_diff = ["# Recent Code Changes\\\n"]
         current_file = None
 
         for line in diff_lines:
@@ -117,7 +108,7 @@ class GTARealityShow:
                 parts = line.split(" ")
                 current_file = parts[-1] if len(parts) > 2 else None
                 if current_file:
-                    formatted_diff.append(f"\\n## {current_file}\\n")
+                    formatted_diff.append(f"\\\n## {current_file}\\\n")
             elif line.startswith("+") and not line.startswith("+++"):
                 # Added lines
                 formatted_diff.append(f"- **Added**: {line[1:].strip()}")
@@ -127,7 +118,7 @@ class GTARealityShow:
 
         # Write the formatted diff to the markdown file
         with open(diff_output_file, "w") as f:
-            f.write("\\n".join(formatted_diff))
+            f.write("\\\n".join(formatted_diff))
 
         print(f"Changes preview saved to {diff_output_file}")
 
