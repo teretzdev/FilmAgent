@@ -233,7 +233,7 @@ This section provides a step-by-step guide to generate images for video sequence
 
 #### Scenario 2: Generating Images for a Long Script
 - **Script Duration**: 60 seconds
-- **Image Interval**: 10 seconds
+- **Image Interval**: 5 seconds
 - **Generated Images**:
   ```
   generated_images/
@@ -243,8 +243,14 @@ This section provides a step-by-step guide to generate images for video sequence
   ├── image_4.png
   ├── image_5.png
   ├── image_6.png
+  ├── image_7.png
+  ├── image_8.png
+  ├── image_9.png
+  ├── image_10.png
+  ├── image_11.png
+  ├── image_12.png
   ```
-- **Description**: The script spans a minute, and six images are generated at 10-second intervals.
+- **Description**: The script spans a minute, and twelve images are generated at 5-second intervals.
 
 ### Additional Notes
 
