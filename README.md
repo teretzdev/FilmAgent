@@ -54,6 +54,70 @@ conda activate filmagent
 pip install -r env.txt
 ```
 
+## 🌟 Generating Images and Video Sequences
+
+This section provides a step-by-step guide to generate images and video sequences using FilmAgent.
+
+### Prerequisites
+
+1. **Install Required Packages**:
+   Ensure you have installed the required Python packages as described in the "Build Your own Film with FilmAgent" section.
+
+2. **Set Up Environment Variables**:
+   - Create a `.env` file in the `FilmAgent` directory or use the provided `.env.example` file as a template.
+   - Configure the following variables:
+     ```env
+     VIDEO_GEN_USERNAME=your_username
+     VIDEO_GEN_PASSWORD=your_password
+     IMAGE_OUTPUT_DIR=./generated_images
+     FONT_PATH=/path/to/font.ttf
+     SCRIPT_PATH=./script.json
+     IMAGE_INTERVAL=5
+     ```
+
+3. **Prepare the Script**:
+   - Ensure you have a valid `script.json` file in the `FilmAgent` directory. This file contains the script details for generating images.
+
+### Steps to Generate Images
+
+1. **Run the Image Generator**:
+   Execute the following command to generate images based on the script:
+   ```bash
+   python FilmAgent/image_generator.py
+   ```
+   - The images will be saved in the directory specified by the `IMAGE_OUTPUT_DIR` environment variable.
+   - Each image will represent a specific timestamp in the script, spaced by the interval defined in `IMAGE_INTERVAL`.
+
+2. **Verify Generated Images**:
+   - Check the `generated_images` directory to ensure all images are created correctly.
+   - Each image file will be named with its corresponding timestamp (e.g., `image_5s.png`, `image_10s.png`).
+
+### Steps to Generate Video Sequences
+
+1. **Log into Video Generator Platform**:
+   - Ensure your `.env` file contains valid credentials for the video generator platform.
+   - The `login_to_video_generator` method in `FilmAgent/main.py` will handle authentication.
+
+2. **Upload Images to Video Generator**:
+   - Use the video generator platform's API or web interface to upload the generated images.
+   - Follow the platform's guidelines for creating video sequences.
+
+3. **Configure Video Settings**:
+   - Set the desired frame rate, resolution, and other video settings as per the platform's options.
+
+4. **Generate and Download Video**:
+   - Initiate the video generation process on the platform.
+   - Once completed, download the video file to your local system.
+
+### Additional Notes
+
+- **API Rate Limits**:
+  Be mindful of API rate limits when using video generator platforms. Refer to the `Research.md` file for details on platform-specific limitations.
+
+- **Future Enhancements**:
+  In future phases, we plan to integrate Unity for VR experiences and automate video generation directly within FilmAgent.
+```
+
 2. Create `Script` and `Logs` folders in the Filmagent directory, then replace the absolute pathname '/path/to/' with your specific path and modify the `topic` in the `main.py`. Modify the api_key and organization number in `LLMCaller.py`. Run the following commands to get the movie script created by the agents collaboratively:
 ```bash
 cd /path/to/FilmAgent
@@ -77,11 +141,9 @@ conda activate filmagent
 python GenerateAudio.py
 ```
 
-5. We now have the `script.json`, `actors_profile.json`, and a series of `.wav` audio files. Next, we need to execute the script in Unity. The recommended version of the Unity editor is **Unity 2022.3.14f1c1**. You need to download the Unity project file we provide [[Dropbox](https://www.dropbox.com/scl/fi/atxhxnqppeofmt471dxr5/TheBigBang.zip?rlkey=o7zuqficetabkk2h1w1npkv3v&st=5s41rzdv&dl=0)][[Baidu Disk](https://pan.baidu.com/s/10wgfvtcG-xnx1fA9Rd_zwg?pwd=5aif)]. After decompression, open `TheBigBang\Assets\TheBigBang\Manyrooms.unity` with Unity. Then replace all the absolute pathnames '/path/to/' with your specific path in `TheBigBang\Assets\Scirpts\StartVideo.cs` and `TheBigBang\Assets\Scirpts\ScriptExecute.cs`. Press **'ctrl+R'** in the unity interface to recompile, click **'Play'** to enter Game mode, then press **'E'** to start executing the script (sometimes the audio files load slowly, so you may need to play it 2 or 3 times before it can run normally).
+<REMOVE ENTIRE SECTION>
 
-<div align=center><img src="https://github.com/HITsz-TMG/FilmAgent/blob/main/pics/unity_1.png" height="100%" width="50%"/><img src="https://github.com/HITsz-TMG/FilmAgent/blob/main/pics/unity_2.png" height="100%" width="50%"/></div>  
-
-6. For the tests on 15 topics in our experimental section, we provide three .py files: `test_full.py` (The full FilmAgent framework, utilizing multi-agent collaboration.), `test_no_interation.py` (A single agent is responsible for planning, scriptwriting, and cinematography, representing our FilmAgent framework without multi-agent collaboration algorithms.) and `test_cot.py` (A single agent generates the chain-of-thought rationale and the complete script).
+5. For the tests on 15 topics in our experimental section, we provide three .py files: `test_full.py` (The full FilmAgent framework, utilizing multi-agent collaboration.), `test_no_interation.py` (A single agent is responsible for planning, scriptwriting, and cinematography, representing our FilmAgent framework without multi-agent collaboration algorithms.) and `test_cot.py` (A single agent generates the chain-of-thought rationale and the complete script).
 
 ## 🌟 Setting Up the ReactJS Frontend
 
