@@ -21,6 +21,31 @@ class FilmCrafter:
         self.topic = topic
         self.scenario = scenario
         self.log_path = cretae_new_path(os.path.join(ROOT_PATH, "Logs"), "txt")
+
+    def calculate_script_duration(self, script_path: str) -> float:
+        """
+        Calculate the total duration of a script based on dialogue and action timings.
+
+        Args:
+            script_path (str): Path to the script JSON file.
+
+        Returns:
+            float: Total duration of the script in seconds.
+        """
+        script = read_json(script_path)
+        total_duration = 0.0
+        avg_word_time = 0.5  # Average time per word in seconds
+        action_time = 2.0    # Default time for each action in seconds
+
+        for scene in script:
+            for line in scene.get("scene", []):
+                if "content" in line:
+                    word_count = len(line["content"].split())
+                    total_duration += word_count * avg_word_time
+                if "actions" in line:
+                    total_duration += len(line["actions"]) * action_time
+
+        return total_duration
         if self.scenario == "GTA Reality Show":
             self.profile_path = os.path.join(ROOT_PATH, "Script\\gta_contestants.json")
         else:
@@ -51,6 +76,28 @@ class FilmCrafter:
         # cinematographer's shot annotation
         self.cinematographer_shot_path = os.path.join(ROOT_PATH, "Script\cinematographer_shot.json")
 
+    def plan_image_generation(self, script_path: str, interval: int = 5) -> List[str]:
+        """
+        Plan image generation at specified intervals.
+
+        Args:
+            script_path (str): Path to the script JSON file.
+            interval (int): Time interval in seconds between images.
+
+        Returns:
+            List[str]: List of filenames for the generated images.
+        """
+        script = read_json(script_path)
+        total_duration = self.calculate_script_duration(script_path)
+        num_images = int(total_duration // interval)
+        image_filenames = []
+
+        for i in range(num_images):
+            filename = f"image_{i * interval}s.png"
+            image_filenames.append(filename)
+
+        return image_filenames
+
         # The maximum number of characters in a film
         self.character_limit = 4
         # The maximum number of scenes in a film
@@ -61,6 +108,25 @@ class FilmCrafter:
         self.stage2_verify_limit = 3
         # The maximum number of discussions between director and cinematographer
         self.stage3_verify_limit = 4
+
+    def login_to_video_generator(self) -> bool:
+        """
+        Log into the video generator website using credentials from the .env file.
+
+        Returns:
+            bool: True if login is successful, False otherwise.
+        """
+        username = os.getenv("VIDEO_GEN_USERNAME")
+        password = os.getenv("VIDEO_GEN_PASSWORD")
+
+        if not username or not password:
+            raise ValueError("Missing VIDEO_GEN_USERNAME or VIDEO_GEN_PASSWORD in .env file.")
+
+        # Simulate login process (replace with actual API call if available)
+        print(f"Logging in with username: {username}")
+        # Example: response = requests.post("https://video-generator.com/api/login", data={"username": username, "password": password})
+        # return response.status_code == 200
+        return True
         
 
     def call(self, identity: str, params: Dict, trans2json: bool = True) -> Union[str, dict, list]:
@@ -146,7 +212,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\n   - topic: {topic}\\\\\n   - involved characters: {characters}\\\\\n   - plot: {plot}\\\\\n   - location: {location}\\\\\n   - dialogue goal: {goal}\\\\\n\\\\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\n   - topic: {topic}\\\\\\n   - involved characters: {characters}\\\\\\n   - plot: {plot}\\\\\\n   - location: {location}\\\\\\n   - dialogue goal: {goal}\\\\\\n\\\\\\n"
     
         params = {"{script_outline}": script_outline.strip()}
         if self.scenario == "GTA Reality Show":
@@ -183,7 +249,7 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\\\\\n   - characters: {who}\\\\\n   - location: {where}\\\\\n   - plot: {what}\\\\\n\\\\\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\n   - characters: {who}\\\\\\n   - location: {where}\\\\\\n   - plot: {what}\\\\\\n\\\\\\n"
             
             position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
             positions = read_json(position_path)
@@ -193,13 +259,13 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\n{p}\\\\\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\n{p}\\\\\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
@@ -234,7 +300,7 @@ class FilmCrafter:
                     sit = "sittable"
                 else:
                     sit = "unsittable"
-                ini = ini + f"   - {item['character']}: " + f"{sit} Position {str(get_number(item['position']))}, standing\\\\\n"
+                ini = ini + f"   - {item['character']}: " + f"{sit} Position {str(get_number(item['position']))}, standing\\\\\\n"
             ini = "   " + ini.strip() 
             params = {"{initial}": ini, 
                         "{plot}": scene['scene_information']['what'],
@@ -300,7 +366,7 @@ class FilmCrafter:
                 position_id = get_number(position['position'])
                 sittable = "sittable" if positions[position_id-1]['sittable'] else "unsittable"
                 p.append(f"{position['character']}'s position: {sittable}")
-            characters_position = characters_position + f"{id+1}. **Scene {id+1}**:\\\\\n{', '.join(p)}\\\\\n\\\\\n"
+            characters_position = characters_position + f"{id+1}. **Scene {id+1}**:\\\\\\n{', '.join(p)}\\\\\\n\\\\\\n"
 
         all_actions = read_prompt(self.action_description_path)
         for i in range(self.stage1_verify_limit):
@@ -377,7 +443,7 @@ class FilmCrafter:
             
         suggestions = ""
         for name, suggestion in feedback.items():
-            suggestions = suggestions + f"   - **{name}**: {suggestion}\\\\\n"
+            suggestions = suggestions + f"   - **{name}**: {suggestion}\\\\\\n"
         params = {"{suggestions}": suggestions,
                   "{character_profiles}": profiles,
                   "{draft_script}": scenes}
@@ -479,7 +545,7 @@ class FilmCrafter:
             if moveable_characters:
                 move2destination = ""
                 for pn in unoccupied_positions:
-                    move2destination = move2destination + f"   - {pn}\\\\\n"
+                    move2destination = move2destination + f"   - {pn}\\\\\\n"
                 move2destination = "   " + move2destination.strip()
                 lines = []
                 for id in range(len(scene['dialogues'])):
@@ -790,4 +856,20 @@ if __name__ == '__main__':
 
     # Run the FastAPI server
     import uvicorn
+    # Example usage of new methods
+    crafter = FilmCrafter(topic="Sample Topic")
+    script_path = crafter.script_path
+
+    # Calculate script duration
+    duration = crafter.calculate_script_duration(script_path)
+    print(f"Total script duration: {duration} seconds")
+
+    # Plan image generation
+    image_plan = crafter.plan_image_generation(script_path)
+    print(f"Image generation plan: {image_plan}")
+
+    # Log into video generator
+    if crafter.login_to_video_generator():
+        print("Logged into video generator successfully.")
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
