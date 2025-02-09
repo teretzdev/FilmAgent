@@ -49,6 +49,36 @@ Below is a list of key locations featured in the season:
 - This document will be updated as new characters and locations are introduced throughout the season.
 - Ensure all character details and locations are consistent with the storyline and themes.
 - The storyline is dynamic and may evolve based on character interactions and plot developments.
+
+---
+
+## Initializing Characters for a Season
+
+To begin a new season, you can specify the list of characters that will participate in the episodes. This is done by initializing the `GTARealityShow` class with the `characters` parameter. The `characters` parameter allows you to define recurring contestants for the entire season.
+
+### Example:
+```python
+from FilmAgent.episodes import GTARealityShow
+
+# Define the list of characters for the season
+characters = [
+    "John Doe",
+    "Jane Smith",
+    "Mike Johnson",
+    "Sarah Connor"
+]
+
+# Initialize the GTARealityShow class with the characters
+gta_show = GTARealityShow(season_name="GTA_Season_1", episodes_per_season=10, characters=characters)
+
+# Generate the season
+gta_show.generate_season()
+```
+
+### Key Points:
+- The `characters` parameter is optional. If not provided, the list of contestants will be empty by default.
+- Ensure that the character names are unique and align with the storyline and themes of the season.
+- The `generate_season` method will use the provided `characters` list to create episodes.
 ```
 
 ### Step 4: Review
