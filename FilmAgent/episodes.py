@@ -1,5 +1,6 @@
 import os
 import random
+from PIL import Image, ImageDraw, ImageFont
 from util import read_json, write_json, read_prompt, prompt_format, log_prompt
 from LLMCaller import GPTCall, clean_text, GPTResponse2JSON
 
@@ -58,12 +59,16 @@ class GTARealityShow:
         episode_plan = self.call_ai_agent("gta_director_2", params)
         episode_script = self.call_ai_agent("gta_screenwriter_2", params)
 
+        # Generate and save an image for the episode
+        image_filename = self.generate_image(episode_number, unique_purpose, selected_location)
+
         return {
             "episode_number": episode_number,
             "unique_purpose": unique_purpose,
             "selected_contestants": selected_contestants,
             "plan": episode_plan,
             "script": episode_script,
+            "image": image_filename,
         }
 
     def generate_season(self):
@@ -72,6 +77,7 @@ class GTARealityShow:
             episode_data = self.generate_episode(episode_number)
             season_data.append(episode_data)
         write_json(self.episodes_path, season_data)
+        print(f"Season data and images saved to {self.episodes_path}")
         return season_data
 
     def generate_preview(self):
@@ -99,7 +105,7 @@ class GTARealityShow:
 
         # Parse the git diff
         diff_lines = git_diff.splitlines()
-        formatted_diff = ["# Recent Code Changes\\\n"]
+        formatted_diff = ["# Recent Code Changes\\\\n"]
         current_file = None
 
         for line in diff_lines:
@@ -108,7 +114,7 @@ class GTARealityShow:
                 parts = line.split(" ")
                 current_file = parts[-1] if len(parts) > 2 else None
                 if current_file:
-                    formatted_diff.append(f"\\\n## {current_file}\\\n")
+                    formatted_diff.append(f"\\\\n## {current_file}\\\\n")
             elif line.startswith("+") and not line.startswith("+++"):
                 # Added lines
                 formatted_diff.append(f"- **Added**: {line[1:].strip()}")
@@ -118,7 +124,7 @@ class GTARealityShow:
 
         # Write the formatted diff to the markdown file
         with open(diff_output_file, "w") as f:
-            f.write("\\\n".join(formatted_diff))
+            f.write("\\\\n".join(formatted_diff))
 
         print(f"Changes preview saved to {diff_output_file}")
 
@@ -144,6 +150,29 @@ class GTARealityShow:
         write_json(self.prizes_path, prizes)
         return prizes
 
+    def generate_image(self, episode_number: int, unique_purpose: str, location: str) -> str:
+        """
+        Generate and save an image for the given episode.
+        """
+        output_dir = os.path.join(ROOT_PATH, "Generated_Images")
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        image_filename = f"image_{episode_number:03d}.png"
+        image_path = os.path.join(output_dir, image_filename)
+
+        # Create a blank image with text
+        image = Image.new("RGB", (800, 600), color=(255, 255, 255))
+        draw = ImageDraw.Draw(image)
+        font = ImageFont.load_default()
+        text = f"Episode {episode_number}\\nPurpose: {unique_purpose}\\nLocation: {location}"
+        draw.text((50, 50), text, fill=(0, 0, 0), font=font)
+
+        # Save the image
+        image.save(image_path)
+        print(f"Image saved: {image_path}")
+        return image_filename
+
     def run(self):
         self.load_contestants()
         season_data = self.generate_season()
@@ -154,6 +183,8 @@ class GTARealityShow:
 
         # Generate a preview of the last two episodes
         self.generate_preview()
+
+        print("All images generated and saved successfully.")
 
 
 if __name__ == "__main__":

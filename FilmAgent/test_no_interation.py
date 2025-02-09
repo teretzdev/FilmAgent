@@ -3,6 +3,8 @@ from LLMCaller import *
 from typing import Dict, List, Union
 import random
 import copy
+from PIL import Image, ImageDraw, ImageFont
+import os
 
 ROOT_PATH = "/absolute/path/to/FilmAgent"
 ID = 13
@@ -13,7 +15,7 @@ class FilmCrafter:
     
     def __init__(self, topic: str) -> None:
         self.topic = topic
-        self.store_path = os.path.join(ROOT_PATH, f"store\\\no_interation\{ID}")
+        self.store_path = os.path.join(ROOT_PATH, f"store\\\\no_interation\{ID}")
         self.log_path = os.path.join(self.store_path, "prompt.txt")
         self.profile_path = os.path.join(self.store_path, "actors_profile.json") 
         self.action_description_path = os.path.join(ROOT_PATH, "Locations\\actions.txt")
@@ -32,6 +34,28 @@ class FilmCrafter:
         self.scene_path_5 = os.path.join(self.store_path, "scenes_6.json") 
         # The final script
         self.script_path = os.path.join(self.store_path, "script.json")
+        self.image_output_dir = os.path.join(self.store_path, "Generated_Images")
+        if not os.path.exists(self.image_output_dir):
+            os.makedirs(self.image_output_dir)
+    
+    def generate_scene_image(self, scene_number: int, scene_details: dict) -> str:
+        """
+        Generate and save an image for the given scene.
+        """
+        image_filename = f"scene_{scene_number:03d}.png"
+        image_path = os.path.join(self.image_output_dir, image_filename)
+
+        # Create a blank image with text
+        image = Image.new("RGB", (800, 600), color=(255, 255, 255))
+        draw = ImageDraw.Draw(image)
+        font = ImageFont.load_default()
+        text = f"Scene {scene_number}\\nCharacters: {', '.join(scene_details['who'])}\\nLocation: {scene_details['where']}\\nPlot: {scene_details['what']}"
+        draw.text((50, 50), text, fill=(0, 0, 0), font=font)
+
+        # Save the image
+        image.save(image_path)
+        print(f"Image saved: {image_path}")
+        return image_filename
 
         # The maximum number of characters in a film
         self.character_limit = 4
@@ -91,6 +115,14 @@ class FilmCrafter:
                   "{female_characters}": female_characters,
                   "{scene_limit}": self.scene_limit}
         result = self.call("director_2", params)
+        for scene_number, scene in enumerate(result, start=1):
+            # Generate an image for each scene
+            self.generate_scene_image(scene_number, {
+                "who": scene[return_most_similar("selected-characters", list(scene.keys()))],
+                "where": scene[return_most_similar("selected-location", list(scene.keys()))],
+                "what": scene[return_most_similar("story-plot", list(scene.keys()))]
+            })
+        
         write_json(self.scene_path, result)
         
         
@@ -119,7 +151,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\n   - topic: {topic}\\n   - involved characters: {characters}\\n   - plot: {plot}\\n   - location: {location}\\n   - dialogue goal: {goal}\\n\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\n   - topic: {topic}\\\n   - involved characters: {characters}\\\n   - plot: {plot}\\\n   - location: {location}\\\n   - dialogue goal: {goal}\\\n\\\n"
     
         params = {"{script_outline}": script_outline.strip()}
         result = self.call("screenwriter_1", params) 
@@ -153,7 +185,7 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\\n   - characters: {who}\\n   - location: {where}\\n   - plot: {what}\\n\\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\\n   - characters: {who}\\\n   - location: {where}\\\n   - plot: {what}\\\n\\\n"
             
             position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
             positions = read_json(position_path)
@@ -163,13 +195,13 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\n{p}\\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\n{p}\\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
@@ -201,7 +233,7 @@ class FilmCrafter:
                     sit = "sittable"
                 else:
                     sit = "unsittable"
-                ini = ini + f"   - {item['character']}: " + f"{sit} {item['position']}, standing\\n"
+                ini = ini + f"   - {item['character']}: " + f"{sit} {item['position']}, standing\\\n"
             ini = "   " + ini.strip() 
             params = {"{initial}": ini, 
                         "{plot}": scene['scene_information']['what'],
@@ -273,7 +305,7 @@ class FilmCrafter:
             if moveable_characters:
                 move2destination = ""
                 for pn in unoccupied_positions:
-                    move2destination = move2destination + f"   - {pn}\\n"
+                    move2destination = move2destination + f"   - {pn}\\\n"
                 move2destination = "   " + move2destination.strip()
                 lines = []
                 for id in range(len(scene['dialogues'])):

@@ -43,12 +43,40 @@ Below is a list of key locations featured in the season:
 9. **Desert Arena**: A vast open space for vehicular combat and stunts.
 10. **Race Track**: A high-speed circuit designed for intense racing and stunts.
 
+
 ---
 
 ## Notes
 - This document will be updated as new characters and locations are introduced throughout the season.
 - Ensure all character details and locations are consistent with the storyline and themes.
 - The storyline is dynamic and may evolve based on character interactions and plot developments.
+
+---
+
+## Character Associations with Generated Images
+
+During script execution, characters are dynamically associated with generated images that represent specific scenes or moments in the storyline. These images are labeled sequentially to indicate their order in the narrative.
+
+### How to Interpret Labeled Images
+1. **Image Filenames**:
+   - Images are saved with filenames like `scene_001.png`, `scene_002.png`, etc., where the number indicates the sequence of the scene in the storyline.
+   - Each image corresponds to a specific scene and includes visual elements tied to the characters and their actions.
+
+2. **Character Associations**:
+   - Each image reflects the characters present in the scene, their positions, and their actions as described in the script.
+   - For example, if a scene involves "John Doe" and "Jane Smith" in a car chase, the corresponding image will visually represent this moment.
+
+3. **Using Images for Analysis**:
+   - These images can be used to analyze character interactions, verify scene accuracy, and create video sequences.
+   - By reviewing the images in sequence, you can trace the progression of the storyline and ensure consistency with the script.
+
+### Practical Applications
+- **Video Creation**:
+  Combine the labeled images into a video sequence using tools like `moviepy` or video editing software.
+- **Storyboarding**:
+  Use the images as visual aids for storyboarding and planning future episodes.
+- **Debugging**:
+  Cross-reference the images with the script to identify and resolve inconsistencies.
 
 ---
 
