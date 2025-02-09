@@ -155,3 +155,107 @@ The `unity_prefabs.json` file contains structured data for Unity prefabs. Below 
 For further assistance, please refer to the FilmAgent repository or contact the development team.
 
 ---
+
+## 🌟 Build Your own Film with FilmAgent
+
+1. Install Package
+```Shell
+conda create -n filmagent python==3.9.18
+conda activate filmagent
+pip install -r env.txt
+```
+
+## 🌟 Generating Images for Video Sequences
+
+This section provides a step-by-step guide to generate images for video sequences using the `image_generator.py` script.
+
+### Prerequisites
+
+1. **Install Required Packages**:
+   Ensure you have installed the required Python packages as described in the "Build Your own Film with FilmAgent" section.
+
+2. **Set Up Environment Variables**:
+   - Create a `.env` file in the `FilmAgent` directory or use the provided `.env.example` file as a template.
+   - Configure the following variables:
+     ```env
+     IMAGE_OUTPUT_DIR=./generated_images
+     FONT_PATH=/path/to/font.ttf
+     SCRIPT_PATH=./script.json
+     IMAGE_INTERVAL=5
+     ```
+
+3. **Prepare the Script**:
+   - Ensure you have a valid `script.json` file in the `FilmAgent` directory. This file contains the script details for generating images.
+
+### Steps to Generate Images
+
+1. **Run the Image Generator**:
+   Execute the following command to generate images based on the script:
+   ```bash
+   python FilmAgent/image_generator.py
+   ```
+   - The images will be saved in the directory specified by the `IMAGE_OUTPUT_DIR` environment variable.
+   - Each image will represent a specific timestamp in the script, spaced by the interval defined in `IMAGE_INTERVAL`.
+
+2. **Export Images with Sequential Labels**:
+   - The generated images will be automatically labeled with their sequence index in the filename (e.g., `image_1.png`, `image_2.png`).
+   - This ensures the images are ordered correctly for video generation.
+
+3. **Verify Generated Images**:
+   - Check the `generated_images` directory to ensure all images are created correctly.
+   - Example filenames:
+     - `image_1.png`: Represents the first frame in the sequence.
+     - `image_2.png`: Represents the second frame in the sequence.
+
+4. **Example Output**:
+   - Below is an example of the generated images:
+     ```
+     generated_images/
+     ├── image_1.png
+     ├── image_2.png
+     ├── image_3.png
+     └── ...
+     ```
+
+### Case Scenarios and Results
+
+#### Scenario 1: Generating Images for a Short Script
+- **Script Duration**: 15 seconds
+- **Image Interval**: 5 seconds
+- **Generated Images**:
+  ```
+  generated_images/
+  ├── image_1.png
+  ├── image_2.png
+  ├── image_3.png
+  ```
+- **Description**: The script contains three key timestamps, and the images are labeled sequentially.
+
+#### Scenario 2: Generating Images for a Long Script
+- **Script Duration**: 60 seconds
+- **Image Interval**: 5 seconds
+- **Generated Images**:
+  ```
+  generated_images/
+  ├── image_1.png
+  ├── image_2.png
+  ├── image_3.png
+  ├── image_4.png
+  ├── image_5.png
+  ├── image_6.png
+  ├── image_7.png
+  ├── image_8.png
+  ├── image_9.png
+  ├── image_10.png
+  ├── image_11.png
+  ├── image_12.png
+  ```
+- **Description**: The script spans a minute, and twelve images are generated at 5-second intervals.
+
+### Additional Notes
+
+- **API Rate Limits**:
+  Be mindful of API rate limits when using video generator platforms. Refer to the `Research.md` file for details on platform-specific limitations.
+
+- **Future Enhancements**:
+  In future phases, we plan to integrate Unity for VR experiences and automate video generation directly within FilmAgent.
