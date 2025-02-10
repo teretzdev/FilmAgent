@@ -158,11 +158,31 @@ For further assistance, please refer to the FilmAgent repository or contact the 
 
 ## 🌟 Build Your own Film with FilmAgent
 
+### For Windows 11 Users
+
 1. Install Package
-```Shell
+```cmd
 conda create -n filmagent python==3.9.18
 conda activate filmagent
 pip install -r env.txt
+```
+
+2. Modify File Paths:
+   - Replace all UNIX-style paths (e.g., `/path/to/`) in the scripts with Windows-style paths (e.g., `C:\path\to\`).
+   - Example:
+     ```python
+     ROOT_PATH = "C:\\path\\to\\FilmAgent"
+     ```
+
+3. Ensure Compatibility:
+   - Use double backslashes (`\\`) or raw strings (`r"C:\path\to\"`) in Python scripts to avoid escape sequence issues.
+   - Update `.env` file paths accordingly.
+
+4. Run the following commands to get the movie script created by the agents collaboratively:
+```cmd
+cd C:\path\to\FilmAgent
+conda activate filmagent
+python main.py
 ```
 
 ## 🌟 Generating Images for Video Sequences
@@ -259,3 +279,27 @@ This section provides a step-by-step guide to generate images for video sequence
 
 - **Future Enhancements**:
   In future phases, we plan to integrate Unity for VR experiences and automate video generation directly within FilmAgent.
+
+3. We use [ChatTTS](https://github.com/2noise/ChatTTS) to provide voice acting for the characters in the script. You need to download the [ChatTTS](https://github.com/2noise/ChatTTS) repository to the `TTS` directory. Then replace the absolute pathname with your specific Windows-style path in the `tts_main.py`. Run the following commands to deploy the text-to-speech service:
+```cmd
+cd C:\path\to\TTS
+conda create -n tts python==3.9.18
+conda activate tts
+pip install -r tts_env.txt
+python tts_main.py
+```
+
+4. Modify the `Script_path`, `actos_path`, `Audio_path`, and `url` in the `GenerateAudio.py` to use Windows-style paths. Run the following commands to get the audio files:
+```cmd
+cd C:\path\to\FilmAgent
+conda activate filmagent
+python GenerateAudio.py
+```
+
+## 🌟 Setting Up the ReactJS Frontend
+
+To set up and run the ReactJS frontend application on Windows 11, follow these steps:
+
+1. Navigate to the `client` directory:
+   ```cmd
+   cd client

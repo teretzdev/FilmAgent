@@ -6,9 +6,9 @@ from util import *
 from tqdm import tqdm
 from LLMCaller import GPTTTS
 # TO DO
-Script_path = f"/path/to/script.json"
-actos_path = f"/path/to/actors_profile.json"
-Audio_path = f"The path to the folder where the audio files are stored."
+Script_path = os.path.join(os.path.dirname(__file__), "script.json")
+actos_path = os.path.join(os.path.dirname(__file__), "actors_profile.json")
+Audio_path = os.path.join(os.path.dirname(__file__), "audio_files")
 # TO DO
 if not os.path.exists(Audio_path):
     os.makedirs(Audio_path)
