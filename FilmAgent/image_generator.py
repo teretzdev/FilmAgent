@@ -61,7 +61,7 @@ def generate_images_from_script(script_path: str, interval: int = 5) -> List[str
         interval (int): Time interval in seconds between images.
 
     Returns:
-        List[str]: List of filenames for the generated images, labeled sequentially.
+        List[str]: List of filenames for the generated images, labeled sequentially (e.g., image_001.png, image_002.png).
     """
     import json
 
@@ -78,7 +78,8 @@ def generate_images_from_script(script_path: str, interval: int = 5) -> List[str
     for i in range(num_images):
         sequence_index = i + 1  # Sequential labeling starts from 1
         text = f"Timestamp: {sequence_index * interval}s"
-        filename = os.path.join(OUTPUT_DIR, f"image_{sequence_index}.png")  # Sequential labeling starts from 1
+        # Generate a filename with zero-padded sequence index for better sorting (e.g., image_001.png, image_002.png)
+        filename = os.path.join(OUTPUT_DIR, f"image_{sequence_index:03d}.png")
         generate_image_with_text(text, filename)
         image_filenames.append(filename)
 

@@ -79,15 +79,27 @@ def test_generate_images_from_script(mock_generate_image, mock_open_file, setup_
 
     # Verify filenames and calls to generate_image_with_text
     for i, filename in enumerate(generated_images):
-        timestamp = i * interval
-        expected_filename = os.path.join(output_dir, f"image_{timestamp}s.png")
+        sequence_index = i + 1
+        expected_filename = os.path.join(output_dir, f"image_{sequence_index:03d}.png")
         assert filename == expected_filename
-        mock_generate_image.assert_any_call(f"Timestamp: {timestamp}s", expected_filename)
+        mock_generate_image.assert_any_call(f"Timestamp: {sequence_index * interval}s", expected_filename)
 
-def test_generate_images_edge_cases(setup_environment):
+def test_generate_images_consistency(setup_environment):
     """
-    Test edge cases for image generation.
+    Test that running the generator multiple times with the same script produces identical filenames.
     """
+    with patch("builtins.open", new_callable=mock_open, read_data=json.dumps([
+        {"duration": 30}
+    ])):
+        generated_images_run1 = generate_images_from_script(MOCK_SCRIPT_PATH, 10)
+        generated_images_run2 = generate_images_from_script(MOCK_SCRIPT_PATH, 10)
+        assert generated_images_run1 == generated_images_run2
+        expected_filenames = [
+            os.path.join(MOCK_OUTPUT_DIR, "image_001.png"),
+            os.path.join(MOCK_OUTPUT_DIR, "image_002.png"),
+            os.path.join(MOCK_OUTPUT_DIR, "image_003.png"),
+        ]
+        assert generated_images_run1 == expected_filenames
     # Case 1: Zero duration
     with patch("builtins.open", new_callable=mock_open, read_data=json.dumps([])):
         generated_images = generate_images_from_script(MOCK_SCRIPT_PATH, MOCK_INTERVAL)
@@ -106,6 +118,18 @@ def test_generate_images_edge_cases(setup_environment):
     ])):
         generated_images = generate_images_from_script(MOCK_SCRIPT_PATH, 10)
         assert len(generated_images) == 0  # No images should be generated
+
+    # Case 4: Verify sequential filenames for a short script
+    with patch("builtins.open", new_callable=mock_open, read_data=json.dumps([
+        {"duration": 15}
+    ])):
+        generated_images = generate_images_from_script(MOCK_SCRIPT_PATH, 5)
+        expected_filenames = [
+            os.path.join(MOCK_OUTPUT_DIR, "image_001.png"),
+            os.path.join(MOCK_OUTPUT_DIR, "image_002.png"),
+            os.path.join(MOCK_OUTPUT_DIR, "image_003.png"),
+        ]
+        assert generated_images == expected_filenames
 
 @patch("FilmAgent.image_generator.os.makedirs")
 def test_create_output_directory_already_exists(mock_makedirs, setup_environment):
