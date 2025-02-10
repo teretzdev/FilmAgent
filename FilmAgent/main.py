@@ -2,6 +2,7 @@ import os
 from util import *
 from LLMCaller import *
 from FilmAgent.image_generator import generate_images_from_script
+from FilmAgent.scripts.generate_actor_scripts import generate_actor_scripts
 from typing import Dict, List, Union
 import random
 import copy
@@ -17,11 +18,45 @@ load_dotenv()
 ROOT_PATH = os.getenv('FILM_AGENT_ROOT', "/absolute/path/to/FilmAgent")
 
 class FilmCrafter:
-    
     def __init__(self, topic: str, scenario: str = "default") -> None:
-        self.topic = topic
-        self.scenario = scenario
-        self.log_path = cretae_new_path(os.path.join(ROOT_PATH, "Logs"), "txt")
+
+    def regenerate_images(self, script_path: str, output_dir: str, interval: int = 5) -> None:
+        """
+        Regenerate images based on the script JSON file.
+
+        Args:
+            script_path (str): Path to the script JSON file.
+            output_dir (str): Directory where the regenerated images will be saved.
+            interval (int): Time interval in seconds between images.
+
+        Returns:
+            None
+        """
+        print("Regenerating images...")
+        try:
+            image_filenames = self.plan_image_generation(script_path, interval)
+            self.export_images_with_labels(image_filenames, output_dir)
+            print(f"Images regenerated successfully and saved to {output_dir}.")
+        except Exception as e:
+            print(f"Error during image regeneration: {e}")
+
+    def regenerate_scripts(self, input_file: str, output_dir: str) -> None:
+        """
+        Regenerate actor scripts using text prompts from the input file.
+
+        Args:
+            input_file (str): Path to the input file containing text prompts.
+            output_dir (str): Directory where the regenerated scripts will be saved.
+
+        Returns:
+            None
+        """
+        print("Regenerating scripts...")
+        try:
+            generate_actor_scripts(input_file, output_dir)
+            print(f"Scripts regenerated successfully and saved to {output_dir}.")
+        except Exception as e:
+            print(f"Error during script regeneration: {e}")
 
     def export_images_with_labels(self, image_filenames: List[str], output_dir: str) -> None:
         """
@@ -221,7 +256,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\\\\\n   - topic: {topic}\\\\\\\\\\n   - involved characters: {characters}\\\\\\\\\\n   - plot: {plot}\\\\\\\\\\n   - location: {location}\\\\\\\\\\n   - dialogue goal: {goal}\\\\\\\\\\n\\\\\\\\\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\\\\\\n   - topic: {topic}\\\\\\\\\\\n   - involved characters: {characters}\\\\\\\\\\\n   - plot: {plot}\\\\\\\\\\\n   - location: {location}\\\\\\\\\\\n   - dialogue goal: {goal}\\\\\\\\\\\n\\\\\\\\\\\n"
     
         params = {"{script_outline}": script_outline.strip()}
         if self.scenario == "GTA Reality Show":
@@ -258,7 +293,7 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\\\\\n   - characters: {who}\\\\\\\\\\n   - location: {where}\\\\\\\\\\n   - plot: {what}\\\\\\\\\\n\\\\\\\\\\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\\\\\\n   - characters: {who}\\\\\\\\\\\n   - location: {where}\\\\\\\\\\\n   - plot: {what}\\\\\\\\\\\n\\\\\\\\\\\n"
             
             position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
             positions = read_json(position_path)
@@ -268,13 +303,13 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\\\\\n{p}\\\\\\\\\\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\\\\\\n{p}\\\\\\\\\\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
@@ -308,3 +343,24 @@ self.generate_images()
 # Log into video generator
 if crafter.login_to_video_generator():
     print("Logged into video generator successfully.")
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="FilmAgent CLI for regenerating scripts and images.")
+    parser.add_argument("--regenerate-scripts", nargs=2, metavar=("INPUT_FILE", "OUTPUT_DIR"),
+                        help="Regenerate actor scripts using the specified input file and output directory.")
+    parser.add_argument("--regenerate-images", nargs=3, metavar=("SCRIPT_PATH", "OUTPUT_DIR", "INTERVAL"),
+                        help="Regenerate images using the specified script path, output directory, and interval.")
+
+    args = parser.parse_args()
+
+    if args.regenerate_scripts:
+        input_file, output_dir = args.regenerate_scripts
+        crafter = FilmCrafter(topic="Sample Topic")
+        crafter.regenerate_scripts(input_file, output_dir)
+
+    if args.regenerate_images:
+        script_path, output_dir, interval = args.regenerate_images
+        crafter = FilmCrafter(topic="Sample Topic")
+        crafter.regenerate_images(script_path, output_dir, int(interval))

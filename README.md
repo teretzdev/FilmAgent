@@ -47,8 +47,47 @@ Following the traditional film studio workflow, we divide the whole film automat
 
 ## 🌟 Build Your own Film with FilmAgent
 
-1. Install Package
-```Shell
+### Cheat Sheet for Installation and Setup (Windows)
+
+1. **Install Python and Conda**:
+   - Ensure Python 3.9.18 and Conda are installed on your system.
+
+2. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/HITsz-TMG/FilmAgent.git
+   cd FilmAgent
+   ```
+
+3. **Set Up the Environment**:
+   - Create and activate a Conda environment:
+     ```bash
+     conda create -n filmagent python==3.9.18
+     conda activate filmagent
+     ```
+
+4. **Install Dependencies**:
+   - Install required Python packages:
+     ```bash
+     pip install -r env.txt
+     ```
+
+5. **Run the Application**:
+   - Navigate to the FilmAgent directory:
+     ```bash
+     cd /path/to/FilmAgent
+     ```
+   - Execute the main script:
+     ```bash
+     python main.py
+     ```
+
+6. **Verify Installation**:
+   - Check the `Logs` and `Script` directories for output files.
+
+7. **Optional: Set Up ReactJS Frontend**:
+   - Follow the steps in the "Setting Up the ReactJS Frontend" section below.
+
+```bash
 conda create -n filmagent python==3.9.18
 conda activate filmagent
 pip install -r env.txt

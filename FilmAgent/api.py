@@ -2,6 +2,32 @@ from fastapi import FastAPI, HTTPException
 from typing import List, Dict, Optional
 import os
 import json
+
+def simulate_script_generation(prompt: str) -> Dict:
+    """
+    Simulate script generation based on a text prompt.
+
+    Args:
+        prompt (str): The text prompt.
+
+    Returns:
+        Dict: The generated script.
+    """
+    return {"script": f"Generated script for prompt: {prompt}"}
+
+def simulate_image_generation(script_path: str) -> str:
+    """
+    Simulate image generation based on a script file.
+
+    Args:
+        script_path (str): Path to the script file.
+
+    Returns:
+        str: Path to the directory containing generated images.
+    """
+    output_dir = "./generated_images"
+    os.makedirs(output_dir, exist_ok=True)
+    return output_dir
 from pathlib import Path
 
 # Initialize FastAPI app
@@ -31,12 +57,54 @@ episodes_data = load_json(EPISODES_PATH)
 def root():
     return {"message": "Welcome to the FilmAgent API!"}
 
+@app.post("/api/generate-script")
+async def generate_script(prompt: Dict[str, str]):
+    """
+    Generate a script based on the provided text prompt.
+
+    Args:
+        prompt (Dict[str, str]): A dictionary containing the text prompt.
+
+    Returns:
+        JSON: The generated script or an error message.
+    """
+    try:
+        if "prompt" not in prompt:
+            raise HTTPException(status_code=400, detail="Missing 'prompt' in request body.")
+        
+        # Simulate script generation logic
+        generated_script = {"script": f"Generated script for prompt: {prompt['prompt']}"}
+        return generated_script
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating script: {str(e)}")
+
 # Endpoint to fetch all scripts
 @app.get("/scripts", response_model=List[Dict])
 def get_all_scripts():
     if not scripts_data:
         raise HTTPException(status_code=404, detail="No scripts found.")
     return scripts_data
+
+@app.post("/api/generate-images")
+async def generate_images(file: Dict[str, str]):
+    """
+    Generate images based on the provided script file.
+
+    Args:
+        file (Dict[str, str]): A dictionary containing the script file path.
+
+    Returns:
+        JSON: The status and location of the generated images or an error message.
+    """
+    try:
+        if "script_path" not in file:
+            raise HTTPException(status_code=400, detail="Missing 'script_path' in request body.")
+        
+        # Simulate image generation logic
+        image_output_dir = "./generated_images"
+        return {"status": "success", "output_dir": image_output_dir}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating images: {str(e)}")
 
 # Endpoint to fetch a specific script by ID
 @app.get("/scripts/{script_id}", response_model=Dict)
