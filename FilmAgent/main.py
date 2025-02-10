@@ -1,4 +1,5 @@
 import os
+import logging
 from util import *
 from LLMCaller import *
 from FilmAgent.image_generator import generate_images_from_script
@@ -11,8 +12,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from FilmAgent.api import app as api_app
 
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
 # Load environment variables
 load_dotenv()
+logging.debug("Environment variables loaded.")
 
 # Use environment variable with fallback
 ROOT_PATH = os.getenv('FILM_AGENT_ROOT', "/absolute/path/to/FilmAgent")
@@ -32,13 +40,14 @@ class FilmCrafter:
         Returns:
             None
         """
-        print("Regenerating images...")
+        logging.info("Starting image regeneration...")
         try:
             image_filenames = self.plan_image_generation(script_path, interval)
+            logging.debug(f"Planned image filenames: {image_filenames}")
             self.export_images_with_labels(image_filenames, output_dir)
-            print(f"Images regenerated successfully and saved to {output_dir}.")
+            logging.info(f"Images regenerated successfully and saved to {output_dir}.")
         except Exception as e:
-            print(f"Error during image regeneration: {e}")
+            logging.error("Error during image regeneration.", exc_info=True)
 
     def regenerate_scripts(self, input_file: str, output_dir: str) -> None:
         """
@@ -51,12 +60,12 @@ class FilmCrafter:
         Returns:
             None
         """
-        print("Regenerating scripts...")
+        logging.info("Starting script regeneration...")
         try:
             generate_actor_scripts(input_file, output_dir)
-            print(f"Scripts regenerated successfully and saved to {output_dir}.")
+            logging.info(f"Scripts regenerated successfully and saved to {output_dir}.")
         except Exception as e:
-            print(f"Error during script regeneration: {e}")
+            logging.error("Error during script regeneration.", exc_info=True)
 
     def export_images_with_labels(self, image_filenames: List[str], output_dir: str) -> None:
         """
@@ -70,6 +79,7 @@ class FilmCrafter:
             None
         """
         if not os.path.exists(output_dir):
+            logging.debug(f"Output directory '{output_dir}' does not exist. Creating it.")
             os.makedirs(output_dir)
 
         for idx, filename in enumerate(image_filenames, start=1):
@@ -77,7 +87,7 @@ class FilmCrafter:
             image_path = os.path.join(output_dir, filename)
             with open(image_path, 'w') as f:
                 f.write(f"Image {idx}")  # Placeholder for actual image content
-            print(f"Exported: {image_path}")
+            logging.debug(f"Exported image: {image_path}")
         script = read_json(script_path)
         total_duration = 0.0
         avg_word_time = 0.5  # Average time per word in seconds
@@ -165,12 +175,12 @@ class FilmCrafter:
         Returns:
             None
         """
-        print("Starting image generation...")
+        logging.info("Starting image generation...")
         try:
             generated_images = generate_images_from_script(self.script_path, self.image_interval)
-            print(f"Generated images: {generated_images}")
+            logging.info(f"Generated images: {generated_images}")
         except Exception as e:
-            print(f"Error during image generation: {e}")
+            logging.error("Error during image generation.", exc_info=True)
         
 
     def call(self, identity: str, params: Dict, trans2json: bool = True) -> Union[str, dict, list]:
@@ -179,11 +189,18 @@ class FilmCrafter:
         else:
             prompt = read_prompt(os.path.join(ROOT_PATH, f"Prompt\{identity}.txt"))
         prompt = prompt_format(prompt, params)
+        logging.debug(f"Logging prompt to {self.log_path}: {prompt}")
         log_prompt(self.log_path, prompt)
-        result = GPTCall(prompt)
-        if trans2json:
-            result = clean_text(result)
-            result = GPTResponse2JSON(result)
+        try:
+            result = GPTCall(prompt)
+            logging.debug(f"Raw GPT result: {result}")
+            if trans2json:
+                result = clean_text(result)
+                result = GPTResponse2JSON(result)
+            logging.debug(f"Processed GPT result: {result}")
+        except Exception as e:
+            logging.error("Error during GPT call.", exc_info=True)
+            raise
         log_prompt(self.log_path, result)
         return result
 
@@ -199,6 +216,7 @@ class FilmCrafter:
             result = self.call("gta_director_1", params)
         else:
             result = self.call("director_1", params)
+        logging.info(f"Writing actor profiles to {self.profile_path}.")
         write_json(self.profile_path, result)
         
         
@@ -228,6 +246,7 @@ class FilmCrafter:
                 result = self.call("gta_director_2", params)
             else:
                 result = self.call("director_2", params)
+        logging.info(f"Writing scenes plan to {self.scene_path}.")
         write_json(self.scene_path, result)
         
         
@@ -256,7 +275,7 @@ class FilmCrafter:
             location = selected_location
             goal = scene[return_most_similar("dialogue-goal", list(scene.keys()))]
 
-            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\\\\\\n   - topic: {topic}\\\\\\\\\\\n   - involved characters: {characters}\\\\\\\\\\\n   - plot: {plot}\\\\\\\\\\\n   - location: {location}\\\\\\\\\\\n   - dialogue goal: {goal}\\\\\\\\\\\n\\\\\\\\\\\n"
+            script_outline = script_outline + f"{id + 1}. **Scene {id + 1}**:\\\\\\\\\\\\n   - topic: {topic}\\\\\\\\\\\\n   - involved characters: {characters}\\\\\\\\\\\\n   - plot: {plot}\\\\\\\\\\\\n   - location: {location}\\\\\\\\\\\\n   - dialogue goal: {goal}\\\\\\\\\\\\n\\\\\\\\\\\\n"
     
         params = {"{script_outline}": script_outline.strip()}
         if self.scenario == "GTA Reality Show":
@@ -274,6 +293,7 @@ class FilmCrafter:
             line['scene_information']['what'] = what[j]
             line['dialogues'] = result[j][return_most_similar("scene-dialogue", list(result[j].keys()))]
             lines.append(line)
+        logging.info(f"Writing generated lines to {self.scene_path_1}.")
         write_json(self.scene_path_1, lines)
 
                 
@@ -293,7 +313,7 @@ class FilmCrafter:
             where = scene['scene_information']['where']
             what = scene['scene_information']['what']
 
-            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\\\\\\n   - characters: {who}\\\\\\\\\\\n   - location: {where}\\\\\\\\\\\n   - plot: {what}\\\\\\\\\\\n\\\\\\\\\\\n"
+            script_information = script_information + f"{i}. **Scene {i}**:\\\\\\\\\\\\n   - characters: {who}\\\\\\\\\\\\n   - location: {where}\\\\\\\\\\\\n   - plot: {what}\\\\\\\\\\\\n\\\\\\\\\\\\n"
             
             position_path = os.path.join(ROOT_PATH, f"Locations\{where}\position.json")
             positions = read_json(position_path)
@@ -303,13 +323,13 @@ class FilmCrafter:
                 p = ""
                 for it,position in enumerate(positions):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\\\n'
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\\\\n'
             else:
                 p = ""
                 for it,position in enumerate(normal_position):
                     j = it + 1
-                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\\\n'                    
-            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\\\\\\n{p}\\\\\\\\\\\n"
+                    p = p + f"   - Position {j}: " + position['description'] + '\\\\\\\\\\\\n'                    
+            optional_positions = optional_positions + f"{i}. **Positions in {where}**:\\\\\\\\\\\\n{p}\\\\\\\\\\\\n"
                 
         params = {"{script_information}": script_information.strip(), 
                         "{optional_positions}": optional_positions.strip()}
@@ -321,6 +341,7 @@ class FilmCrafter:
         assert len(result) == len(scenes)
         for j in range(len(scenes)):
             scenes[j]["initial position"] = result[j][return_most_similar("scene-position", list(result[j].keys()))]
+        logging.info(f"Writing initial positions to {self.scene_path_2}.")
         write_json(self.scene_path_2, scenes)
 
 

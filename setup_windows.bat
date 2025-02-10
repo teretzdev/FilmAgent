@@ -103,7 +103,7 @@ if %ERRORLEVEL% NEQ 0 (
 
 :: Step 3: Activate the 'filmagent' environment
 echo Activating Conda environment 'filmagent'...
-call conda activate filmagent
+call "%CONDA_PREFIX%\Scripts\activate.bat" filmagent
 if %ERRORLEVEL% NEQ 0 (
     echo Error: Failed to activate Conda environment.
     exit /b 1
