@@ -47,50 +47,9 @@ Following the traditional film studio workflow, we divide the whole film automat
 
 ## 🌟 Build Your own Film with FilmAgent
 
-### Cheat Sheet for Installation and Setup (Windows)
+### Quickstart for Windows Users
 
-1. **Install Python and Conda**:
-   - Ensure Python 3.9.18 and Conda are installed on your system.
-
-2. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/HITsz-TMG/FilmAgent.git
-   cd FilmAgent
-   ```
-
-3. **Set Up the Environment**:
-   - Create and activate a Conda environment:
-     ```bash
-     conda create -n filmagent python==3.9.18
-     conda activate filmagent
-     ```
-
-4. **Install Dependencies**:
-   - Install required Python packages:
-     ```bash
-     pip install -r env.txt
-     ```
-
-5. **Run the Application**:
-   - Navigate to the FilmAgent directory:
-     ```bash
-     cd /path/to/FilmAgent
-     ```
-   - Execute the main script:
-     ```bash
-     python main.py
-     ```
-
-6. **Verify Installation**:
-   - Check the `Logs` and `Script` directories for output files.
-
-7. **Optional: Set Up ReactJS Frontend**:
-   - Follow the steps in the "Setting Up the ReactJS Frontend" section below.
-
-```bash
-conda create -n filmagent python==3.9.18
-conda activate filmagent
-pip install -r env.txt
+For Windows-specific installation and setup instructions, please refer to the [**QUICKSTART-WINDOWS.md**](./QUICKSTART-WINDOWS.md) guide. This document provides a detailed step-by-step guide tailored for Windows environments.
 ```
 
 ## 🌟 Generating Images and Video Sequences
@@ -100,7 +59,7 @@ This section provides a detailed guide to generate images and video sequences us
 ### Prerequisites
 
 1. **Install Required Packages**:
-   Ensure you have installed the required Python packages as described in the "Build Your own Film with FilmAgent" section.
+   Ensure you have installed the required Python packages as described in the general installation instructions.
 
 2. **Set Up Environment Variables**:
    - Create a `.env` file in the `FilmAgent` directory or use the provided `.env.example` file as a template.
