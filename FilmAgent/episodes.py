@@ -3,7 +3,7 @@ import random
 from util import read_json, write_json, read_prompt, prompt_format, log_prompt
 from LLMCaller import GPTCall, clean_text, GPTResponse2JSON
 
-ROOT_PATH = "/absolute/path/to/FilmAgent"
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 class GTARealityShow:
     def __init__(self, season_name: str, episodes_per_season: int = 10, characters: list = None):
@@ -99,7 +99,7 @@ class GTARealityShow:
 
         # Parse the git diff
         diff_lines = git_diff.splitlines()
-        formatted_diff = ["# Recent Code Changes\\\n"]
+        formatted_diff = ["# Recent Code Changes\\\\n"]
         current_file = None
 
         for line in diff_lines:
@@ -108,7 +108,7 @@ class GTARealityShow:
                 parts = line.split(" ")
                 current_file = parts[-1] if len(parts) > 2 else None
                 if current_file:
-                    formatted_diff.append(f"\\\n## {current_file}\\\n")
+                    formatted_diff.append(f"\\\\n## {current_file}\\\\n")
             elif line.startswith("+") and not line.startswith("+++"):
                 # Added lines
                 formatted_diff.append(f"- **Added**: {line[1:].strip()}")
@@ -118,7 +118,7 @@ class GTARealityShow:
 
         # Write the formatted diff to the markdown file
         with open(diff_output_file, "w") as f:
-            f.write("\\\n".join(formatted_diff))
+            f.write("\\\\n".join(formatted_diff))
 
         print(f"Changes preview saved to {diff_output_file}")
 
@@ -165,7 +165,7 @@ import random
 from util import read_json, write_json, read_prompt, prompt_format, log_prompt
 from LLMCaller import GPTCall, clean_text, GPTResponse2JSON
 
-ROOT_PATH = "/absolute/path/to/FilmAgent"
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 class GTARealityShow:
     def __init__(self, season_name: str, episodes_per_season: int = 10):
