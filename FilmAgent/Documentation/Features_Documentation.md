@@ -20,7 +20,8 @@ This section provides a detailed guide on generating images for long-form videos
 
 2. **Export Images with Sequential Labels**:
    - The generated images are automatically labeled with their sequence index in the filename (e.g., `image_1.png`, `image_2.png`).
-   - This ensures the images are ordered correctly for video generation.
+   - Sequential labeling ensures that the images are ordered correctly for video generation workflows.
+   - Each filename includes a timestamp or index that corresponds to the script's timeline, making it easier to integrate the images into video sequences.
 
 3. **Verify Generated Images**:
    - Check the `generated_images` directory to ensure all images are created correctly.
@@ -37,6 +38,41 @@ generated_images/
 ├── image_2.png
 ├── image_3.png
 └── ...
+```
+
+### Case Scenarios and Results
+
+#### Scenario 1: Short Script
+- **Script Duration**: 15 seconds
+- **Image Interval**: 5 seconds
+- **Generated Images**:
+  ```
+  generated_images/
+  ├── image_1.png
+  ├── image_2.png
+  ├── image_3.png
+  ```
+- **Description**: The script contains three key timestamps, and the images are labeled sequentially.
+
+#### Scenario 2: Long Script
+- **Script Duration**: 60 seconds
+- **Image Interval**: 10 seconds
+- **Generated Images**:
+  ```
+  generated_images/
+  ├── image_1.png
+  ├── image_2.png
+  ├── image_3.png
+  ├── image_4.png
+  ├── image_5.png
+  ├── image_6.png
+  ```
+- **Description**: The script spans a minute, and six images are generated at 10-second intervals.
+
+#### Scenario 3: Edge Cases
+- **Zero Duration**: No images are generated.
+- **Very Short Interval**: One image per second is generated.
+- **Interval Longer than Duration**: No images are generated.
 ```
 
 ### Case Scenarios and Results
@@ -75,6 +111,11 @@ generated_images/
 - **Description**: The script spans a minute, and twelve images are generated at 5-second intervals.
 
 ### Additional Notes
+
+- **Edge Cases**:
+  - **Zero Duration**: If the script duration is zero, no images will be generated.
+  - **Very Short Interval**: If the interval is very short (e.g., 1 second), one image will be generated per second.
+  - **Interval Longer than Duration**: If the interval is longer than the total script duration, no images will be generated.
 
 - **API Rate Limits**:
   Be mindful of API rate limits when using video generator platforms. Refer to the `Research.md` file for details on platform-specific limitations.
