@@ -298,8 +298,39 @@ python GenerateAudio.py
 
 ## 🌟 Setting Up the ReactJS Frontend
 
-To set up and run the ReactJS frontend application on Windows 11, follow these steps:
+To set up and run the ReactJS frontend application, follow these steps:
 
 1. Navigate to the `client` directory:
-   ```cmd
+   ```bash
    cd client
+   ```
+
+2. Install the required dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+   This will start the ReactJS application, and it will be accessible at `http://localhost:3000` in your web browser.
+
+4. To preview the application in `fine.dev`'s preview mode:
+   - Ensure you have the `fine.dev` CLI installed. If not, install it using:
+     ```bash
+     npm install -g fine-cli
+     ```
+   - Run the following command to start the preview:
+     ```bash
+     fine preview
+     ```
+   - Open the provided URL in your browser to view the application in `fine.dev`'s preview environment.
+
+5. To build the application for production, run:
+   ```bash
+   npm run build
+   ```
+
+   The production-ready files will be available in the `client/build` directory.
